@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Our Lovely Foundations</title>
+</head>
+<body>
+
+<h2>All Foundations...</h2>
+
+<ul th:each="foundation : ${allFoundations}">
+    <li th:text="${foundation.name}"></li>
+
+</ul>
+
+</body>
+</html>

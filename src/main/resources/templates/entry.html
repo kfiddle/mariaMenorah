@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/entryPage.css">
+    <script src="/entry.js" defer></script>
+    <title>entry page for events and foundations</title>
+</head>
+<body>
+
+<div id="eventDiv">
+
+    <h2>Enter events here...</h2>
+    <form action="/add-event" method="POST">
+
+
+        <label>
+            <input type="text" placeholder="Event Title" class="input" id="eventTitleInput"/>
+        </label>
+
+        <label><h3>Total Cost</h3>
+            <input type="number" placeholder="dollars" class="input money" id="eventDollars"/>
+            <input type="number" placeholder="cents" class="input money" id="eventCents"/>
+        </label>
+        <br>
+        <label>
+            <input type="date" placeholder="Event Date" class="input" id="eventDate"/>
+        </label>
+
+        <button type="submit" class="submitButton" id="eventSubmit">Submit Event</button>
+    </form>
+</div>
+
+
+<div id="foundationDiv">
+    <h2>Enter Foundations here...</h2>
+
+    <label>
+        <input type="text" placeholder="Foundation Name" class="input" id="foundationName"/>
+    </label>
+
+
+    <button type="submit" class="submitButton" id="foundationSubmit">Submit Foundation</button>
+
+</div>
+
+
+</body>
+</html>

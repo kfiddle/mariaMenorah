@@ -1,0 +1,44 @@
+
+
+#eventDiv{
+    display: flex;
+    flex-direction: row;
+    background: lightslategray;
+}
+
+#foundationDiv{
+    background: azure;
+
+}
+
+h2 {
+    color: darkblue;
+    margin: 3rem;
+}
+form {
+    margin: 3rem;
+}
+
+input {
+    height: 2rem;
+    margin: 1rem;
+}
+
+.money {
+    width: 4rem;
+}
+
+.title {
+    width: 15rem;
+}
+
+.submitButton {
+    background: darkslategray;
+    color: gold;
+    font-weight: 900;
+    height: 2rem;
+}
+
+.submitButton:hover {
+    background: blueviolet;
+}

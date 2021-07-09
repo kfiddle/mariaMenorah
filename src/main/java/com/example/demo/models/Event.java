@@ -27,6 +27,10 @@ public class Event {
     public Event() {
     }
 
+    public Event(String title) {
+        this.title = title;
+    }
+
     public Event(String title, LocalDate date, double totalCost) {
         this.title = title;
         this.date = date;
@@ -53,8 +57,6 @@ public class Event {
         this.endingMinute = endingMinute;
         this.foundations = foundations;
     }
-
-
 
     public Long getId() {
         return id;
