@@ -2,7 +2,9 @@ let foundationSubmit = document.getElementById('foundationSubmit');
 let eventSubmit = document.getElementById('eventSubmit');
 
 
-eventSubmit.addEventListener('click', ()=> {
+eventSubmit.addEventListener('click', () => {
+
+    event.preventDefault();
 
     let eventTitle = document.getElementById('eventTitleInput').value;
     let eventDate = document.getElementById('eventDate').value;
@@ -11,17 +13,40 @@ eventSubmit.addEventListener('click', ()=> {
 
     let dataToSubmit = {};
 
-    if (eventDate === null && eventDollars === null && eventCents === null) {
+    if (eventDate === null && eventDollars === null) {
         dataToSubmit = {
             title: eventTitle
         }
-    };
+    } else if (eventDollars === null && eventCents === null) {
+        dataToSubmit = {
+            title: eventTitle,
+            date: eventDate,
 
-    if 
+        }
+    } else if (eventCents == null) {
+        dataToSubmit = {
+            title: eventTitle,
+            date: eventDate,
+            totalCostInCents: eventDollars * 100
+        }
+    } else {
+        dataToSubmit = {
+            title: eventTitle,
+            date: eventDate,
+            totalCostInCents: (eventDollars * 100) + eventCents
+        }
+    }
 
-})
+    console.log(dataToSubmit)
 
-
+    fetch("/add-event", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSubmit),
+    }).catch(error => console.log(error))
+});
 
 
 foundationSubmit.addEventListener('click', () => {

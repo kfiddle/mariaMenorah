@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All Our Events</title>
@@ -7,7 +8,12 @@
 <body>
 
 
-<h2>any thing is here</h2>
+<h2>All Events...</h2>
+
+<ul th:each="event : ${allEvents}">
+    <li th:text="${event.title}"></li>
+
+</ul>
 
 </body>
 </html>

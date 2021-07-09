@@ -13,7 +13,7 @@ public class Event {
 
     private String title;
     private LocalDate date;
-    private double totalCost;
+    private int totalCostInCents;
 
     private int startingHour;
     private int startingMinute;
@@ -31,26 +31,33 @@ public class Event {
         this.title = title;
     }
 
-    public Event(String title, LocalDate date, double totalCost) {
+    public Event(String title, LocalDate date, int totalCostInCents) {
         this.title = title;
         this.date = date;
-        this.totalCost = totalCost;
+        this.totalCostInCents = totalCostInCents;
     }
 
-    public Event(String title, LocalDate date, double totalCost, int startingHour, int startingMinute, int endingHour, int endingMinute) {
+    public Event(String title, LocalDate date, int dollars, int totalCostInCents) {
         this.title = title;
         this.date = date;
-        this.totalCost = totalCost;
+        this.totalCostInCents = totalCostInCents;
+
+    }
+
+    public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute) {
+        this.title = title;
+        this.date = date;
+        this.totalCostInCents = totalCostInCents;
         this.startingHour = startingHour;
         this.startingMinute = startingMinute;
         this.endingHour = endingHour;
         this.endingMinute = endingMinute;
     }
 
-    public Event(String title, LocalDate date, double totalCost, int startingHour, int startingMinute, int endingHour, int endingMinute, Collection<Foundation> foundations) {
+    public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute, Collection<Foundation> foundations) {
         this.title = title;
         this.date = date;
-        this.totalCost = totalCost;
+        this.totalCostInCents = totalCostInCents;
         this.startingHour = startingHour;
         this.startingMinute = startingMinute;
         this.endingHour = endingHour;
@@ -70,8 +77,8 @@ public class Event {
         return date;
     }
 
-    public double getTotalCost() {
-        return totalCost;
+    public int getTotalCostInCents() {
+        return totalCostInCents;
     }
 
     public int getStartingHour() {
