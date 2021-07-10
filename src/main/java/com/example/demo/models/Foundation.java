@@ -1,9 +1,6 @@
 package com.example.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
@@ -19,11 +16,19 @@ public class Foundation {
     @ManyToMany
     private Collection<Event> events;
 
+    @OneToOne
+    private Purpose purpose;
+
     public Foundation() {
     }
 
     public Foundation(String name) {
         this.name = name;
+    }
+
+    public Foundation(String name, Purpose purpose) {
+        this.name = name;
+        this.purpose = purpose;
     }
 
     public Foundation(String name, double contributionAmount) {
@@ -42,4 +47,6 @@ public class Foundation {
     public double getContributionAmount() {
         return contributionAmount;
     }
+
+    public Purpose getPurpose() { return purpose; }
 }

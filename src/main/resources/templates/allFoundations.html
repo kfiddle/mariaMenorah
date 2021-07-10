@@ -25,6 +25,7 @@
         </tr>
         <tr th:each="foundation : ${allFoundations}">
             <td th:text="${foundation.name}"></td>
+            <td th:text="${foundation.purpose.title}"></td>
 
         </tr>
 
