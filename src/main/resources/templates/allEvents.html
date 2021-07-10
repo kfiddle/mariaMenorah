@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/entryPage.css">
+    <link rel="stylesheet" href="/events.css">
 
     <title>All Our Events</title>
 </head>
@@ -18,10 +19,21 @@
 
 <h2>All Events...</h2>
 
-<ul th:each="event : ${allEvents}">
-    <li th:text="${event.title}"></li>
 
-</ul>
+<table>
+    <tr class="eventRow">
+        <th>Title</th>
+        <th>Date</th>
+        <th>Cost</th>
+    </tr>
+    <tr th:each="event : ${allEvents}">
+        <td th:text="${event.title}"></td>
+        <td th:text="${event.date}"></td>
+        <td th:value="${event.totalCostInCents}"></td>
+    </tr>
+
+</table>
+
 
 </body>
 </html>

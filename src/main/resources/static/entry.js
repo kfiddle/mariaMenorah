@@ -33,7 +33,7 @@ eventSubmit.addEventListener('click', () => {
         dataToSubmit = {
             title: eventTitle,
             date: eventDate,
-            totalCostInCents: (eventDollars * 100) + eventCents
+            totalCostInCents: +(eventDollars * 100) + +eventCents
         }
     }
 
@@ -46,6 +46,12 @@ eventSubmit.addEventListener('click', () => {
         },
         body: JSON.stringify(dataToSubmit),
     }).catch(error => console.log(error))
+
+    document.getElementById('eventTitleInput').value = '';
+    document.getElementById('eventDate').value = '';
+    document.getElementById('eventDollars').value = '';
+    document.getElementById('eventCents').value = '';
+
 });
 
 

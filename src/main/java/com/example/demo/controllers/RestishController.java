@@ -40,10 +40,9 @@ public class RestishController {
     @PostMapping("/add-event")
     public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
 
-        Event eventToAdd = new Event(incomingEvent.getTitle());
 
-        if (!eventRepo.existsByTitle(incomingEvent.getTitle())) {
-            eventRepo.save(eventToAdd);
+        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+            eventRepo.save(incomingEvent);
         }
         return (Collection<Event>) eventRepo.findAll();
     }
