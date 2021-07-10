@@ -7,10 +7,7 @@ import com.example.demo.models.Foundation;
 import com.example.demo.repositories.AmountOfMoneyRepository;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -52,8 +49,12 @@ public class RestishController {
             incomingEvent.setCost(incomingMoney);
             eventRepo.save(incomingEvent);
         }
-
         return (Collection<Event>) eventRepo.findAll();
+    }
+
+    @RequestMapping("/get-foundations")
+    public Collection<Foundation> getAllFoundations() {
+        return (Collection<Foundation>) foundationRepo.findAll();
     }
 
 

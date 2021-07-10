@@ -1,5 +1,4 @@
 
-
 #navBar {
     position: fixed;
     display: flex;
@@ -21,21 +20,22 @@
 }
 
 
-#eventDiv{
+#eventDiv {
     display: flex;
     flex-direction: row;
     background: lightslategray;
 }
 
-#foundationDiv{
+#foundationDiv {
     background: azure;
 
 }
 
 h2 {
     color: darkblue;
-    margin: 3rem;
+    margin: 1rem;
 }
+
 form {
     margin: 3rem;
 }
@@ -43,6 +43,23 @@ form {
 input {
     height: 2rem;
     margin: 1rem;
+}
+
+.foundationDiv {
+    color: darkgreen;
+    margin-left: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.foundationDiv:hover {
+    color: chartreuse;
+}
+
+
+
+#foundationDropDown {
+    margin-bottom: 4rem;
 }
 
 .money {

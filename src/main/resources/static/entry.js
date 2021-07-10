@@ -1,5 +1,12 @@
 let foundationSubmit = document.getElementById('foundationSubmit');
 let eventSubmit = document.getElementById('eventSubmit');
+let foundationDropdown = document.getElementById('foundationDropDown');
+let foundationClicker = document.getElementById('foundationClicker');
+
+async function getListOfFoundations() {
+    let foundationsFromBackend = await fetch("/get-foundations");
+    return await foundationsFromBackend.json();
+}
 
 
 eventSubmit.addEventListener('click', () => {
@@ -70,4 +77,28 @@ foundationSubmit.addEventListener('click', () => {
         },
         body: JSON.stringify(dataToSubmit),
     }).catch(error => console.log(error))
+
+    document.getElementById('foundationName').value = '';
 });
+
+
+const listFoundations = async () => {
+    getListOfFoundations().then(list => {
+            list.forEach(foundation => {
+                let foundationDiv = document.createElement('div');
+                foundationDiv.classList.add('foundationDiv');
+                foundationDiv.innerText = foundation.name;
+                foundationDiv.addEventListener('click', ()=> {
+                    foundationDiv.style.color = 'gold';
+                })
+                foundationDropdown.appendChild(foundationDiv);
+
+
+                console.log(foundation.name);
+            })
+
+
+    });
+}
+
+foundationClicker.addEventListener('click', listFoundations);
