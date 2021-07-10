@@ -2,11 +2,14 @@
     font-size: 1.2rem;
 }
 
-
-
 .eventRow {
-    justify-content: space-around;
     background: lightgray;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 1rem;
 }
 
 

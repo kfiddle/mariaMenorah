@@ -15,6 +15,9 @@ public class Event {
     private LocalDate date;
     private int totalCostInCents;
 
+    @OneToOne
+    private AmountOfMoney cost;
+
     private int startingHour;
     private int startingMinute;
 
@@ -31,18 +34,17 @@ public class Event {
         this.title = title;
     }
 
+    public Event(String title, LocalDate date) {
+        this.title = title;
+        this.date = date;
+    }
+
     public Event(String title, LocalDate date, int totalCostInCents) {
         this.title = title;
         this.date = date;
         this.totalCostInCents = totalCostInCents;
     }
 
-    public Event(String title, LocalDate date, int dollars, int totalCostInCents) {
-        this.title = title;
-        this.date = date;
-        this.totalCostInCents = totalCostInCents;
-
-    }
 
     public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute) {
         this.title = title;
@@ -64,6 +66,11 @@ public class Event {
         this.endingMinute = endingMinute;
         this.foundations = foundations;
     }
+
+    public void setCost(AmountOfMoney cost) {
+        this.cost = cost;
+    }
+
 
     public Long getId() {
         return id;
@@ -99,5 +106,9 @@ public class Event {
 
     public Collection<Foundation> getFoundations() {
         return foundations;
+    }
+
+    public String getCost() {
+        return cost.toString();
     }
 }

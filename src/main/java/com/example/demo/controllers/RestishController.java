@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.AmountOfMoney;
 import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
+import com.example.demo.repositories.AmountOfMoneyRepository;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,9 +27,13 @@ public class RestishController {
     @Resource
     EventRepository eventRepo;
 
+    @Resource
+    AmountOfMoneyRepository amountOfMoneyRepo;
+
 
     @PostMapping("/add-foundation")
     public Collection<Foundation> addFoundationToDatabase(@RequestBody Foundation incomingFoundation) throws IOException {
+
 
         Foundation foundationToAdd = new Foundation(incomingFoundation.getName());
         if (!foundationRepo.existsByName(incomingFoundation.getName())) {
@@ -40,10 +46,13 @@ public class RestishController {
     @PostMapping("/add-event")
     public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
 
-
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+            AmountOfMoney incomingMoney = new AmountOfMoney(incomingEvent.getTotalCostInCents());
+            amountOfMoneyRepo.save(incomingMoney);
+            incomingEvent.setCost(incomingMoney);
             eventRepo.save(incomingEvent);
         }
+
         return (Collection<Event>) eventRepo.findAll();
     }
 

@@ -29,7 +29,12 @@
     <tr th:each="event : ${allEvents}">
         <td th:text="${event.title}"></td>
         <td th:text="${event.date}"></td>
-        <td th:value="${event.totalCostInCents}"></td>
+        <td th:text="${event.getCost()}"></td>
+
+
+
+
+
     </tr>
 
 </table>
