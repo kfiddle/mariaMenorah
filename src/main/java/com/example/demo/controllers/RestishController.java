@@ -48,6 +48,7 @@ public class RestishController {
             amountOfMoneyRepo.save(incomingMoney);
             incomingEvent.setCost(incomingMoney);
             eventRepo.save(incomingEvent);
+            System.out.println(incomingEvent.getFoundations().size());
         }
         return (Collection<Event>) eventRepo.findAll();
     }

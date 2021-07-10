@@ -3,6 +3,8 @@ let eventSubmit = document.getElementById('eventSubmit');
 let foundationDropdown = document.getElementById('foundationDropDown');
 let foundationClicker = document.getElementById('foundationClicker');
 
+let chosenFoundations = [];
+
 async function getListOfFoundations() {
     let foundationsFromBackend = await fetch("/get-foundations");
     return await foundationsFromBackend.json();
@@ -22,25 +24,32 @@ eventSubmit.addEventListener('click', () => {
 
     if (eventDate === null && eventDollars === null) {
         dataToSubmit = {
-            title: eventTitle
+            title: eventTitle,
+            foundations: chosenFoundations
         }
     } else if (eventDollars === null && eventCents === null) {
         dataToSubmit = {
             title: eventTitle,
             date: eventDate,
+            foundations: chosenFoundations
+
 
         }
     } else if (eventCents == null) {
         dataToSubmit = {
             title: eventTitle,
             date: eventDate,
-            totalCostInCents: eventDollars * 100
+            totalCostInCents: eventDollars * 100,
+            foundations: chosenFoundations
+
         }
     } else {
         dataToSubmit = {
             title: eventTitle,
             date: eventDate,
-            totalCostInCents: +(eventDollars * 100) + +eventCents
+            totalCostInCents: +(eventDollars * 100) + +eventCents,
+            foundations: chosenFoundations
+
         }
     }
 
@@ -90,11 +99,12 @@ const listFoundations = async () => {
                 foundationDiv.innerText = foundation.name;
                 foundationDiv.addEventListener('click', ()=> {
                     foundationDiv.style.color = 'gold';
+                    chosenFoundations.push(foundation);
                 })
                 foundationDropdown.appendChild(foundationDiv);
 
 
-                console.log(foundation.name);
+                console.log(foundation);
             })
 
 

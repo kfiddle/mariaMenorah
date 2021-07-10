@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/entryPage.css">
+    <link rel="stylesheet" href="/foundationPage.css">
     <meta charset="UTF-8">
     <title>All Our Lovely Foundations</title>
 </head>
@@ -11,16 +12,28 @@
 <nav id="navBar">
     <a href="/all-events">All Events</a>
     <a href="/entry">Entry Page</a>
-    <a href="">Editing Page</a>
 </nav>
 <body>
 
-<h2>All Foundations...</h2>
+<div class="outerFoundationContainer">
+    <h2>All Foundations...</h2>
 
-<ul th:each="foundation : ${allFoundations}">
-    <li th:text="${foundation.name}"></li>
+    <table id="foundationTable">
+        <tr class="foundationRow">
+            <th>Name</th>
+            <th>Contribution</th>
+        </tr>
+        <tr th:each="foundation : ${allFoundations}">
+            <td th:text="${foundation.name}"></td>
 
-</ul>
+        </tr>
+
+    </table>
+
+
+</div>
+
+
 
 </body>
 </html>
