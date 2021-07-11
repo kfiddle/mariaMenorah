@@ -7,7 +7,11 @@ let purposeClicker = document.getElementById('purposeClicker');
 let foundationDropdown = document.getElementById('foundationDropDown');
 let foundationClicker = document.getElementById('foundationClicker');
 
+
+
 let chosenFoundations = [];
+
+
 
 async function getListOfFoundations() {
     let foundationsFromBackend = await fetch("/get-foundations");
@@ -124,7 +128,7 @@ const listPurposes = async () => {
     getListOfPurposes().then(list => {
         list.forEach(purpose => {
             let purposeDiv = document.createElement('div');
-            purposeDiv.classList.add('purposeDiv');
+            purposeDiv.classList.add('foundationDiv');
             purposeDiv.innerText = purpose.title;
             purposeDiv.addEventListener('click', ()=> {
                 purposeDiv.style.color = 'gold';
