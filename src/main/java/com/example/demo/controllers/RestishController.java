@@ -68,4 +68,9 @@ public class RestishController {
         return (Collection<Purpose>) purposeRepo.findAll();
     }
 
+    @RequestMapping("/get-events")
+    public Collection<Event> getAllEvents() {
+        return (Collection<Event>) eventRepo.findAll();
+    }
+
 }

@@ -8,8 +8,9 @@ let foundationDropdown = document.getElementById('foundationDropDown');
 let foundationClicker = document.getElementById('foundationClicker');
 
 let chosenFoundations = [];
+let selectedPurpose = {};
 
-let clicked = { purposes: false, foundations: false};
+let clicked = {purposes: false, foundations: false};
 
 const eraseAllDisplays = () => {
     while (purposeDropdown.lastChild) {
@@ -43,40 +44,43 @@ eventSubmit.addEventListener('click', () => {
     let eventDollars = document.getElementById('eventDollars').value;
     let eventCents = document.getElementById('eventCents').value;
 
-    let dataToSubmit = {};
+    let dataToSubmit = {
+        title: eventTitle,
+        date: eventDate,
+        totalCostInCents: +(eventDollars * 100) + +eventCents,
+        purpose: selectedPurpose,
+        foundations: chosenFoundations,
+    };
 
-    if (eventDate === null && eventDollars === null) {
-        dataToSubmit = {
-            title: eventTitle,
-            foundations: chosenFoundations
-        }
-    } else if (eventDollars === null && eventCents === null) {
-        dataToSubmit = {
-            title: eventTitle,
-            date: eventDate,
-            foundations: chosenFoundations
-
-
-        }
-    } else if (eventCents == null) {
-        dataToSubmit = {
-            title: eventTitle,
-            date: eventDate,
-            totalCostInCents: eventDollars * 100,
-            foundations: chosenFoundations
-
-        }
-    } else {
-        dataToSubmit = {
-            title: eventTitle,
-            date: eventDate,
-            totalCostInCents: +(eventDollars * 100) + +eventCents,
-            foundations: chosenFoundations
-
-        }
-    }
-
-    console.log(dataToSubmit)
+    // if (eventDate === null && eventDollars === null) {
+    //     dataToSubmit = {
+    //         title: eventTitle,
+    //         foundations: chosenFoundations
+    //     }
+    // } else if (eventDollars === null && eventCents === null) {
+    //     dataToSubmit = {
+    //         title: eventTitle,
+    //         date: eventDate,
+    //         foundations: chosenFoundations
+    //
+    //
+    //     }
+    // } else if (eventCents == null) {
+    //     dataToSubmit = {
+    //         title: eventTitle,
+    //         date: eventDate,
+    //         totalCostInCents: eventDollars * 100,
+    //         foundations: chosenFoundations
+    //
+    //     }
+    // } else {
+    //     dataToSubmit = {
+    //         title: eventTitle,
+    //         date: eventDate,
+    //         totalCostInCents: +(eventDollars * 100) + +eventCents,
+    //         foundations: chosenFoundations
+    //     }
+    // }
 
     fetch("/add-event", {
         method: "POST",
@@ -115,22 +119,21 @@ foundationSubmit.addEventListener('click', () => {
 
 
 const listFoundations = async () => {
-    eraseAllDisplays();
 
     getListOfFoundations().then(list => {
-            list.forEach(foundation => {
-                let foundationDiv = document.createElement('div');
-                foundationDiv.classList.add('foundationDiv');
-                foundationDiv.innerText = foundation.name;
-                foundationDiv.addEventListener('click', ()=> {
-                    foundationDiv.style.color = 'gold';
-                    chosenFoundations.push(foundation);
-                })
-                foundationDropdown.appendChild(foundationDiv);
-
-
-                console.log(foundation);
+        list.forEach(foundation => {
+            let foundationDiv = document.createElement('div');
+            foundationDiv.classList.add('foundationDiv');
+            foundationDiv.innerText = foundation.name;
+            foundationDiv.addEventListener('click', () => {
+                foundationDiv.style.color = 'gold';
+                chosenFoundations.push(foundation);
             })
+            foundationDropdown.appendChild(foundationDiv);
+
+
+            console.log(foundation);
+        })
 
 
     });
@@ -138,15 +141,20 @@ const listFoundations = async () => {
 
 const listPurposes = async () => {
 
-    eraseAllDisplays();
-    
+
     getListOfPurposes().then(list => {
         list.forEach(purpose => {
             let purposeDiv = document.createElement('div');
             purposeDiv.classList.add('foundationDiv');
             purposeDiv.innerText = purpose.title;
-            purposeDiv.addEventListener('click', ()=> {
-                purposeDiv.style.color = 'gold';
+            purposeDiv.addEventListener('click', () => {
+                let purposes = Array.from(purposeDropdown.querySelectorAll('.foundationDiv'));
+                purposes.forEach(singlePurpose => {
+                    singlePurpose.style.color = 'darkgreen'
+                });
+
+                purposeDiv.style.color = 'violet';
+                selectedPurpose = purpose;
             })
             purposeDropdown.appendChild(purposeDiv);
         })
@@ -156,3 +164,4 @@ const listPurposes = async () => {
 
 foundationClicker.addEventListener('click', listFoundations);
 purposeClicker.addEventListener('click', listPurposes);
+

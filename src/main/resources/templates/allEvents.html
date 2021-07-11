@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/entryPage.css">
     <link rel="stylesheet" href="/events.css">
 
+    <script src="/events.js" defer></script>
+
     <title>All Our Events</title>
 </head>
 
@@ -13,8 +15,8 @@
     <a href="/all-foundations">All Foundations</a>
     <a href="/entry">Entry Page</a>
     <a href="/all-purposes">All Purposes</a>
-
 </nav>
+
 <body>
 
 <header>
@@ -22,17 +24,17 @@
 </header>
 
 
-<table>
+<table id="eventsTable">
     <tr class="eventRow">
         <th>Title</th>
         <th>Date</th>
         <th>Cost</th>
     </tr>
-    <tr th:each="event : ${allEvents}">
-        <td th:text="${event.title}"></td>
-        <td th:text="${event.date}"></td>
-        <td th:text="${event.getCost()}"></td>
-    </tr>
+<!--    <tr th:each="event : ${allEvents}">-->
+<!--        <td th:text="${event.title}"></td>-->
+<!--        <td th:text="${event.date}"></td>-->
+<!--        <td th:text="${event.getCost()}"></td>-->
+<!--    </tr>-->
 
 </table>
 

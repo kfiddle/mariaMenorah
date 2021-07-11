@@ -18,6 +18,9 @@ public class Event {
     @OneToOne
     private AmountOfMoney cost;
 
+    @OneToOne
+    private Purpose purpose;
+
     private int startingHour;
     private int startingMinute;
 
@@ -45,6 +48,26 @@ public class Event {
         this.totalCostInCents = totalCostInCents;
     }
 
+    public Event(String title, LocalDate date, Purpose purpose) {
+        this.title = title;
+        this.date = date;
+        this.purpose = purpose;
+    }
+
+
+
+    public Event(String title, Purpose purpose) {
+        this.title = title;
+        this.purpose = purpose;
+    }
+
+    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents) {
+        this.title = title;
+        this.date = date;
+        this.purpose = purpose;
+        this.totalCostInCents = totalCostInCents;
+    }
+
 
     public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute) {
         this.title = title;
@@ -66,6 +89,19 @@ public class Event {
         this.endingMinute = endingMinute;
         this.foundations = foundations;
     }
+
+    public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute, Purpose purpose, Collection<Foundation> foundations) {
+        this.title = title;
+        this.date = date;
+        this.totalCostInCents = totalCostInCents;
+        this.startingHour = startingHour;
+        this.startingMinute = startingMinute;
+        this.endingHour = endingHour;
+        this.endingMinute = endingMinute;
+        this.purpose = purpose;
+        this.foundations = foundations;
+    }
+
 
     public void setCost(AmountOfMoney cost) {
         this.cost = cost;
@@ -110,5 +146,9 @@ public class Event {
 
     public String getCost() {
         return cost.toString();
+    }
+
+    public Purpose getPurpose() {
+        return purpose;
     }
 }

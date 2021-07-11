@@ -54,6 +54,11 @@ input {
     margin: 1rem;
 }
 
+#dropdownsDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .foundationDiv {
     color: darkgreen;
     margin-left: 3rem;
@@ -86,4 +91,8 @@ input {
 
 .submitButton:hover {
     background: blueviolet;
+}
+
+.extraHighlight:hover {
+    color: blueviolet;
 }

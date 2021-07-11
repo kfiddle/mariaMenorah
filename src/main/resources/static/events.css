@@ -24,7 +24,11 @@ h1 {
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 1rem 10rem;
+    padding: 1rem 10rem 1rem 0;
+}
+
+td:hover {
+    color: gold;
 }
 
 
