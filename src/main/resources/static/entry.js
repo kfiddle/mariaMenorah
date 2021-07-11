@@ -7,10 +7,20 @@ let purposeClicker = document.getElementById('purposeClicker');
 let foundationDropdown = document.getElementById('foundationDropDown');
 let foundationClicker = document.getElementById('foundationClicker');
 
-
-
 let chosenFoundations = [];
 
+let clicked = { purposes: false, foundations: false};
+
+const eraseAllDisplays = () => {
+    while (purposeDropdown.lastChild) {
+        purposeDropdown.removeChild(purposeDropdown.lastChild);
+    }
+
+    while (foundationDropdown.lastChild) {
+        foundationDropdown.removeChild(foundationDropdown.lastChild);
+    }
+
+}
 
 
 async function getListOfFoundations() {
@@ -105,6 +115,8 @@ foundationSubmit.addEventListener('click', () => {
 
 
 const listFoundations = async () => {
+    eraseAllDisplays();
+
     getListOfFoundations().then(list => {
             list.forEach(foundation => {
                 let foundationDiv = document.createElement('div');
@@ -125,6 +137,9 @@ const listFoundations = async () => {
 }
 
 const listPurposes = async () => {
+
+    eraseAllDisplays();
+    
     getListOfPurposes().then(list => {
         list.forEach(purpose => {
             let purposeDiv = document.createElement('div');
