@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/entryPage.css">
+    <link rel="stylesheet" href="/foundationPage.css">
+    <meta charset="UTF-8">
+    <title>All Purposes</title>
+</head>
+
+<nav id="navBar">
+    <a href="/all-foundations">All Foundations</a>
+    <a href="/entry">Entry Page</a>
+    <a href="/all-events">All Events</a>
+</nav>
+
+<body>
+
+<header>
+    <h1>All Purposes...</h1>
+</header>
+
+
+<table>
+    <tr class="eventRow">
+        <th>Title</th>
+
+    </tr>
+    <tr th:each="purpose : ${allPurposes}">
+        <td th:text="${purpose.title}"></td>
+
+    </tr>
+
+</table>
+</html>

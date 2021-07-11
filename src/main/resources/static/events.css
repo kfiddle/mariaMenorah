@@ -1,7 +1,22 @@
 * {
     font-size: 1.2rem;
+    letter-spacing: .1em;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    height: 10rem;
+    background: gray;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #dddddd;
+}
 .eventRow {
     background: lightgray;
 }
@@ -9,7 +24,7 @@
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 1rem;
+    padding: 1rem 10rem;
 }
 
 

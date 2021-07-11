@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
+import com.example.demo.repositories.PurposeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,9 @@ public class NavController {
 
     @Resource
     EventRepository eventRepo;
+
+    @Resource
+    PurposeRepository purposeRepo;
 
     @RequestMapping("/entry")
     public String showPageToAddEventsAndFoundations() {
@@ -38,7 +42,13 @@ public class NavController {
 
         model.addAttribute("allFoundations", foundationRepo.findAll());
         return "allFoundations";
+    }
 
+    @RequestMapping("/all-purposes")
+    public String showAllPurposesPage(Model model) {
+
+        model.addAttribute("allPurposes", purposeRepo.findAll());
+        return "allPurposes";
     }
 
 

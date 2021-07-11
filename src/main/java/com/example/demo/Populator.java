@@ -67,7 +67,7 @@ public class Populator implements CommandLineRunner {
         purposeRepo.save(b9);
         purposeRepo.save(c1);
         purposeRepo.save(c2);
-        
+
 
         Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", a6);
         Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", a7);

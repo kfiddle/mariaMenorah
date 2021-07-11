@@ -4,9 +4,11 @@ package com.example.demo.controllers;
 import com.example.demo.models.AmountOfMoney;
 import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
+import com.example.demo.models.Purpose;
 import com.example.demo.repositories.AmountOfMoneyRepository;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
+import com.example.demo.repositories.PurposeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +28,9 @@ public class RestishController {
 
     @Resource
     AmountOfMoneyRepository amountOfMoneyRepo;
+
+    @Resource
+    PurposeRepository purposeRepo;
 
 
     @PostMapping("/add-foundation")
@@ -58,5 +63,9 @@ public class RestishController {
         return (Collection<Foundation>) foundationRepo.findAll();
     }
 
+    @RequestMapping("/get-purposes")
+    public Collection<Purpose> getAllPurposes() {
+        return (Collection<Purpose>) purposeRepo.findAll();
+    }
 
 }

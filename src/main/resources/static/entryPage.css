@@ -26,14 +26,24 @@
     background: lightslategray;
 }
 
+#purposeDropDown {
+    margin-bottom: .5rem;
+    height: 3rem;
+}
+
 #foundationDiv {
     background: azure;
-
 }
 
 h2 {
     color: darkblue;
     margin: 1rem;
+    cursor: pointer;
+}
+
+
+.clicker:hover {
+    color: chartreuse;
 }
 
 form {

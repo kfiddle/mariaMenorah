@@ -1,5 +1,9 @@
 let foundationSubmit = document.getElementById('foundationSubmit');
 let eventSubmit = document.getElementById('eventSubmit');
+
+let purposeDropdown = document.getElementById('purposeDropDown');
+let purposeClicker = document.getElementById('purposeClicker');
+
 let foundationDropdown = document.getElementById('foundationDropDown');
 let foundationClicker = document.getElementById('foundationClicker');
 
@@ -8,6 +12,11 @@ let chosenFoundations = [];
 async function getListOfFoundations() {
     let foundationsFromBackend = await fetch("/get-foundations");
     return await foundationsFromBackend.json();
+}
+
+async function getListOfPurposes() {
+    let purposesFromBackend = await fetch('/get-purposes');
+    return await purposesFromBackend.json();
 }
 
 
@@ -111,4 +120,20 @@ const listFoundations = async () => {
     });
 }
 
+const listPurposes = async () => {
+    getListOfPurposes().then(list => {
+        list.forEach(purpose => {
+            let purposeDiv = document.createElement('div');
+            purposeDiv.classList.add('purposeDiv');
+            purposeDiv.innerText = purpose.title;
+            purposeDiv.addEventListener('click', ()=> {
+                purposeDiv.style.color = 'gold';
+            })
+            purposeDropdown.appendChild(purposeDiv);
+        })
+
+    })
+}
+
 foundationClicker.addEventListener('click', listFoundations);
+purposeClicker.addEventListener('click', listPurposes);
