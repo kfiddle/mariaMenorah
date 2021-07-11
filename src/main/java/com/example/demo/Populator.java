@@ -37,6 +37,13 @@ public class Populator implements CommandLineRunner {
         Purpose b2 = new Purpose("Art Studio Supplies");
         Purpose b3 = new Purpose("Dreams");
         Purpose b4 = new Purpose("Jewish Holidays");
+        Purpose b5 = new Purpose("Men's Club");
+        Purpose b6 = new Purpose("New Year's Eve Party");
+        Purpose b7 = new Purpose("Reform or Conversative visiting rabbis");
+        Purpose b8 = new Purpose("Mother's Day");
+        Purpose b9 = new Purpose("Educational Lectures");
+        Purpose c1 = new Purpose("Mitzvah Corps");
+        Purpose c2 = new Purpose("Athletic Activities");
 
         purposeRepo.save(a1);
         purposeRepo.save(a2);
@@ -53,6 +60,14 @@ public class Populator implements CommandLineRunner {
         purposeRepo.save(b2);
         purposeRepo.save(b3);
         purposeRepo.save(b4);
+        purposeRepo.save(b5);
+        purposeRepo.save(b6);
+        purposeRepo.save(b7);
+        purposeRepo.save(b8);
+        purposeRepo.save(b9);
+        purposeRepo.save(c1);
+        purposeRepo.save(c2);
+        
 
         Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", a6);
         Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", a7);
@@ -64,6 +79,23 @@ public class Populator implements CommandLineRunner {
         Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", b2);
         Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", b3 );
         Foundation munitz = new Foundation("A Munitz, L & L Rich Family Jewish Holiday", b4);
+        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", a4);
+        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", b5);
+        Foundation zelda = new Foundation("Morris, Zelda, Esther Rice", b6);
+        Foundation sayre = new Foundation("Sayre Family Activities Fund", a7);
+        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", b7);
+        Foundation senkfor = new Foundation("Senkfor Family", b1);
+        Foundation sheryl = new Foundation("Sheryl & Bart Simon", b8);
+        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", b9);
+        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", b9);
+        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", a10);
+        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", a5);
+        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", a4);
+        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", c1);
+        Foundation estelle = new Foundation("Estselle & Allen Wolfe Fund", c2);
+
+
+
 
         foundationRepo.save(mAndm);
         foundationRepo.save(rayeMorris);
@@ -75,6 +107,20 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(hortense);
         foundationRepo.save(munitz);
         foundationRepo.save(june);
+        foundationRepo.save(rena);
+        foundationRepo.save(larry);
+        foundationRepo.save(zelda);
+        foundationRepo.save(sayre);
+        foundationRepo.save(schnerb);
+        foundationRepo.save(senkfor);
+        foundationRepo.save(sheryl);
+        foundationRepo.save(carol);
+        foundationRepo.save(sylvia);
+        foundationRepo.save(laya);
+        foundationRepo.save(peggy);
+        foundationRepo.save(esther);
+        foundationRepo.save(weisz);
+        foundationRepo.save(estelle);
 
 
 
