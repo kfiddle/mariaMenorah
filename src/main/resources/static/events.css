@@ -31,4 +31,12 @@ td:hover {
     color: gold;
 }
 
+.submitEditing {
+    background: lightblue;
+}
+
+.submitEditing:hover {
+    background: blueviolet;
+}
+
 

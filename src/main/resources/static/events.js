@@ -1,8 +1,36 @@
 let eventsTable = document.getElementById('eventsTable');
 
+let eventSurgicalDiv = document.getElementById('eventSurgicalDiv');
+
 async function getListOfEvents() {
     let eventsFromBackend = await fetch("/get-events");
     return await eventsFromBackend.json();
+}
+
+const openEditingTable = eventObject => {
+
+    while (eventSurgicalDiv.lastChild) {
+        eventSurgicalDiv.removeChild(eventSurgicalDiv.lastChild);
+    }
+
+    let inputs = {
+        title: eventObject.title,
+        date: eventObject.date,
+        dollars: '$' + ~~(eventObject.totalCostInCents / 100),
+        cents: eventObject.totalCostInCents % 100 + '  cents',
+        purpose: eventObject.purpose.title
+    }
+
+    for (let key in inputs) {
+        let input = document.createElement('input');
+        inputs[key] === null ? input.placeholder = '' : input.placeholder = inputs[key];
+        eventSurgicalDiv.appendChild(input);
+    }
+
+    let submitEditing = document.createElement('button');
+    submitEditing.innerText = 'Submit Edited Event';
+    submitEditing.classList.add('submitEditing');
+    eventSurgicalDiv.appendChild(submitEditing);
 }
 
 const loadPage = async () => {
@@ -20,6 +48,11 @@ const loadPage = async () => {
             tableRow.appendChild(titleCell);
             tableRow.appendChild(dateCell);
             tableRow.appendChild(purposeCell);
+
+            tableRow.addEventListener('click', () => {
+                openEditingTable(event);
+
+            })
 
             eventsTable.appendChild(tableRow);
         })
