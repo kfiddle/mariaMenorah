@@ -31,12 +31,24 @@ td:hover {
     color: gold;
 }
 
+#eventSurgicalDiv {
+    margin-top: 10rem;
+}
+
 .submitEditing {
     background: lightblue;
 }
 
 .submitEditing:hover {
     background: blueviolet;
+}
+
+.editingInput::placeholder {
+    opacity: 40%;
+}
+
+#dollars {
+    width: 7rem;
 }
 
 

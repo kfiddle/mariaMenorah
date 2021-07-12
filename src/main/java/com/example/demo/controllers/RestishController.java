@@ -33,6 +33,22 @@ public class RestishController {
     PurposeRepository purposeRepo;
 
 
+    @RequestMapping("/get-foundations")
+    public Collection<Foundation> getAllFoundations() {
+        return (Collection<Foundation>) foundationRepo.findAll();
+    }
+
+    @RequestMapping("/get-purposes")
+    public Collection<Purpose> getAllPurposes() {
+        return (Collection<Purpose>) purposeRepo.findAll();
+    }
+
+    @RequestMapping("/get-events")
+    public Collection<Event> getAllEvents() {
+        return (Collection<Event>) eventRepo.findAll();
+    }
+
+
     @PostMapping("/add-foundation")
     public Collection<Foundation> addFoundationToDatabase(@RequestBody Foundation incomingFoundation) throws IOException {
 
@@ -58,19 +74,18 @@ public class RestishController {
         return (Collection<Event>) eventRepo.findAll();
     }
 
-    @RequestMapping("/get-foundations")
-    public Collection<Foundation> getAllFoundations() {
-        return (Collection<Foundation>) foundationRepo.findAll();
-    }
+    @PostMapping("edit-event")
+    public Collection<Event> editAnEventInDatabase(@RequestBody Event eventToEdit) throws IOException {
 
-    @RequestMapping("/get-purposes")
-    public Collection<Purpose> getAllPurposes() {
-        return (Collection<Purpose>) purposeRepo.findAll();
-    }
+        if (eventRepo.existsById(eventToEdit.getId())) {
+            Event existingEvent = eventRepo.findById(eventToEdit.getId()).get();
+            eventRepo.delete(existingEvent);
 
-    @RequestMapping("/get-events")
-    public Collection<Event> getAllEvents() {
+            eventRepo.save(eventToEdit);
+        }
+
         return (Collection<Event>) eventRepo.findAll();
     }
+
 
 }

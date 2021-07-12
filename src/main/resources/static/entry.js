@@ -52,35 +52,6 @@ eventSubmit.addEventListener('click', () => {
         foundations: chosenFoundations,
     };
 
-    // if (eventDate === null && eventDollars === null) {
-    //     dataToSubmit = {
-    //         title: eventTitle,
-    //         foundations: chosenFoundations
-    //     }
-    // } else if (eventDollars === null && eventCents === null) {
-    //     dataToSubmit = {
-    //         title: eventTitle,
-    //         date: eventDate,
-    //         foundations: chosenFoundations
-    //
-    //
-    //     }
-    // } else if (eventCents == null) {
-    //     dataToSubmit = {
-    //         title: eventTitle,
-    //         date: eventDate,
-    //         totalCostInCents: eventDollars * 100,
-    //         foundations: chosenFoundations
-    //
-    //     }
-    // } else {
-    //     dataToSubmit = {
-    //         title: eventTitle,
-    //         date: eventDate,
-    //         totalCostInCents: +(eventDollars * 100) + +eventCents,
-    //         foundations: chosenFoundations
-    //     }
-    // }
 
     fetch("/add-event", {
         method: "POST",
