@@ -23,7 +23,6 @@ const eraseAllDisplays = () => {
 
 }
 
-
 async function getListOfFoundations() {
     let foundationsFromBackend = await fetch("/get-foundations");
     return await foundationsFromBackend.json();
@@ -94,24 +93,42 @@ const listFoundations = async () => {
     getListOfFoundations().then(list => {
         list.forEach(foundation => {
             let foundationDiv = document.createElement('div');
+
+            let foundationInput = document.createElement('input');
+            foundationInput.style.display = 'none';
+
             foundationDiv.classList.add('foundationDiv');
             foundationDiv.innerText = foundation.name;
             foundationDiv.addEventListener('click', () => {
                 foundationDiv.style.color = 'gold';
+                foundationInput.style.display = 'block';
                 chosenFoundations.push(foundation);
             })
+
+            foundationDiv.appendChild(foundationInput);
             foundationDropdown.appendChild(foundationDiv);
 
-
-            console.log(foundation);
         })
-
-
     });
 }
 
-const listPurposes = async () => {
+const showMatchingFoundations = purpose => {
+    fetch('/get-matching-foundations', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(purpose),
+    })
 
+        .then(answer => console.log(answer))
+
+        .catch(error =>  console.log(error))
+
+
+}
+
+const listPurposes = async () => {
 
     getListOfPurposes().then(list => {
         list.forEach(purpose => {
@@ -126,6 +143,8 @@ const listPurposes = async () => {
 
                 purposeDiv.style.color = 'violet';
                 selectedPurpose = purpose;
+
+                showMatchingFoundations(purpose);
             })
             purposeDropdown.appendChild(purposeDiv);
         })

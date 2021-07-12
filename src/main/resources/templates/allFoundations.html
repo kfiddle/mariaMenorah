@@ -5,6 +5,8 @@
 <head>
     <link rel="stylesheet" href="/entryPage.css">
     <link rel="stylesheet" href="/foundationPage.css">
+    <script src="/foundations.js" defer></script>
+
     <meta charset="UTF-8">
     <title>All Our Lovely Foundations</title>
 </head>
@@ -23,13 +25,13 @@
         <tr class="foundationRow">
             <th>Name</th>
             <th>Purpose</th>
+            <th>Contribution Amount</th>
         </tr>
-        <tr th:each="foundation : ${allFoundations}">
-            <td th:text="${foundation.name}"></td>
-            <td th:text="${foundation.purpose.title}"></td>
-
-        </tr>
-
+<!--        <tr th:each="foundation : ${allFoundations}">-->
+<!--            <td th:text="${foundation.name}"></td>-->
+<!--            <td th:text="${foundation.purpose.title}"></td>-->
+<!--            <td th:text="${foundation.contributionAmount.toString()}"></td>-->
+<!--        </tr>-->
     </table>
 
 

@@ -59,7 +59,12 @@ input {
     grid-template-columns: 1fr 1fr;
 }
 
+#foundationClicker {
+    visibility: hidden;
+}
+
 .foundationDiv {
+    display: flex;
     color: darkgreen;
     margin-left: 3rem;
     font-size: 1.5rem;

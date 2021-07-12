@@ -11,13 +11,17 @@ public class Foundation {
     private Long id;
 
     private String name;
-    private double contributionAmount;
+
+    @OneToOne
+    private Purpose purpose;
+
+    @OneToOne
+    private AmountOfMoney contributionAmount;
 
     @ManyToMany
     private Collection<Event> events;
 
-    @OneToOne
-    private Purpose purpose;
+
 
     public Foundation() {
     }
@@ -31,10 +35,23 @@ public class Foundation {
         this.purpose = purpose;
     }
 
-    public Foundation(String name, double contributionAmount) {
+    public Foundation(String name, AmountOfMoney contributionAmount) {
         this.name = name;
         this.contributionAmount = contributionAmount;
     }
+
+    public Foundation(String name, AmountOfMoney contributionAmount, Purpose purpose) {
+        this.name = name;
+        this.contributionAmount = contributionAmount;
+        this.purpose = purpose;
+    }
+
+
+
+    public void setContributionAmount(AmountOfMoney contributionAmount) {
+        this.contributionAmount = contributionAmount;
+    }
+
 
     public Long getId() {
         return id;
@@ -44,8 +61,8 @@ public class Foundation {
         return name;
     }
 
-    public double getContributionAmount() {
-        return contributionAmount;
+    public String getContributionAmount() {
+        return contributionAmount.toString();
     }
 
     public Purpose getPurpose() { return purpose; }

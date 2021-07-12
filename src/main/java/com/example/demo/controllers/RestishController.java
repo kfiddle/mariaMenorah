@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -61,6 +62,21 @@ public class RestishController {
         return (Collection<Foundation>) foundationRepo.findAll();
     }
 
+    @RequestMapping("/get-matching-foundations")
+    public Collection<Foundation> getAllFoundationsOfCertainPurpose(@RequestBody Purpose purposeToMatch) throws IOException {
+
+//        Collection<Foundation> matchingFoundations = new ArrayList<>();
+//        matchingFoundations.add((Foundation) foundationRepo.findByPurpose(purposeToMatch));
+//        System.out.println(matchingFoundations.size());
+//        return matchingFoundations;
+
+
+        System.out.println(foundationRepo.findByPurpose(purposeToMatch).size());
+        return foundationRepo.findByPurpose(purposeToMatch);
+
+    }
+
+
     @PostMapping("/add-event")
     public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
 
@@ -69,7 +85,6 @@ public class RestishController {
             amountOfMoneyRepo.save(incomingMoney);
             incomingEvent.setCost(incomingMoney);
             eventRepo.save(incomingEvent);
-            System.out.println(incomingEvent.getFoundations().size());
         }
         return (Collection<Event>) eventRepo.findAll();
     }
