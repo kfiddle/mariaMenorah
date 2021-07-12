@@ -74,14 +74,11 @@ public class RestishController {
         return (Collection<Event>) eventRepo.findAll();
     }
 
-    @PostMapping("edit-event")
-    public Collection<Event> editAnEventInDatabase(@RequestBody Event eventToEdit) throws IOException {
+    @PostMapping("/delete-event")
+    public Collection<Event> editAnEventInDatabase(@RequestBody Long eventToDeleteID) throws IOException {
 
-        if (eventRepo.existsById(eventToEdit.getId())) {
-            Event existingEvent = eventRepo.findById(eventToEdit.getId()).get();
-            eventRepo.delete(existingEvent);
-
-            eventRepo.save(eventToEdit);
+        if (eventRepo.findById(eventToDeleteID).isPresent()) {
+            eventRepo.deleteById(eventToDeleteID);
         }
 
         return (Collection<Event>) eventRepo.findAll();

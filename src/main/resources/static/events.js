@@ -1,7 +1,7 @@
 let eventsTable = document.getElementById('eventsTable');
 let eventSurgicalDiv = document.getElementById('eventSurgicalDiv');
 
-let idOfEventToEdit = 0;
+let eventToDeleteID = 0;
 
 
 async function getListOfEvents() {
@@ -13,25 +13,30 @@ const submitEditedEvent = () => {
 
     let editedDollars = document.getElementById('dollars').value;
 
-
     let dataToSubmit = {
-        id: idOfEventToEdit,
         title: document.getElementById('title').value,
         date: document.getElementById('date').value,
         totalCostInCents: +(editedDollars * 100) + +document.getElementById('cents').value,
-        purpose: document.getElementById('purpose'),
     };
 
-    fetch("/edit-event", {
+    fetch("/delete-event", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataToSubmit),
-    }).catch(error => console.log(error))
-
-    loadPage().catch(error => console.log(error));
+        body: eventToDeleteID
+    }).then(() => {
+        fetch("/add-event", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataToSubmit),
+        })
+            .then(loadPage).catch(error => console.log(error));
+    })
 }
+
 
 const openEditingTable = eventObject => {
 
@@ -63,7 +68,27 @@ const openEditingTable = eventObject => {
     submitEditing.addEventListener('click', submitEditedEvent);
 }
 
-const loadPage = async () => {
+async function loadPage() {
+
+    while (eventsTable.lastChild) {
+        eventsTable.removeChild(eventsTable.lastChild);
+    }
+
+    let headingRow = document.createElement('tr');
+    let titleHeader = document.createElement('th');
+    let dateHeader = document.createElement('th');
+    let purposeHeader = document.createElement('th');
+
+    titleHeader.innerText = 'Title';
+    dateHeader.innerText = 'Date';
+    purposeHeader.innerText = 'Purpose';
+
+    headingRow.appendChild(titleHeader);
+    headingRow.appendChild(dateHeader);
+    headingRow.appendChild(purposeHeader);
+
+    eventsTable.appendChild(headingRow);
+
     getListOfEvents().then(allEvents => {
         allEvents.forEach(event => {
             let tableRow = document.createElement('tr');
@@ -81,7 +106,7 @@ const loadPage = async () => {
 
             tableRow.addEventListener('click', () => {
                 openEditingTable(event);
-                idOfEventToEdit = event.id;
+                eventToDeleteID = event.id;
             })
 
             eventsTable.appendChild(tableRow);
