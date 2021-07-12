@@ -120,15 +120,35 @@ const showMatchingFoundations = purpose => {
         },
         body: JSON.stringify(purpose),
     })
+        .then(data => data.json()).then(listOfPossibles => {
+            listOfPossibles.forEach(possibleFoundation => {
+                let foundationDiv = document.createElement('div');
 
-        .then(answer => console.log(answer))
+                let foundationInput = document.createElement('input');
+                foundationInput.style.display = 'none';
 
-        .catch(error =>  console.log(error))
+                foundationDiv.classList.add('foundationDiv');
+                foundationDiv.innerText = possibleFoundation.name;
+                foundationDiv.addEventListener('click', () => {
+                    foundationDiv.style.color = 'gold';
+                    foundationInput.style.display = 'block';
+                    chosenFoundations.push(possibleFoundation);
+                })
 
+                foundationDiv.appendChild(foundationInput);
+                foundationDropdown.appendChild(foundationDiv);
+
+            })
+
+    })
+        .catch(error => console.log(error));
 
 }
 
+
 const listPurposes = async () => {
+
+
 
     getListOfPurposes().then(list => {
         list.forEach(purpose => {
@@ -144,6 +164,9 @@ const listPurposes = async () => {
                 purposeDiv.style.color = 'violet';
                 selectedPurpose = purpose;
 
+                while(foundationDropdown.lastChild) {
+                    foundationDropdown.removeChild(foundationDropdown.lastChild);
+                }
                 showMatchingFoundations(purpose);
             })
             purposeDropdown.appendChild(purposeDiv);
