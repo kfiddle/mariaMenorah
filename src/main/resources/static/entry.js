@@ -5,7 +5,7 @@ let purposeDropdown = document.getElementById('purposeDropDown');
 let purposeClicker = document.getElementById('purposeClicker');
 
 let foundationDropdown = document.getElementById('foundationDropDown');
-let foundationClicker = document.getElementById('foundationClicker');
+// let foundationClicker = document.getElementById('foundationClicker');
 
 let chosenFoundations = [];
 let selectedPurpose = {};
@@ -88,30 +88,6 @@ foundationSubmit.addEventListener('click', () => {
 });
 
 
-const listFoundations = async () => {
-
-    getListOfFoundations().then(list => {
-        list.forEach(foundation => {
-            let foundationDiv = document.createElement('div');
-
-            let foundationInput = document.createElement('input');
-            foundationInput.style.display = 'none';
-
-            foundationDiv.classList.add('foundationDiv');
-            foundationDiv.innerText = foundation.name;
-            foundationDiv.addEventListener('click', () => {
-                foundationDiv.style.color = 'gold';
-                foundationInput.style.display = 'block';
-                chosenFoundations.push(foundation);
-            })
-
-            foundationDiv.appendChild(foundationInput);
-            foundationDropdown.appendChild(foundationDiv);
-
-        })
-    });
-}
-
 const showMatchingFoundations = purpose => {
     fetch('/get-matching-foundations', {
         method: 'POST',
@@ -122,21 +98,38 @@ const showMatchingFoundations = purpose => {
     })
         .then(data => data.json()).then(listOfPossibles => {
             listOfPossibles.forEach(possibleFoundation => {
-                let foundationDiv = document.createElement('div');
 
-                let foundationInput = document.createElement('input');
-                foundationInput.style.display = 'none';
 
-                foundationDiv.classList.add('foundationDiv');
-                foundationDiv.innerText = possibleFoundation.name;
-                foundationDiv.addEventListener('click', () => {
-                    foundationDiv.style.color = 'gold';
-                    foundationInput.style.display = 'block';
-                    chosenFoundations.push(possibleFoundation);
-                })
+                let foundationRow = document.createElement('tr');
+                let foundationName = document.createElement('td');
+                let availableFunds = document.createElement('td');
+                let inputForFunds = document.createElement('input');
 
-                foundationDiv.appendChild(foundationInput);
-                foundationDropdown.appendChild(foundationDiv);
+                foundationName.classList.add('foundationDiv');
+
+                foundationName.innerText = possibleFoundation.name;
+                availableFunds.innerText = possibleFoundation.contributionAmount;
+
+                foundationRow.appendChild(foundationName);
+                foundationRow.appendChild(availableFunds);
+                foundationRow.appendChild(inputForFunds);
+                foundationDropdown.appendChild(foundationRow);
+
+
+                // let foundationDiv = document.createElement('div');
+                // let foundationInput = document.createElement('input');
+                // foundationInput.style.display = 'none';
+                //
+                // foundationDiv.classList.add('foundationDiv');
+                // foundationDiv.innerText = possibleFoundation.name;
+                // foundationDiv.addEventListener('click', () => {
+                //     foundationDiv.style.color = 'gold';
+                //     foundationInput.style.display = 'block';
+                //     chosenFoundations.push(possibleFoundation);
+                // })
+                //
+                // foundationDiv.appendChild(foundationInput);
+                // foundationDropdown.appendChild(foundationDiv);
 
             })
 
@@ -175,6 +168,32 @@ const listPurposes = async () => {
     })
 }
 
-foundationClicker.addEventListener('click', listFoundations);
 purposeClicker.addEventListener('click', listPurposes);
 
+
+
+// foundationClicker.addEventListener('click', listFoundations);
+
+// const listFoundations = async () => {
+//
+//     getListOfFoundations().then(list => {
+//         list.forEach(foundation => {
+//             let foundationDiv = document.createElement('div');
+//
+//             let foundationInput = document.createElement('input');
+//             foundationInput.style.display = 'none';
+//
+//             foundationDiv.classList.add('foundationDiv');
+//             foundationDiv.innerText = foundation.name;
+//             foundationDiv.addEventListener('click', () => {
+//                 foundationDiv.style.color = 'gold';
+//                 foundationInput.style.display = 'block';
+//                 chosenFoundations.push(foundation);
+//             })
+//
+//             foundationDiv.appendChild(foundationInput);
+//             foundationDropdown.appendChild(foundationDiv);
+//
+//         })
+//     });
+// }
