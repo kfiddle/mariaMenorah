@@ -22,14 +22,29 @@ async function getListOfPurposes() {
 }
 
 
+const sendAmountsToAdjust = () => {
+
+    idsToQuery.forEach(id => {
+        let objectToSend = {
+            id,
+            amountToAdjust: document.getElementById(id).value
+        }
+
+        fetch('/deduct-contribution', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(objectToSend)
+        }).catch(error => console.log(error))
+    })
+}
+
 eventSubmit.addEventListener('click', () => {
 
     event.preventDefault();
 
-    idsToQuery.forEach(id => {
-        let valueToFind = document.getElementById(id).value;
-        console.log(valueToFind);
-    })
+    sendAmountsToAdjust();
 
     let eventTitle = document.getElementById('eventTitleInput').value;
     let eventDate = document.getElementById('eventDate').value;
@@ -109,7 +124,6 @@ const showMatchingFoundations = purpose => {
                 foundationRow.appendChild(availableFunds);
                 foundationRow.appendChild(inputForFunds);
                 foundationDropdown.appendChild(foundationRow);
-
             })
     })
         .catch(error => console.log(error));

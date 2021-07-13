@@ -9,6 +9,8 @@ import com.example.demo.repositories.AmountOfMoneyRepository;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import net.minidev.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -88,6 +90,15 @@ public class RestishController {
         }
 
         return (Collection<Event>) eventRepo.findAll();
+    }
+
+
+    @PostMapping("/deduct-contribution")
+    public Collection<Foundation> deductAmountsFromFoundations(@RequestBody JSONObject object) {
+
+        System.out.println(object);
+
+        return (Collection<Foundation>) foundationRepo.findAll();
     }
 
 
