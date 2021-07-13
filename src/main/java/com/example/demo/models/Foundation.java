@@ -53,6 +53,8 @@ public class Foundation {
     }
 
 
+
+
     public Long getId() {
         return id;
     }
@@ -63,6 +65,10 @@ public class Foundation {
 
     public String getContributionAmount() {
         return contributionAmount.toString();
+    }
+
+    public AmountOfMoney getOriginalMoneyObject() {
+        return contributionAmount;
     }
 
     public Purpose getPurpose() { return purpose; }

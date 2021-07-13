@@ -37,6 +37,14 @@ public class AmountOfMoney {
         return "$" + dollars + "." + displayCents;
     }
 
+    public void debitAmount(int dollarsToDebit) {
+        int centsToDebit = dollarsToDebit * 100;
+        this.totalAmountInCents -= centsToDebit;
+
+        this.dollars = totalAmountInCents / 100;
+        this.cents = totalAmountInCents % 100;
+    }
+
 
     public int getTotalAmountInCents() {
         return totalAmountInCents;

@@ -35,6 +35,16 @@ public class RestishController {
     @Resource
     PurposeRepository purposeRepo;
 
+    public static class Debit {
+        Long id;
+        int amountToAdjust;
+
+        public Debit(Long id, int amountToAdjust) {
+            this.id = id;
+            this.amountToAdjust = amountToAdjust;
+        }
+    }
+
 
     @RequestMapping("/get-foundations")
     public Collection<Foundation> getAllFoundations() {
@@ -94,9 +104,17 @@ public class RestishController {
 
 
     @PostMapping("/deduct-contribution")
-    public Collection<Foundation> deductAmountsFromFoundations(@RequestBody JSONObject object) {
+    public Collection<Foundation> deductAmountsFromFoundations(@RequestBody Debit debit) {
 
-        System.out.println(object);
+        if (foundationRepo.findById(debit.id).isPresent()) {
+            Foundation foundationToAdjust = foundationRepo.findById(debit.id).get();
+            AmountOfMoney amountToAdjust = foundationToAdjust.getOriginalMoneyObject();
+
+            amountToAdjust.debitAmount(debit.amountToAdjust);
+            System.out.println(amountToAdjust.toString());
+            amountOfMoneyRepo.save(amountToAdjust);
+
+        }
 
         return (Collection<Foundation>) foundationRepo.findAll();
     }
