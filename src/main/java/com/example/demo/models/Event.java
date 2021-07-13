@@ -16,9 +16,6 @@ public class Event {
     private int totalCostInCents;
 
     @OneToOne
-    private AmountOfMoney cost;
-
-    @OneToOne
     private Purpose purpose;
 
     private int startingHour;
@@ -102,11 +99,6 @@ public class Event {
     }
 
 
-    public void setCost(AmountOfMoney cost) {
-        this.cost = cost;
-    }
-
-
     public Long getId() {
         return id;
     }
@@ -141,10 +133,6 @@ public class Event {
 
     public Collection<Foundation> getFoundations() {
         return foundations;
-    }
-
-    public String getCost() {
-        return cost.toString();
     }
 
     public Purpose getPurpose() {

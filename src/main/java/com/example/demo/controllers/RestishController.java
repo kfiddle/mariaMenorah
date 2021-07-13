@@ -1,21 +1,16 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.AmountOfMoney;
 import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
-import com.example.demo.repositories.AmountOfMoneyRepository;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import net.minidev.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -28,9 +23,6 @@ public class RestishController {
 
     @Resource
     EventRepository eventRepo;
-
-    @Resource
-    AmountOfMoneyRepository amountOfMoneyRepo;
 
     @Resource
     PurposeRepository purposeRepo;
@@ -84,9 +76,6 @@ public class RestishController {
     public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
 
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
-            AmountOfMoney incomingMoney = new AmountOfMoney(incomingEvent.getTotalCostInCents());
-            amountOfMoneyRepo.save(incomingMoney);
-            incomingEvent.setCost(incomingMoney);
             eventRepo.save(incomingEvent);
         }
         return (Collection<Event>) eventRepo.findAll();
@@ -107,7 +96,6 @@ public class RestishController {
 
         if (eventRepo.findById(eventToEdit.getId()).isPresent()) {
             eventRepo.deleteById(eventToEdit.getId());
-            System.out.println(eventToEdit.getCost());
 
         }
         return (Collection<Event>) eventRepo.findAll();
@@ -120,12 +108,10 @@ public class RestishController {
 
         if (foundationRepo.findById(debit.id).isPresent()) {
             Foundation foundationToAdjust = foundationRepo.findById(debit.id).get();
-            AmountOfMoney amountToAdjust = foundationToAdjust.getOriginalMoneyObject();
 
-            amountToAdjust.debitAmount(debit.amountToAdjust);
-            System.out.println(amountToAdjust.toString());
-            amountOfMoneyRepo.save(amountToAdjust);
+            foundationToAdjust.debitPenniesFromTotal(debit.amountToAdjust);
 
+            foundationRepo.save(foundationToAdjust);
         }
 
         return (Collection<Foundation>) foundationRepo.findAll();

@@ -1,10 +1,8 @@
 package com.example.demo;
 
 
-import com.example.demo.models.AmountOfMoney;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
-import com.example.demo.repositories.AmountOfMoneyRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,8 +14,7 @@ import javax.annotation.Resource;
 public class Populator implements CommandLineRunner {
 
 
-    @Resource
-    AmountOfMoneyRepository amountOfMoneyRepo;
+
 
     @Resource
     PurposeRepository purposeRepo;
@@ -31,18 +28,6 @@ public class Populator implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
-        AmountOfMoney a = new AmountOfMoney(25000);
-        AmountOfMoney b = new AmountOfMoney(54000);
-        AmountOfMoney c = new AmountOfMoney(98478);
-        AmountOfMoney d= new AmountOfMoney(28593);
-        AmountOfMoney e = new AmountOfMoney(75000);
-
-        amountOfMoneyRepo.save(a);
-        amountOfMoneyRepo.save(b);
-        amountOfMoneyRepo.save(c);
-        amountOfMoneyRepo.save(d);
-        amountOfMoneyRepo.save(e);
 
 
         Purpose a1 = new Purpose("Exercise");
@@ -91,32 +76,30 @@ public class Populator implements CommandLineRunner {
         purposeRepo.save(c2);
 
 
-        Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", a, a6);
-        Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", b, a7);
-        Foundation albertBilstein = new Foundation("Albert Bilstein: Garden Fund for SG", c, a8);
-        Foundation helenHerb = new Foundation("Helen & Herb Brown", d, a9);
-        Foundation mollyCharles = new Foundation("Molly & Charles Goodman", e, a10);
-        Foundation barbaraGross = new Foundation("Barbara Gross", a, a4);
-        Foundation june = new Foundation("June Isquick", b, b1 );
-        Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", c, b2);
-        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", d, b3 );
-        Foundation munitz = new Foundation("A Munitz, L & L Rich Family Jewish Holiday", e, b4);
-        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", a, a4);
-        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", b, b5);
-        Foundation zelda = new Foundation("Morris, Zelda, Esther Rice", c, b6);
-        Foundation sayre = new Foundation("Sayre Family Activities Fund", d, a7);
-        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", e, b7);
-        Foundation senkfor = new Foundation("Senkfor Family", a, b1);
-        Foundation sheryl = new Foundation("Sheryl & Bart Simon", b, b8);
-        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", c, b9);
-        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", d, b9);
-        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", e, a10);
-        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", a, a5);
-        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", b, a4);
-        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", c, c1);
-        Foundation estelle = new Foundation("Estselle & Allen Wolfe Fund", d, c2);
-
-
+        Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", 82000, a6);
+        Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", 68357, a7);
+        Foundation albertBilstein = new Foundation("Albert Bilstein: Garden Fund for SG", 26833, a8);
+        Foundation helenHerb = new Foundation("Helen & Herb Brown", 6799, a9);
+        Foundation mollyCharles = new Foundation("Molly & Charles Goodman", 46789, a10);
+        Foundation barbaraGross = new Foundation("Barbara Gross", 475949, a4);
+        Foundation june = new Foundation("June Isquick", 347438, b1 );
+        Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", 5678, b2);
+        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 34683, b3 );
+        Foundation munitz = new Foundation("A Munitz, L & L Rich Family Jewish Holiday", 373839, b4);
+        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", 76899, a4);
+        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", 63733, b5);
+        Foundation zelda = new Foundation("Morris, Zelda, Esther Rice", 23583, b6);
+        Foundation sayre = new Foundation("Sayre Family Activities Fund", 23823, a7);
+        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", 29348, b7);
+        Foundation senkfor = new Foundation("Senkfor Family", 92625, b1);
+        Foundation sheryl = new Foundation("Sheryl & Bart Simon", 252, b8);
+        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", 274374, b9);
+        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", 18474, b9);
+        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", 19457, a10);
+        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", 5272, a5);
+        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 729384, a4);
+        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 83848, c1);
+        Foundation estelle = new Foundation("Estselle & Allen Wolfe Fund", 27373, c2);
 
 
         foundationRepo.save(mAndm);

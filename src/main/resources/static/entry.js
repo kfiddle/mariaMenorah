@@ -27,7 +27,7 @@ const sendAmountsToAdjust = () => {
     idsToQuery.forEach(id => {
         let objectToSend = {
             id,
-            amountToAdjust: +document.getElementById(id).value
+            amountToAdjust: +document.getElementById(id).value * 100
         }
 
         fetch('/deduct-contribution', {

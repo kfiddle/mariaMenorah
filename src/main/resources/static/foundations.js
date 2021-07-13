@@ -9,11 +9,12 @@ async function getListOfFoundations() {
 
 async function loadPage() {
 
+
     getListOfFoundations().then(allFoundations => {
         allFoundations.forEach(foundation => {
 
             let row = document.createElement('tr');
-            const { name, purpose, contributionAmount } = foundation;
+            const { name, purpose, contributionInPennies } = foundation;
 
             let newFields = {
                 nameCell: document.createElement('td'),
@@ -23,18 +24,14 @@ async function loadPage() {
 
             newFields.nameCell.innerText = name;
             newFields.purposeCell.innerText = purpose.title;
-            newFields.moneyCell.innerText = contributionAmount;
+            newFields.moneyCell.innerText = contributionInPennies;
 
             for (let key in newFields) {
                 row.appendChild(newFields[key]);
             }
 
             foundationTable.appendChild(row);
-
-
         })
-
-
     })
 
 
