@@ -107,6 +107,12 @@ const showMatchingFoundations = purpose => {
         .then(data => data.json()).then(listOfPossibles => {
             listOfPossibles.forEach(possibleFoundation => {
 
+                const { name, contributionInPennies } = possibleFoundation;
+
+                let foundationDollars = ~~(contributionInPennies / 100)
+                let foundationCents =
+                    contributionInPennies % 100 === 0 ? '00' : contributionInPennies % 100;
+
                 let foundationRow = document.createElement('tr');
                 let foundationName = document.createElement('td');
                 let availableFunds = document.createElement('td');
@@ -116,8 +122,8 @@ const showMatchingFoundations = purpose => {
 
                 foundationName.classList.add('foundation');
 
-                foundationName.innerText = possibleFoundation.name;
-                availableFunds.innerText = possibleFoundation.contributionAmount;
+                foundationName.innerText = name;
+                availableFunds.innerText = `${foundationDollars}.${foundationCents}`;
                 availableFunds.classList.add('availableFunds');
 
                 foundationRow.appendChild(foundationName);

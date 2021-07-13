@@ -16,6 +16,10 @@ async function loadPage() {
             let row = document.createElement('tr');
             const { name, purpose, contributionInPennies } = foundation;
 
+            let foundationDollars = ~~(contributionInPennies / 100)
+            let foundationCents =
+                contributionInPennies % 100 === 0 ? '00' : contributionInPennies % 100;
+
             let newFields = {
                 nameCell: document.createElement('td'),
                 purposeCell: document.createElement('td'),
@@ -24,7 +28,7 @@ async function loadPage() {
 
             newFields.nameCell.innerText = name;
             newFields.purposeCell.innerText = purpose.title;
-            newFields.moneyCell.innerText = contributionInPennies;
+            newFields.moneyCell.innerText = `${foundationDollars}.${foundationCents}`;
 
             for (let key in newFields) {
                 row.appendChild(newFields[key]);

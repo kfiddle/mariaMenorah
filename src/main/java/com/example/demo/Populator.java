@@ -1,14 +1,17 @@
 package com.example.demo;
 
 
+import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
+import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 
 @Component
 public class Populator implements CommandLineRunner {
@@ -21,6 +24,9 @@ public class Populator implements CommandLineRunner {
 
     @Resource
     FoundationRepository foundationRepo;
+
+    @Resource
+    EventRepository eventRepo;
 
 
 
@@ -128,6 +134,32 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(estelle);
 
 
+        Event a = new Event("one big party", LocalDate.now(), a4, 305300);
+        Event b = new Event("another big party", LocalDate.of(2021, 9, 15), a4, 305300);
+        Event c = new Event("a comedy", LocalDate.of(2021, 8, 5), a4, 5383);
+        Event d = new Event("a lecture", LocalDate.of(2021, 9, 15), b9, 8353);
+        Event e = new Event("pilates", LocalDate.of(2021, 7, 25), a1, 3053);
+        Event f = new Event("bar hopping", LocalDate.of(2021, 9, 17), a9, 76820);
+        Event g = new Event("garden hoe-ing", LocalDate.of(2021, 7, 27), a8, 76820);
+        Event h = new Event("derek bass lecture", LocalDate.of(2021, 7, 19), b9, 9800);
+        Event i = new Event("mother's day random", LocalDate.of(2021, 9, 27), b8, 7298);
+        Event j = new Event("running a marathon", LocalDate.of(2021, 8, 2), a1, 5000);
+        Event k = new Event("the trio", LocalDate.of(2021, 8, 14), a5, 20000);
+        Event l = new Event("the duo", LocalDate.of(2021, 8, 4), a5, 16000);
+
+
+        eventRepo.save(a);
+        eventRepo.save(b);
+        eventRepo.save(c);
+        eventRepo.save(d);
+        eventRepo.save(e);
+        eventRepo.save(f);
+        eventRepo.save(g);
+        eventRepo.save(h);
+        eventRepo.save(i);
+        eventRepo.save(j);
+        eventRepo.save(k);
+        eventRepo.save(l);
 
 
     }
