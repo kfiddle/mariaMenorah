@@ -98,6 +98,16 @@ input {
     background: blueviolet;
 }
 
-.extraHighlight:hover {
-    color: blueviolet;
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 1rem 6rem 1rem .5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: darkblue;
 }
+
+.foundationName {
+}
+
+

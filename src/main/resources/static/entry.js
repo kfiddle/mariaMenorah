@@ -5,23 +5,11 @@ let purposeDropdown = document.getElementById('purposeDropDown');
 let purposeClicker = document.getElementById('purposeClicker');
 
 let foundationDropdown = document.getElementById('foundationDropDown');
-// let foundationClicker = document.getElementById('foundationClicker');
+
 
 let chosenFoundations = [];
 let selectedPurpose = {};
-
-let clicked = {purposes: false, foundations: false};
-
-const eraseAllDisplays = () => {
-    while (purposeDropdown.lastChild) {
-        purposeDropdown.removeChild(purposeDropdown.lastChild);
-    }
-
-    while (foundationDropdown.lastChild) {
-        foundationDropdown.removeChild(foundationDropdown.lastChild);
-    }
-
-}
+let idsToQuery = [];
 
 async function getListOfFoundations() {
     let foundationsFromBackend = await fetch("/get-foundations");
@@ -37,6 +25,11 @@ async function getListOfPurposes() {
 eventSubmit.addEventListener('click', () => {
 
     event.preventDefault();
+
+    idsToQuery.forEach(id => {
+        let valueToFind = document.getElementById(id).value;
+        console.log(valueToFind);
+    })
 
     let eventTitle = document.getElementById('eventTitleInput').value;
     let eventDate = document.getElementById('eventDate').value;
@@ -99,40 +92,25 @@ const showMatchingFoundations = purpose => {
         .then(data => data.json()).then(listOfPossibles => {
             listOfPossibles.forEach(possibleFoundation => {
 
-
                 let foundationRow = document.createElement('tr');
                 let foundationName = document.createElement('td');
                 let availableFunds = document.createElement('td');
                 let inputForFunds = document.createElement('input');
+                inputForFunds.id = possibleFoundation.id;
+                idsToQuery.push(inputForFunds.id);
 
-                foundationName.classList.add('foundationDiv');
+                foundationName.classList.add('foundation');
 
                 foundationName.innerText = possibleFoundation.name;
                 availableFunds.innerText = possibleFoundation.contributionAmount;
+                availableFunds.classList.add('availableFunds');
 
                 foundationRow.appendChild(foundationName);
                 foundationRow.appendChild(availableFunds);
                 foundationRow.appendChild(inputForFunds);
                 foundationDropdown.appendChild(foundationRow);
 
-
-                // let foundationDiv = document.createElement('div');
-                // let foundationInput = document.createElement('input');
-                // foundationInput.style.display = 'none';
-                //
-                // foundationDiv.classList.add('foundationDiv');
-                // foundationDiv.innerText = possibleFoundation.name;
-                // foundationDiv.addEventListener('click', () => {
-                //     foundationDiv.style.color = 'gold';
-                //     foundationInput.style.display = 'block';
-                //     chosenFoundations.push(possibleFoundation);
-                // })
-                //
-                // foundationDiv.appendChild(foundationInput);
-                // foundationDropdown.appendChild(foundationDiv);
-
             })
-
     })
         .catch(error => console.log(error));
 
@@ -140,8 +118,6 @@ const showMatchingFoundations = purpose => {
 
 
 const listPurposes = async () => {
-
-
 
     getListOfPurposes().then(list => {
         list.forEach(purpose => {
@@ -160,6 +136,8 @@ const listPurposes = async () => {
                 while(foundationDropdown.lastChild) {
                     foundationDropdown.removeChild(foundationDropdown.lastChild);
                 }
+
+                idsToQuery = [];
                 showMatchingFoundations(purpose);
             })
             purposeDropdown.appendChild(purposeDiv);
