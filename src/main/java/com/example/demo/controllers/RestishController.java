@@ -93,13 +93,25 @@ public class RestishController {
     }
 
     @PostMapping("/delete-event")
-    public Collection<Event> editAnEventInDatabase(@RequestBody Long eventToDeleteID) throws IOException {
+    public Collection<Event> deleteAnEventInDatabase(@RequestBody Long eventToDeleteID) throws IOException {
 
         if (eventRepo.findById(eventToDeleteID).isPresent()) {
             eventRepo.deleteById(eventToDeleteID);
         }
 
         return (Collection<Event>) eventRepo.findAll();
+    }
+
+    @PostMapping("/edit-event")
+    public Collection<Event> editAnEventInDatabase(@RequestBody Event eventToEdit) throws IOException {
+
+        if (eventRepo.findById(eventToEdit.getId()).isPresent()) {
+            eventRepo.deleteById(eventToEdit.getId());
+            System.out.println(eventToEdit.getCost());
+
+        }
+        return (Collection<Event>) eventRepo.findAll();
+
     }
 
 

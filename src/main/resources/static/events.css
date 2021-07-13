@@ -1,5 +1,5 @@
 * {
-    font-size: 1.2rem;
+    font-size: 1rem;
     letter-spacing: .1em;
 }
 
@@ -21,10 +21,17 @@ h1 {
     background: lightgray;
 }
 
-td, th {
+th {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: darkblue;
+}
+
+td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 1rem 10rem 1rem 0;
+    color: darkslategrey;
 }
 
 td:hover {

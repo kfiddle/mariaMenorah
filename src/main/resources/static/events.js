@@ -78,31 +78,44 @@ async function loadPage() {
     let titleHeader = document.createElement('th');
     let dateHeader = document.createElement('th');
     let purposeHeader = document.createElement('th');
+    let costHeader = document.createElement('th');
 
     titleHeader.innerText = 'Title';
     dateHeader.innerText = 'Date';
     purposeHeader.innerText = 'Purpose';
+    costHeader.innerText = 'Cost';
 
     headingRow.appendChild(titleHeader);
     headingRow.appendChild(dateHeader);
     headingRow.appendChild(purposeHeader);
+    headingRow.appendChild(costHeader);
 
     eventsTable.appendChild(headingRow);
 
     getListOfEvents().then(allEvents => {
         allEvents.forEach(event => {
+
+            let eventDollars = ~~(event.totalCostInCents / 100)
+            let eventCents =
+                event.totalCostInCents % 100 === 0 ? '00' : event.totalCostInCents % 100;
+
             let tableRow = document.createElement('tr');
             let titleCell = document.createElement('td');
             let dateCell = document.createElement('td');
             let purposeCell = document.createElement('td');
+            let costCell = document.createElement('td');
 
             titleCell.innerText = event.title;
             dateCell.innerText = event.date;
             purposeCell.innerText = event.purpose.title;
 
+
+            costCell.innerText = `${eventDollars}.${eventCents}`;
+
             tableRow.appendChild(titleCell);
             tableRow.appendChild(dateCell);
             tableRow.appendChild(purposeCell);
+            tableRow.appendChild(costCell);
 
             tableRow.addEventListener('click', () => {
                 openEditingTable(event);

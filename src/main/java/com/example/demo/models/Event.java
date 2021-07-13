@@ -55,7 +55,6 @@ public class Event {
     }
 
 
-
     public Event(String title, Purpose purpose) {
         this.title = title;
         this.purpose = purpose;
