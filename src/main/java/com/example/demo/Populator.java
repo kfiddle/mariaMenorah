@@ -12,12 +12,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Component
 public class Populator implements CommandLineRunner {
-
-
-
 
     @Resource
     PurposeRepository purposeRepo;
@@ -52,7 +50,7 @@ public class Populator implements CommandLineRunner {
         Purpose b4 = new Purpose("Jewish Holidays");
         Purpose b5 = new Purpose("Men's Club");
         Purpose b6 = new Purpose("New Year's Eve Party");
-        Purpose b7 = new Purpose("Reform or Conversative visiting rabbis");
+        Purpose b7 = new Purpose("Reform or Conservative visiting rabbis");
         Purpose b8 = new Purpose("Mother's Day");
         Purpose b9 = new Purpose("Educational Lectures");
         Purpose c1 = new Purpose("Mitzvah Corps");
@@ -133,16 +131,29 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
 
+        ArrayList<Foundation> firstList = new ArrayList<>();
+        firstList.add(mAndm);
+        firstList.add(estelle);
+        firstList.add(esther);
+
+        ArrayList<Foundation> secondList = new ArrayList<>();
+        firstList.add(peggy);
+        firstList.add(weisz);
+        firstList.add(laya);
+
+        ArrayList<Foundation> thirdList = new ArrayList<>();
+        firstList.add(senkfor);
+        firstList.add(zelda);
 
         Event a = new Event("one big party", LocalDate.now(), a4, 305300);
-        Event b = new Event("another big party", LocalDate.of(2021, 9, 15), a4, 305300);
+        Event b = new Event("another big party", LocalDate.of(2021, 9, 15), a4, 305300, thirdList);
         Event c = new Event("a comedy", LocalDate.of(2021, 8, 5), a4, 5383);
-        Event d = new Event("a lecture", LocalDate.of(2021, 9, 15), b9, 8353);
-        Event e = new Event("pilates", LocalDate.of(2021, 7, 25), a1, 3053);
+        Event d = new Event("a lecture", LocalDate.of(2021, 9, 15), b9, 8353, secondList);
+        Event e = new Event("pilates", LocalDate.of(2021, 7, 25), a1, 3053, firstList);
         Event f = new Event("bar hopping", LocalDate.of(2021, 9, 17), a9, 76820);
-        Event g = new Event("garden hoe-ing", LocalDate.of(2021, 7, 27), a8, 76820);
+        Event g = new Event("garden hoe-ing", LocalDate.of(2021, 7, 27), a8, 76820, thirdList);
         Event h = new Event("derek bass lecture", LocalDate.of(2021, 7, 19), b9, 9800);
-        Event i = new Event("mother's day random", LocalDate.of(2021, 9, 27), b8, 7298);
+        Event i = new Event("mother's day random", LocalDate.of(2021, 9, 27), b8, 7298, firstList);
         Event j = new Event("running a marathon", LocalDate.of(2021, 8, 2), a1, 5000);
         Event k = new Event("the trio", LocalDate.of(2021, 8, 14), a5, 20000);
         Event l = new Event("the duo", LocalDate.of(2021, 8, 4), a5, 16000);

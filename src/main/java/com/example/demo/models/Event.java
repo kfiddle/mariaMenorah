@@ -64,6 +64,14 @@ public class Event {
         this.totalCostInCents = totalCostInCents;
     }
 
+    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Foundation> foundations) {
+        this.title = title;
+        this.date = date;
+        this.purpose = purpose;
+        this.totalCostInCents = totalCostInCents;
+        this.foundations = foundations;
+    }
+
 
     public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute) {
         this.title = title;

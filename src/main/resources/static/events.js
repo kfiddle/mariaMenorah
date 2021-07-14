@@ -1,6 +1,8 @@
 let eventsTable = document.getElementById('eventsTable');
 let eventSurgicalDiv = document.getElementById('eventSurgicalDiv');
 
+let purposeHeader = document.getElementById('purposeHeader');
+
 let eventToDeleteID = 0;
 
 
@@ -8,6 +10,11 @@ async function getListOfEvents() {
     let eventsFromBackend = await fetch("/get-events");
     return await eventsFromBackend.json();
 }
+
+// async function getEventsByPurpose() {
+//     let eventsOrderByPurpose = await fetch('/get-events-by-purpose');
+//     return await eventsOrderByPurpose.json();
+// }
 
 const submitEditedEvent = () => {
 
@@ -70,36 +77,20 @@ const openEditingTable = eventObject => {
 
 async function loadPage() {
 
-    while (eventsTable.lastChild) {
-        eventsTable.removeChild(eventsTable.lastChild);
-    }
-
-    let headingRow = document.createElement('tr');
-    let titleHeader = document.createElement('th');
-    let dateHeader = document.createElement('th');
-    let purposeHeader = document.createElement('th');
-    let costHeader = document.createElement('th');
-
-    titleHeader.innerText = 'Title';
-    dateHeader.innerText = 'Date';
-    purposeHeader.innerText = 'Purpose';
-    costHeader.innerText = 'Cost';
-
-    headingRow.appendChild(titleHeader);
-    headingRow.appendChild(dateHeader);
-    headingRow.appendChild(purposeHeader);
-    headingRow.appendChild(costHeader);
-
-    eventsTable.appendChild(headingRow);
-
     getListOfEvents().then(allEvents => {
         allEvents.forEach(event => {
+
+            let listOfFoundationElements = [];
+            let clicked = false;
 
             let eventDollars = ~~(event.totalCostInCents / 100)
             let eventCents =
                 event.totalCostInCents % 100 === 0 ? '00' : event.totalCostInCents % 100;
 
             let tableRow = document.createElement('tr');
+
+            tableRow.classList.add('eventRow');
+
             let titleCell = document.createElement('td');
             let dateCell = document.createElement('td');
             let purposeCell = document.createElement('td');
@@ -108,7 +99,6 @@ async function loadPage() {
             titleCell.innerText = event.title;
             dateCell.innerText = event.date;
             purposeCell.innerText = event.purpose.title;
-
 
             costCell.innerText = `${eventDollars}.${eventCents}`;
 
@@ -120,12 +110,41 @@ async function loadPage() {
             tableRow.addEventListener('click', () => {
                 openEditingTable(event);
                 eventToDeleteID = event.id;
+
+                if (!clicked) {
+                    listOfFoundationElements.forEach(element => element.style.display = 'block')
+                    clicked = true;
+                } else {
+                    listOfFoundationElements.forEach(element => element.style.display = 'none');
+                    clicked = false;
+                }
             })
 
             eventsTable.appendChild(tableRow);
+
+            event.foundations.forEach(foundation => {
+                let foundationDiv = document.createElement('div');
+                foundationDiv.innerText = foundation.name;
+                foundationDiv.style.display = 'none'
+                eventsTable.appendChild(foundationDiv)
+                listOfFoundationElements.push(foundationDiv);
+            })
+
+
         })
 
     });
 };
+
+
+purposeHeader.addEventListener('click', () => {
+    while (eventsTable.querySelector('.eventRow')) {
+        eventsTable.removeChild(document.querySelector('.eventRow'));
+    }
+    //loadPage('purpose')
+    // getEventsByPurpose().then(answer => console.log(answer));
+
+})
+
 
 loadPage().catch(error => console.log(error));

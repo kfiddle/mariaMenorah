@@ -1,13 +1,17 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.Event;
-import org.springframework.data.repository.CrudRepository;
+import com.example.demo.models.Purpose;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
-public interface EventRepository extends CrudRepository<Event, Long> {
+public interface EventRepository extends PagingAndSortingRepository<Event, Long> {
 
     boolean existsByTitle(String title);
 
     boolean existsByDate(LocalDate date);
+
+
 }

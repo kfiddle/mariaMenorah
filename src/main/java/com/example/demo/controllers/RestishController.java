@@ -7,11 +7,13 @@ import com.example.demo.models.Purpose;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 
 
 @CrossOrigin
@@ -52,6 +54,8 @@ public class RestishController {
     public Collection<Event> getAllEvents() {
         return (Collection<Event>) eventRepo.findAll();
     }
+
+
 
 
     @PostMapping("/add-foundation")
