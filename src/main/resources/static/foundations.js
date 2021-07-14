@@ -14,7 +14,10 @@ async function loadPage() {
         allFoundations.forEach(foundation => {
 
             let row = document.createElement('tr');
-            const { name, purpose, contributionInPennies } = foundation;
+            const { name, purpose, contributionInPennies, leftOverPennies } = foundation;
+
+            let leftOverDollars = ~~(leftOverPennies / 100);
+            let leftOverCents = leftOverPennies % 100 === 0 ? '00' : leftOverPennies % 100;
 
             let foundationDollars = ~~(contributionInPennies / 100)
             let foundationCents =
@@ -23,12 +26,14 @@ async function loadPage() {
             let newFields = {
                 nameCell: document.createElement('td'),
                 purposeCell: document.createElement('td'),
-                moneyCell: document.createElement('td')
+                originalContributionCell: document.createElement('td'),
+                leftOverCell: document.createElement('td')
             }
 
             newFields.nameCell.innerText = name;
             newFields.purposeCell.innerText = purpose.title;
-            newFields.moneyCell.innerText = `${foundationDollars}.${foundationCents}`;
+            newFields.originalContributionCell.innerText = `${foundationDollars}.${foundationCents}`;
+            newFields.leftOverCell.innerText = `${leftOverDollars}.${leftOverCents}`
 
             for (let key in newFields) {
                 row.appendChild(newFields[key]);
