@@ -124,8 +124,12 @@ async function loadPage() {
 
             event.foundations.forEach(foundation => {
                 let foundationDiv = document.createElement('div');
-                foundationDiv.innerText = foundation.name;
+
+                let foundationName = document.createElement('div');
+
+                foundationName.innerText = foundation.name;
                 foundationDiv.style.display = 'none'
+                foundationDiv.appendChild(foundationName);
                 eventsTable.appendChild(foundationDiv)
                 listOfFoundationElements.push(foundationDiv);
             })

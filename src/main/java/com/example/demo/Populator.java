@@ -137,13 +137,13 @@ public class Populator implements CommandLineRunner {
         firstList.add(esther);
 
         ArrayList<Foundation> secondList = new ArrayList<>();
-        firstList.add(peggy);
-        firstList.add(weisz);
-        firstList.add(laya);
+        secondList.add(peggy);
+        secondList.add(weisz);
+        secondList.add(laya);
 
         ArrayList<Foundation> thirdList = new ArrayList<>();
-        firstList.add(senkfor);
-        firstList.add(zelda);
+        thirdList.add(senkfor);
+        thirdList.add(zelda);
 
         Event a = new Event("one big party", LocalDate.now(), a4, 305300);
         Event b = new Event("another big party", LocalDate.of(2021, 9, 15), a4, 305300, thirdList);
