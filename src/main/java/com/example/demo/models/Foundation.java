@@ -13,10 +13,11 @@ public class Foundation {
     private String name;
     private int contributionInPennies;
 
-
     @OneToOne
     private Purpose purpose;
 
+    @OneToMany
+    private Collection<Transaction> transactions;
 
     @ManyToMany
     private Collection<Event> events;
@@ -43,6 +44,14 @@ public class Foundation {
         this.contributionInPennies -= penniesToDebit;
     }
 
+    public int leftOverPennies() {
+        int spentOnTransactions = 0;
+        for (Transaction transaction : transactions) {
+            spentOnTransactions += transaction.getTotalPennies();
+        }
+        return contributionInPennies - spentOnTransactions;
+    }
+
 
     public Long getId() {
         return id;
@@ -57,4 +66,8 @@ public class Foundation {
     }
 
     public Purpose getPurpose() { return purpose; }
+
+    public Collection<Transaction> getTransactions() {
+        return transactions;
+    }
 }

@@ -24,6 +24,9 @@ public class Event {
     private int endingHour;
     private int endingMinute;
 
+    @OneToMany
+    private Collection<Transaction> transactions;
+
     @ManyToMany
     private Collection<Foundation> foundations;
 
@@ -64,13 +67,23 @@ public class Event {
         this.totalCostInCents = totalCostInCents;
     }
 
-    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Foundation> foundations) {
+    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Transaction> transactions) {
         this.title = title;
         this.date = date;
         this.purpose = purpose;
         this.totalCostInCents = totalCostInCents;
-        this.foundations = foundations;
+        this.transactions = transactions;
     }
+
+
+
+//    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Foundation> foundations) {
+//        this.title = title;
+//        this.date = date;
+//        this.purpose = purpose;
+//        this.totalCostInCents = totalCostInCents;
+//        this.foundations = foundations;
+//    }
 
 
     public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute) {
@@ -137,6 +150,10 @@ public class Event {
 
     public int getEndingMinute() {
         return endingMinute;
+    }
+
+    public Collection<Transaction> getTransactions() {
+        return transactions;
     }
 
     public Collection<Foundation> getFoundations() {
