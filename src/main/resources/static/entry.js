@@ -72,8 +72,6 @@ eventSubmit.addEventListener('click', () => {
 
 
 
-
-
 const showMatchingFoundations = purpose => {
 
     idAndFoundationCombos = [];

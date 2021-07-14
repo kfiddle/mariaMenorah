@@ -11,10 +11,6 @@ async function getListOfEvents() {
     return await eventsFromBackend.json();
 }
 
-// async function getEventsByPurpose() {
-//     let eventsOrderByPurpose = await fetch('/get-events-by-purpose');
-//     return await eventsOrderByPurpose.json();
-// }
 
 const submitEditedEvent = () => {
 
@@ -80,7 +76,7 @@ async function loadPage() {
     getListOfEvents().then(allEvents => {
         allEvents.forEach(event => {
 
-            let listOfFoundationElements = [];
+            let listOfTransactionElements = [];
             let clicked = false;
 
             let eventDollars = ~~(event.totalCostInCents / 100)
@@ -112,28 +108,38 @@ async function loadPage() {
                 eventToDeleteID = event.id;
 
                 if (!clicked) {
-                    listOfFoundationElements.forEach(element => element.style.display = 'block')
+                    listOfTransactionElements.forEach(element => element.style.display = 'flex')
                     clicked = true;
                 } else {
-                    listOfFoundationElements.forEach(element => element.style.display = 'none');
+                    listOfTransactionElements.forEach(element => element.style.display = 'none');
                     clicked = false;
                 }
             })
 
             eventsTable.appendChild(tableRow);
 
-            event.foundations.forEach(foundation => {
-                let foundationDiv = document.createElement('div');
+            event.transactions.forEach(transaction => {
+                let transactionDiv = document.createElement('div');
 
-                let foundationName = document.createElement('div');
 
-                foundationName.innerText = foundation.name;
-                foundationDiv.style.display = 'none'
-                foundationDiv.appendChild(foundationName);
-                eventsTable.appendChild(foundationDiv)
-                listOfFoundationElements.push(foundationDiv);
+                transactionDiv.classList.add('accordionContainer');
+                transactionDiv.style.display = 'none'
+
+                let transactFoundationDiv = document.createElement('div');
+                let transactAmountDiv = document.createElement('div');
+
+                transactFoundationDiv.classList.add('accordionFoundationName');
+                transactAmountDiv.classList.add('accordionAmount');
+
+                transactFoundationDiv.innerText = transaction.foundation.name;
+                transactAmountDiv.innerText = transaction.totalPennies;
+
+                transactionDiv.appendChild(transactFoundationDiv);
+                transactionDiv.appendChild(transactAmountDiv);
+
+                eventsTable.appendChild(transactionDiv)
+                listOfTransactionElements.push(transactionDiv);
             })
-
 
         })
 
@@ -145,8 +151,6 @@ purposeHeader.addEventListener('click', () => {
     while (eventsTable.querySelector('.eventRow')) {
         eventsTable.removeChild(document.querySelector('.eventRow'));
     }
-    //loadPage('purpose')
-    // getEventsByPurpose().then(answer => console.log(answer));
 
 })
 

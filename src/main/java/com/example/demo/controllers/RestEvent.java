@@ -67,7 +67,6 @@ public class RestEvent {
 
             eventRepo.save(eventToAdd);
 
-            System.out.println(eventToAdd.getTransactions().size());
         }
         return (Collection<Event>) eventRepo.findAll();
 

@@ -4,15 +4,18 @@ package com.example.demo;
 import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
+import com.example.demo.models.Transaction;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
+import com.example.demo.repositories.TransactionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Component
 public class Populator implements CommandLineRunner {
@@ -22,6 +25,9 @@ public class Populator implements CommandLineRunner {
 
     @Resource
     FoundationRepository foundationRepo;
+
+    @Resource
+    TransactionRepository transactionRepo;
 
     @Resource
     EventRepository eventRepo;
@@ -131,6 +137,30 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
 
+        Transaction t1 = new Transaction(450, weisz);
+        Transaction t2 = new Transaction(300, estelle);
+        Transaction t3 = new Transaction(2300, peggy);
+
+        Transaction t4 = new Transaction(348, carol);
+        Transaction t5 = new Transaction(492, senkfor);
+
+        transactionRepo.save(t1);
+        transactionRepo.save(t2);
+        transactionRepo.save(t3);
+        transactionRepo.save(t4);
+        transactionRepo.save(t5);
+
+
+
+        Collection<Transaction> transax = new ArrayList<>();
+        transax.add(t1);
+        transax.add(t2);
+        transax.add(t3);
+
+        Collection<Transaction> transax1 = new ArrayList<>();
+        transax1.add(t4);
+        transax1.add(t5);
+
 
 
         Event a = new Event("one big party", LocalDate.now(), a4, 305300);
@@ -139,12 +169,12 @@ public class Populator implements CommandLineRunner {
         Event d = new Event("a lecture", LocalDate.of(2021, 9, 15), b9, 8353);
         Event e = new Event("pilates", LocalDate.of(2021, 7, 25), a1, 3053);
         Event f = new Event("bar hopping", LocalDate.of(2021, 9, 17), a9, 76820);
-        Event g = new Event("garden hoe-ing", LocalDate.of(2021, 7, 27), a8, 76820);
+        Event g = new Event("garden hoe-ing", LocalDate.of(2021, 7, 27), a8, 76820, transax1);
         Event h = new Event("derek bass lecture", LocalDate.of(2021, 7, 19), b9, 9800);
         Event i = new Event("mother's day random", LocalDate.of(2021, 9, 27), b8, 7298);
         Event j = new Event("running a marathon", LocalDate.of(2021, 8, 2), a1, 5000);
         Event k = new Event("the trio", LocalDate.of(2021, 8, 14), a5, 20000);
-        Event l = new Event("the duo", LocalDate.of(2021, 8, 4), a5, 16000);
+        Event l = new Event("the duo", LocalDate.of(2021, 8, 4), a5, 16000, transax);
 
 
         eventRepo.save(a);
