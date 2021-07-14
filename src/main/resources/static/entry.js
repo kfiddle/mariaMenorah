@@ -9,12 +9,10 @@ let foundationDropdown = document.getElementById('foundationDropDown');
 
 let chosenFoundations = [];
 let selectedPurpose = {};
-let idsToQuery = [];
+let idAndFoundationCombos = [];
 
-async function getListOfFoundations() {
-    let foundationsFromBackend = await fetch("/get-foundations");
-    return await foundationsFromBackend.json();
-}
+// let idsToQuery = [];
+
 
 async function getListOfPurposes() {
     let purposesFromBackend = await fetch('/get-purposes');
@@ -22,41 +20,32 @@ async function getListOfPurposes() {
 }
 
 
-const sendAmountsToAdjust = () => {
 
-    idsToQuery.forEach(id => {
-        let objectToSend = {
-            id,
-            amountToAdjust: +document.getElementById(id).value * 100
-        }
-
-        fetch('/deduct-contribution', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(objectToSend)
-        }).catch(error => console.log(error))
-    })
-}
 
 eventSubmit.addEventListener('click', () => {
 
-    event.preventDefault();
+    let transactionObjectsToSend = [];
 
-    sendAmountsToAdjust();
+    event.preventDefault();
 
     let eventTitle = document.getElementById('eventTitleInput').value;
     let eventDate = document.getElementById('eventDate').value;
     let eventDollars = document.getElementById('eventDollars').value;
     let eventCents = document.getElementById('eventCents').value;
 
+    idAndFoundationCombos.forEach(combo => {
+        transactionObjectsToSend.push({
+            foundation: combo.foundation,
+            totalPennies: +document.getElementById(combo.id).value * 100,
+        })
+    })
+
     let dataToSubmit = {
         title: eventTitle,
         date: eventDate,
         totalCostInCents: +(eventDollars * 100) + +eventCents,
         purpose: selectedPurpose,
-        foundations: chosenFoundations,
+        transactions: transactionObjectsToSend
     };
 
 
@@ -73,30 +62,23 @@ eventSubmit.addEventListener('click', () => {
     document.getElementById('eventDollars').value = '';
     document.getElementById('eventCents').value = '';
 
+    transactionObjectsToSend = [];
+
+    idAndFoundationCombos.forEach(combo => {
+       document.getElementById(combo.id).value = '';
+        })
+
 });
 
 
-foundationSubmit.addEventListener('click', () => {
-    let foundationName = document.getElementById('foundationName').value;
-    console.log(foundationName);
 
-    let dataToSubmit = {
-        name: foundationName
-    }
-
-    fetch("/add-foundation", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSubmit),
-    }).catch(error => console.log(error))
-
-    document.getElementById('foundationName').value = '';
-});
 
 
 const showMatchingFoundations = purpose => {
+
+    idAndFoundationCombos = [];
+
+
     fetch('/get-matching-foundations', {
         method: 'POST',
         headers: {
@@ -107,7 +89,7 @@ const showMatchingFoundations = purpose => {
         .then(data => data.json()).then(listOfPossibles => {
             listOfPossibles.forEach(possibleFoundation => {
 
-                const { name, contributionInPennies } = possibleFoundation;
+                const { id, name, contributionInPennies } = possibleFoundation;
 
                 let foundationDollars = ~~(contributionInPennies / 100)
                 let foundationCents =
@@ -117,8 +99,16 @@ const showMatchingFoundations = purpose => {
                 let foundationName = document.createElement('td');
                 let availableFunds = document.createElement('td');
                 let inputForFunds = document.createElement('input');
-                inputForFunds.id = possibleFoundation.id;
-                idsToQuery.push(inputForFunds.id);
+
+                inputForFunds.id = id;
+
+                let foundationAndIdToQuery = {
+                    id,
+                    foundation: possibleFoundation
+                }
+
+                idAndFoundationCombos.push(foundationAndIdToQuery);
+
 
                 foundationName.classList.add('foundation');
 
@@ -133,7 +123,6 @@ const showMatchingFoundations = purpose => {
             })
     })
         .catch(error => console.log(error));
-
 }
 
 
@@ -157,7 +146,6 @@ const listPurposes = async () => {
                     foundationDropdown.removeChild(foundationDropdown.lastChild);
                 }
 
-                idsToQuery = [];
                 showMatchingFoundations(purpose);
             })
             purposeDropdown.appendChild(purposeDiv);
@@ -168,7 +156,24 @@ const listPurposes = async () => {
 
 purposeClicker.addEventListener('click', listPurposes);
 
+foundationSubmit.addEventListener('click', () => {
+    let foundationName = document.getElementById('foundationName').value;
+    console.log(foundationName);
 
+    let dataToSubmit = {
+        name: foundationName
+    }
+
+    fetch("/add-foundation", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSubmit),
+    }).catch(error => console.log(error))
+
+    document.getElementById('foundationName').value = '';
+});
 
 // foundationClicker.addEventListener('click', listFoundations);
 
@@ -195,3 +200,20 @@ purposeClicker.addEventListener('click', listPurposes);
 //         })
 //     });
 // }
+
+// const sendUpTransactions = () => {
+//     idsToQuery.forEach(id => {
+//         let transactionToSend = {
+//             id,
+//             totalPennies: +document.getElementById(id).value * 100
+//         }
+//         fetch('/add-transaction', {
+//             method: 'POST',
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(transactionToSend)
+//         }).catch(error => console.log(error))
+//     })
+// }
+

@@ -4,14 +4,17 @@ package com.example.demo.controllers;
 import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
+import com.example.demo.models.Transaction;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
+import com.example.demo.repositories.TransactionRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -22,6 +25,9 @@ public class RestEvent {
 
     @Resource
     FoundationRepository foundationRepo;
+
+    @Resource
+    TransactionRepository transactionRepo;
 
     @Resource
     EventRepository eventRepo;
@@ -40,7 +46,6 @@ public class RestEvent {
     }
 
 
-
     @RequestMapping("/get-events")
     public Collection<Event> getAllEvents() {
         return (Collection<Event>) eventRepo.findAll();
@@ -48,13 +53,36 @@ public class RestEvent {
 
 
     @PostMapping("/add-event")
-    public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
+    public Collection<Event> addEventWithItsTransactions(@RequestBody Event incomingEvent) throws IOException {
 
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
-            eventRepo.save(incomingEvent);
+            transactionRepo.saveAll(incomingEvent.getTransactions());
+            Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
+
+            Event eventToAdd = new Event(incomingEvent.getTitle(),
+                    incomingEvent.getDate(),
+                    incomingEvent.getPurpose(),
+                    incomingEvent.getTotalCostInCents(),
+                    transactionsToPutInEvent);
+
+            eventRepo.save(eventToAdd);
+
+            System.out.println(eventToAdd.getTransactions().size());
         }
         return (Collection<Event>) eventRepo.findAll();
+
+
     }
+
+
+//    @PostMapping("/add-event")
+//    public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
+//
+//        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+//            eventRepo.save(incomingEvent);
+//        }
+//        return (Collection<Event>) eventRepo.findAll();
+//    }
 
     @PostMapping("/delete-event")
     public Collection<Event> deleteAnEventInDatabase(@RequestBody Long eventToDeleteID) throws IOException {
@@ -76,9 +104,6 @@ public class RestEvent {
         return (Collection<Event>) eventRepo.findAll();
 
     }
-
-
-
 
 
 }

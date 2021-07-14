@@ -24,11 +24,9 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(int totalPennies, Event event, Foundation foundation) {
+    public Transaction(int totalPennies, Foundation foundation) {
         this.totalPennies = totalPennies;
-        this.event = event;
         this.foundation = foundation;
-
     }
 
     public Long getId() {
@@ -39,11 +37,11 @@ public class Transaction {
         return totalPennies;
     }
 
-    public Event getEvent() {
-        return event;
-    }
-
     public Foundation getFoundation() {
         return foundation;
+    }
+
+    public Event getEvent() {
+        return event;
     }
 }
