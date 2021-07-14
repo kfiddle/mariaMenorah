@@ -35,16 +35,6 @@ public class RestEvent {
     @Resource
     PurposeRepository purposeRepo;
 
-    public static class Debit {
-        Long id;
-        int amountToAdjust;
-
-        public Debit(Long id, int amountToAdjust) {
-            this.id = id;
-            this.amountToAdjust = amountToAdjust;
-        }
-    }
-
 
     @RequestMapping("/get-events")
     public Collection<Event> getAllEvents() {
@@ -57,7 +47,16 @@ public class RestEvent {
 
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
             transactionRepo.saveAll(incomingEvent.getTransactions());
+
             Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
+
+            for (Transaction transaction : transactionsToPutInEvent) {
+                if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
+                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                    foundationToDebit.setLeftOverPennies(transaction.getTotalPennies());
+                    foundationRepo.save(foundationToDebit);
+                }
+            }
 
             Event eventToAdd = new Event(incomingEvent.getTitle(),
                     incomingEvent.getDate(),

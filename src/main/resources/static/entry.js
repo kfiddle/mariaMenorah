@@ -87,11 +87,11 @@ const showMatchingFoundations = purpose => {
         .then(data => data.json()).then(listOfPossibles => {
             listOfPossibles.forEach(possibleFoundation => {
 
-                const { id, name, contributionInPennies } = possibleFoundation;
+                const { id, name, contributionInPennies, leftOverPennies } = possibleFoundation;
 
-                let foundationDollars = ~~(contributionInPennies / 100)
+                let foundationDollars = ~~(leftOverPennies / 100)
                 let foundationCents =
-                    contributionInPennies % 100 === 0 ? '00' : contributionInPennies % 100;
+                    leftOverPennies % 100 === 0 ? '00' : leftOverPennies % 100;
 
                 let foundationRow = document.createElement('tr');
                 let foundationName = document.createElement('td');

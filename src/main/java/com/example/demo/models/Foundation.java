@@ -12,6 +12,7 @@ public class Foundation {
 
     private String name;
     private int contributionInPennies;
+    private int leftOverPennies;
 
     @OneToOne
     private Purpose purpose;
@@ -37,6 +38,7 @@ public class Foundation {
     public Foundation(String name, int contributionInPennies, Purpose purpose) {
         this.name = name;
         this.contributionInPennies = contributionInPennies;
+        this.leftOverPennies = contributionInPennies;
         this.purpose = purpose;
     }
 
@@ -44,12 +46,8 @@ public class Foundation {
         this.contributionInPennies -= penniesToDebit;
     }
 
-    public int leftOverPennies() {
-        int spentOnTransactions = 0;
-        for (Transaction transaction : transactions) {
-            spentOnTransactions += transaction.getTotalPennies();
-        }
-        return contributionInPennies - spentOnTransactions;
+    public void setLeftOverPennies(int spentOnATransaction) {
+        leftOverPennies -= spentOnATransaction;
     }
 
 
@@ -63,6 +61,10 @@ public class Foundation {
 
     public int getContributionInPennies() {
         return contributionInPennies;
+    }
+
+    public int getLeftOverPennies() {
+        return leftOverPennies;
     }
 
     public Purpose getPurpose() { return purpose; }

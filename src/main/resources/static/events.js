@@ -121,6 +121,10 @@ async function loadPage() {
             event.transactions.forEach(transaction => {
                 let transactionDiv = document.createElement('div');
 
+                let dollars = ~~(transaction.totalPennies / 100);
+
+                let cents =
+                    transaction.totalPennies % 100 === 0 ? '00' : transaction.totalPennies % 100;
 
                 transactionDiv.classList.add('accordionContainer');
                 transactionDiv.style.display = 'none'
@@ -132,7 +136,7 @@ async function loadPage() {
                 transactAmountDiv.classList.add('accordionAmount');
 
                 transactFoundationDiv.innerText = transaction.foundation.name;
-                transactAmountDiv.innerText = transaction.totalPennies;
+                transactAmountDiv.innerText = `${dollars}.${cents}`;
 
                 transactionDiv.appendChild(transactFoundationDiv);
                 transactionDiv.appendChild(transactAmountDiv);
