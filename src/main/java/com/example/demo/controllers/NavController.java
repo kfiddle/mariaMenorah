@@ -24,7 +24,7 @@ public class NavController {
     @Resource
     PurposeRepository purposeRepo;
 
-    @RequestMapping("/entry")
+    @RequestMapping("/")
     public String showPageToAddEventsAndFoundations() {
         return "entry";
     }
