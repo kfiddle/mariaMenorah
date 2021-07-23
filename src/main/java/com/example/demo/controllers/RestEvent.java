@@ -65,6 +65,7 @@ public class RestEvent {
                     transactionsToPutInEvent);
 
             eventRepo.save(eventToAdd);
+            System.out.println(eventToAdd.getTotalCostInCents());
 
         }
         return (Collection<Event>) eventRepo.findAll();
@@ -83,10 +84,12 @@ public class RestEvent {
 //    }
 
     @PostMapping("/delete-event")
-    public Collection<Event> deleteAnEventInDatabase(@RequestBody Long eventToDeleteID) throws IOException {
+    public Collection<Event> deleteAnEventInDatabase(@RequestBody Event eventToDelete) throws IOException {
 
-        if (eventRepo.findById(eventToDeleteID).isPresent()) {
-            eventRepo.deleteById(eventToDeleteID);
+        System.out.println(eventToDelete.getTitle() + "is gonna have to go");
+
+        if (eventRepo.findById(eventToDelete.getId()).isPresent()) {
+            eventRepo.deleteById(eventToDelete.getId());
         }
 
         return (Collection<Event>) eventRepo.findAll();

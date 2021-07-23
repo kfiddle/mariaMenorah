@@ -18,10 +18,15 @@ public class Payee {
     private String phoneNumber;
     private String email;
     private String streetNumber;
+
+
+
     private String street;
     private String apartmentNumber;
     private String city;
     private String zip;
+
+    private boolean w9ed;
 
     public Payee() {
     }
@@ -91,5 +96,9 @@ public class Payee {
 
     public String getZip() {
         return zip;
+    }
+
+    public boolean isW9ed() {
+        return w9ed;
     }
 }
