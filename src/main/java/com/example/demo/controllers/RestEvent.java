@@ -74,21 +74,14 @@ public class RestEvent {
     }
 
 
-//    @PostMapping("/add-event")
-//    public Collection<Event> addEventToDatabase(@RequestBody Event incomingEvent) throws IOException {
-//
-//        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
-//            eventRepo.save(incomingEvent);
-//        }
-//        return (Collection<Event>) eventRepo.findAll();
-//    }
 
     @PostMapping("/delete-event")
     public Collection<Event> deleteAnEventInDatabase(@RequestBody Event eventToDelete) throws IOException {
 
-        System.out.println(eventToDelete.getTitle() + "is gonna have to go");
-
         if (eventRepo.findById(eventToDelete.getId()).isPresent()) {
+
+
+
             eventRepo.deleteById(eventToDelete.getId());
         }
 

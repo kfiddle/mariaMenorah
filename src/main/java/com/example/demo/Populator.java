@@ -109,7 +109,7 @@ public class Populator implements CommandLineRunner {
         Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", 50000, a5);
         Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 700000, a4);
         Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 120000, c1);
-        Foundation estelle = new Foundation("Estselle & Allen Wolfe Fund", 200000, c2);
+        Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 200000, c2);
 
 
         foundationRepo.save(mAndm);

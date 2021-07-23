@@ -19,8 +19,6 @@ public class Payee {
     private String email;
     private String streetNumber;
 
-
-
     private String street;
     private String apartmentNumber;
     private String city;
