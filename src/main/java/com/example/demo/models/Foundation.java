@@ -42,8 +42,9 @@ public class Foundation {
         this.purpose = purpose;
     }
 
-    public void debitPenniesFromTotal(int penniesToDebit) {
-        this.contributionInPennies -= penniesToDebit;
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
+        leftOverPennies -= transaction.getTotalPennies();
     }
 
     public void setLeftOverPennies(int spentOnATransaction) {
@@ -72,4 +73,6 @@ public class Foundation {
     public Collection<Transaction> getTransactions() {
         return transactions;
     }
+
+
 }

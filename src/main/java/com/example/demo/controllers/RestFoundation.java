@@ -50,18 +50,4 @@ public class RestFoundation {
     }
 
 
-//    @PostMapping("/deduct-contribution")
-//    public Collection<Foundation> deductAmountsFromFoundations(@RequestBody RestEvent.Debit debit) {
-//
-//        if (foundationRepo.findById(debit.id).isPresent()) {
-//            Foundation foundationToAdjust = foundationRepo.findById(debit.id).get();
-//
-//            foundationToAdjust.debitPenniesFromTotal(debit.amountToAdjust);
-//
-//            foundationRepo.save(foundationToAdjust);
-//        }
-//
-//        return (Collection<Foundation>) foundationRepo.findAll();
-//    }
-
 }

@@ -46,17 +46,30 @@ public class RestEvent {
     public Collection<Event> addEventWithItsTransactions(@RequestBody Event incomingEvent) throws IOException {
 
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
-            transactionRepo.saveAll(incomingEvent.getTransactions());
+
 
             Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
 
+//            for (Transaction transaction : transactionsToPutInEvent) {
+//                if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
+//                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+//                    foundationToDebit.setLeftOverPennies(transaction.getTotalPennies());
+//                    foundationRepo.save(foundationToDebit);
+//                }
+//            }
+
             for (Transaction transaction : transactionsToPutInEvent) {
                 if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
-                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                    foundationToDebit.setLeftOverPennies(transaction.getTotalPennies());
-                    foundationRepo.save(foundationToDebit);
+                    Foundation foundationToGetTransaction = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                    foundationToGetTransaction.addTransaction(transaction);
+
                 }
             }
+
+
+
+            transactionRepo.saveAll(incomingEvent.getTransactions());
+
 
             Event eventToAdd = new Event(incomingEvent.getTitle(),
                     incomingEvent.getDate(),

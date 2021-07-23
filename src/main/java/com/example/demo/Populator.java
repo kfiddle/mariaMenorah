@@ -86,30 +86,30 @@ public class Populator implements CommandLineRunner {
         purposeRepo.save(c2);
 
 
-        Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", 82000, a6);
-        Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", 150000, a7);
-        Foundation albertBilstein = new Foundation("Albert Bilstein: Garden Fund for SG", 260000, a8);
-        Foundation helenHerb = new Foundation("Helen & Herb Brown", 70000, a9);
-        Foundation mollyCharles = new Foundation("Molly & Charles Goodman", 100000, a10);
-        Foundation barbaraGross = new Foundation("Barbara Gross", 500000, a4);
-        Foundation june = new Foundation("June Isquick", 35000, b1 );
-        Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", 50000, b2);
-        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 350000, b3 );
-        Foundation munitz = new Foundation("A Munitz, L & L Rich Family Jewish Holiday", 400000, b4);
-        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", 75000, a4);
-        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", 600000, b5);
-        Foundation zelda = new Foundation("Morris, Zelda, Esther Rice", 25000, b6);
-        Foundation sayre = new Foundation("Sayre Family Activities Fund", 20000, a7);
-        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", 300000, b7);
-        Foundation senkfor = new Foundation("Senkfor Family", 90000, b1);
-        Foundation sheryl = new Foundation("Sheryl & Bart Simon", 20000, b8);
-        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", 250000, b9);
-        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", 120000, b9);
-        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", 100000, a10);
-        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", 50000, a5);
-        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 700000, a4);
-        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 120000, c1);
-        Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 200000, c2);
+        Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", 42500, a6);
+        Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", 29900, a7);
+        Foundation albertBilstein = new Foundation("Albert Bilstein: Garden Fund for SG", 55800, a8);
+        Foundation helenHerb = new Foundation("Helen & Herb Brown", 56900, a9);
+        Foundation mollyCharles = new Foundation("Molly & Charles Goodman", 38700, a10);
+        Foundation barbaraGross = new Foundation("Barbara Gross", 70400, a4);
+        Foundation june = new Foundation("June Isquick", 29500, b1 );
+        Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", 83100, b2);
+        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 72700, b3 );
+        Foundation munitz = new Foundation("A Munitz, L & L Rich Family Jewish Holiday", 55100, b4);
+        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", 64100, a4);
+        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", 48000, b5);
+        Foundation zelda = new Foundation("Morris, Zelda, Esther Rice", 31600, b6);
+        Foundation sayre = new Foundation("Sayre Family Activities Fund", 212400, a7);
+        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", 59600, b7);
+        Foundation senkfor = new Foundation("Senkfor Family", 21400, b1);
+        Foundation sheryl = new Foundation("Sheryl & Bart Simon", 47300, b8);
+        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", 214100, b9);
+        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", 39300, b9);
+        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", 74400, a10);
+        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", 30700, a5);
+        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 34700, a4);
+        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 29900, c1);
+        Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 14200, c2);
 
 
         foundationRepo.save(mAndm);
