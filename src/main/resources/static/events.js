@@ -73,8 +73,14 @@ const openEditingTable = eventObject => {
 
 async function loadPage() {
 
+
+
     getListOfEvents().then(allEvents => {
+
+
         allEvents.forEach(event => {
+
+            console.log(event)
 
             let listOfTransactionElements = [];
             let clicked = false;

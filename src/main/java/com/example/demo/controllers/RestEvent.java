@@ -52,19 +52,11 @@ public class RestEvent {
             transactionRepo.saveAll(incomingEvent.getTransactions());
 
 
-//            for (Transaction transaction : transactionsToPutInEvent) {
-//                if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
-//                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-//                    foundationToDebit.setLeftOverPennies(transaction.getTotalPennies());
-//                    foundationRepo.save(foundationToDebit);
-//                }
-//            }
-
             for (Transaction transaction : transactionsToPutInEvent) {
                 if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
-                    Foundation foundationToGetTransaction = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                    foundationToGetTransaction.addTransaction(transaction);
-                    foundationRepo.save(foundationToGetTransaction);
+                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                    foundationToDebit.setLeftOverPennies(transaction.getTotalPennies());
+                    foundationRepo.save(foundationToDebit);
                 }
             }
 
@@ -75,8 +67,11 @@ public class RestEvent {
                     transactionsToPutInEvent);
 
             eventRepo.save(eventToAdd);
-            System.out.println(eventToAdd.getTotalCostInCents());
-
+            System.out.println(incomingEvent.getTitle() + "  " +
+                    incomingEvent.getDate() + "  " +
+                    incomingEvent.getPurpose().getTitle() + "  " +
+                    incomingEvent.getTotalCostInCents() + "  " +
+                    transactionsToPutInEvent.size());
         }
         return (Collection<Event>) eventRepo.findAll();
 
@@ -84,12 +79,10 @@ public class RestEvent {
     }
 
 
-
     @PostMapping("/delete-event")
     public Collection<Event> deleteAnEventInDatabase(@RequestBody Event eventToDelete) throws IOException {
 
         if (eventRepo.findById(eventToDelete.getId()).isPresent()) {
-
 
 
             eventRepo.deleteById(eventToDelete.getId());
