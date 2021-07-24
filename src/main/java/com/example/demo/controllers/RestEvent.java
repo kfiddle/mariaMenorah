@@ -49,6 +49,8 @@ public class RestEvent {
 
 
             Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
+            transactionRepo.saveAll(incomingEvent.getTransactions());
+
 
 //            for (Transaction transaction : transactionsToPutInEvent) {
 //                if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
@@ -62,14 +64,9 @@ public class RestEvent {
                 if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
                     Foundation foundationToGetTransaction = foundationRepo.findById(transaction.getFoundation().getId()).get();
                     foundationToGetTransaction.addTransaction(transaction);
-
+                    foundationRepo.save(foundationToGetTransaction);
                 }
             }
-
-
-
-            transactionRepo.saveAll(incomingEvent.getTransactions());
-
 
             Event eventToAdd = new Event(incomingEvent.getTitle(),
                     incomingEvent.getDate(),
