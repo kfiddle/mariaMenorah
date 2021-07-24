@@ -137,58 +137,13 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
 
-        Transaction t1 = new Transaction(450, weisz);
-        Transaction t2 = new Transaction(1000, estelle);
-        Transaction t3 = new Transaction(2300, peggy);
-
-        Transaction t4 = new Transaction(348, carol);
-        Transaction t5 = new Transaction(492, senkfor);
-
-        transactionRepo.save(t1);
-        transactionRepo.save(t2);
-        transactionRepo.save(t3);
-        transactionRepo.save(t4);
-        transactionRepo.save(t5);
 
 
 
-        Collection<Transaction> transax = new ArrayList<>();
-        transax.add(t1);
-        transax.add(t2);
-        transax.add(t3);
-
-        Collection<Transaction> transax1 = new ArrayList<>();
-        transax1.add(t4);
-        transax1.add(t5);
 
 
 
-        Event a = new Event("one big party", LocalDate.now(), a4, 305300);
-        Event b = new Event("another big party", LocalDate.of(2021, 9, 15), a4, 305300);
-        Event c = new Event("a comedy", LocalDate.of(2021, 8, 5), a4, 5383);
-        Event d = new Event("a lecture", LocalDate.of(2021, 9, 15), b9, 8353);
-        Event e = new Event("pilates", LocalDate.of(2021, 7, 25), a1, 3053);
-        Event f = new Event("bar hopping", LocalDate.of(2021, 9, 17), a9, 76820);
-        Event g = new Event("garden hoe-ing", LocalDate.of(2021, 7, 27), a8, 76820, transax1);
-        Event h = new Event("derek bass lecture", LocalDate.of(2021, 7, 19), b9, 9800);
-        Event i = new Event("mother's day random", LocalDate.of(2021, 9, 27), b8, 7298);
-        Event j = new Event("running a marathon", LocalDate.of(2021, 8, 2), a1, 5000);
-        Event k = new Event("the trio", LocalDate.of(2021, 8, 14), a5, 20000);
-        Event l = new Event("the duo", LocalDate.of(2021, 8, 4), a5, 16000, transax);
 
-
-        eventRepo.save(a);
-        eventRepo.save(b);
-        eventRepo.save(c);
-        eventRepo.save(d);
-        eventRepo.save(e);
-        eventRepo.save(f);
-        eventRepo.save(g);
-        eventRepo.save(h);
-        eventRepo.save(i);
-        eventRepo.save(j);
-        eventRepo.save(k);
-        eventRepo.save(l);
 
 
     }
