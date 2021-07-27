@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Transactions</title>
+</head>
+<body>
+
+
+<table>
+    <tr class="eventRow">
+
+    </tr>
+    <tr th:each="transaction : ${allTransactions}">
+
+        <td th:text="${transaction.foundation.name}"></td>
+
+        <td th:text="${transaction.totalPennies}"></td>
+
+    </tr>
+
+</table>
+
+</body>
+</html>

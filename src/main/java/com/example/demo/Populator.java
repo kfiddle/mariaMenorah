@@ -33,11 +33,8 @@ public class Populator implements CommandLineRunner {
     EventRepository eventRepo;
 
 
-
-
     @Override
     public void run(String... args) throws Exception {
-
 
 
         Purpose a1 = new Purpose("Exercise");
@@ -92,13 +89,13 @@ public class Populator implements CommandLineRunner {
         Foundation helenHerb = new Foundation("Helen & Herb Brown", 56900, a9);
         Foundation mollyCharles = new Foundation("Molly & Charles Goodman", 38700, a10);
         Foundation barbaraGross = new Foundation("Barbara Gross", 70400, a4);
-        Foundation june = new Foundation("June Isquick", 29500, b1 );
+        Foundation june = new Foundation("June Isquick", 29500, b1);
         Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", 83100, b2);
-        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 72700, b3 );
-        Foundation munitz = new Foundation("A Munitz, L & L Rich Family Jewish Holiday", 55100, b4);
+        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 72700, b3);
+        Foundation munitz = new Foundation("A Munitz- L & L Rich Family Jewish Holiday", 55100, b4);
         Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", 64100, a4);
         Foundation larry = new Foundation("Larry Reiss Men's Club Fund", 48000, b5);
-        Foundation zelda = new Foundation("Morris, Zelda, Esther Rice", 31600, b6);
+        Foundation zelda = new Foundation("Morris- Zelda- Esther Rice", 31600, b6);
         Foundation sayre = new Foundation("Sayre Family Activities Fund", 212400, a7);
         Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", 59600, b7);
         Foundation senkfor = new Foundation("Senkfor Family", 21400, b1);
@@ -110,6 +107,9 @@ public class Populator implements CommandLineRunner {
         Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 34700, a4);
         Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 29900, c1);
         Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 14200, c2);
+
+
+
 
 
         foundationRepo.save(mAndm);
@@ -136,6 +136,33 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(esther);
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
+
+        Transaction first = new Transaction(7500, albertBilstein.getId());
+        Transaction second = new Transaction(260, senkfor.getId());
+
+        Transaction third = new Transaction(7200, estelle.getId());
+        Transaction fourth = new Transaction(9300, esther.getId());
+
+        transactionRepo.save(first);
+        transactionRepo.save(second);
+        transactionRepo.save(third);
+        transactionRepo.save(fourth);
+
+        Collection<Transaction> trx= new ArrayList<>();
+
+        trx.add(first);
+        trx.add(second);
+
+        Collection<Transaction> trx1= new ArrayList<>();
+
+        trx.add(third);
+        trx.add(fourth);
+//
+//        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
+//        Event secondEvent = new Event("Ginger's Finger", LocalDate.now(), a3, 9900, trx1);
+
+//        eventRepo.save(firstEvent);
+//        eventRepo.save(secondEvent);
 
 
     }

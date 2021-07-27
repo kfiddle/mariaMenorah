@@ -11,4 +11,6 @@ public interface FoundationRepository extends CrudRepository<Foundation, Long> {
     boolean existsByName(String name);
 
     Collection<Foundation> findByPurpose(Purpose purpose);
+
+    Foundation findByName(String foundationName);
 }

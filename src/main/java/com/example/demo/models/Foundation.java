@@ -1,7 +1,9 @@
 package com.example.demo.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Foundation {
@@ -17,8 +19,8 @@ public class Foundation {
     @OneToOne
     private Purpose purpose;
 
-    @OneToMany
-    private Collection<Transaction> transactions;
+//    @OneToMany(mappedBy = "foundation")
+//    private Collection<Transaction> transactions;
 
     @ManyToMany
     private Collection<Event> events;
@@ -42,15 +44,11 @@ public class Foundation {
         this.purpose = purpose;
     }
 
-    public void addTransaction(Transaction transaction) {
-        this.transactions.add(transaction);
-        leftOverPennies -= transaction.getTotalPennies();
-    }
+
 
     public void setLeftOverPennies(int spentOnATransaction) {
         leftOverPennies -= spentOnATransaction;
     }
-
 
     public Long getId() {
         return id;
@@ -68,11 +66,15 @@ public class Foundation {
         return leftOverPennies;
     }
 
-    public Purpose getPurpose() { return purpose; }
-
-    public Collection<Transaction> getTransactions() {
-        return transactions;
+    public Purpose getPurpose() {
+        return purpose;
     }
+
+//    public Collection<Transaction> getTransactions() {
+//        return transactions;
+//    }
+
+
 
 
 }

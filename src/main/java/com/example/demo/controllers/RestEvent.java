@@ -23,6 +23,16 @@ import java.util.Collections;
 @RestController
 public class RestEvent {
 
+//    public static class TransactionPair {
+//        int pennies;
+//        Foundation foundation;
+//
+//        public TransactionPair(int pennies, Foundation foundation) {
+//            this.pennies = pennies;
+//            this.foundation = foundation;
+//        }
+//    }
+
     @Resource
     FoundationRepository foundationRepo;
 
@@ -42,37 +52,56 @@ public class RestEvent {
     }
 
 
+    @RequestMapping("/get-stringable-events")
+    public Collection<String> getStringableEvents() {
+
+        Collection<String> stringsToSendBack = new ArrayList<>();
+
+        for (Event event : eventRepo.findAll()) {
+            String stringToReturn =
+                    event.getTitle() + "," + event.getDate() + "," + event.getPurpose().getTitle() + "," + event.getTotalCostInCents() + event.getId();
+            stringsToSendBack.add(stringToReturn);
+        }
+        return stringsToSendBack;
+
+    }
+
+
     @PostMapping("/add-event")
     public Collection<Event> addEventWithItsTransactions(@RequestBody Event incomingEvent) throws IOException {
 
-        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+//        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+//
+//            Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
+
+//            for (Transaction transaction : transactionsToPutInEvent) {
+//                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies());
+//                transaction.getFoundation().addTransaction(newTransactionToSave);
+//                transactionRepo.save(newTransactionToSave);
+//                System.out.println(newTransactionToSave.getFoundation().getName() + " will give " + newTransactionToSave.getTotalPennies());
+//                System.out.println(newTransactionToSave.getFoundation().getTransactions().size());
 
 
-            Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
-            transactionRepo.saveAll(incomingEvent.getTransactions());
+//                if (foundationRepo.existsByName(transaction.getFoundationName())) {
+//
+//                    Foundation foundationToConnect = foundationRepo.findByName(transaction.getFoundationName());
+//                    foundationToConnect.addTransaction(transaction);
+//                    System.out.println(foundationToConnect.getName() + " has " + foundationToConnect.getTransactions().size() + " transactions");
+
+//                    foundationToConnect.setLeftOverPennies(transaction.getTotalPennies());
+//                    foundationRepo.save(foundationToConnect);
+
+//            }
+//        }
+//            Event eventToAdd = new Event(incomingEvent.getTitle(),
+//                    incomingEvent.getDate(),
+//                    incomingEvent.getPurpose(),
+//                    incomingEvent.getTotalCostInCents(),
+//                    transactionsToPutInEvent);
+//
+//            eventRepo.save(eventToAdd);
 
 
-            for (Transaction transaction : transactionsToPutInEvent) {
-                if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
-                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                    foundationToDebit.setLeftOverPennies(transaction.getTotalPennies());
-                    foundationRepo.save(foundationToDebit);
-                }
-            }
-
-            Event eventToAdd = new Event(incomingEvent.getTitle(),
-                    incomingEvent.getDate(),
-                    incomingEvent.getPurpose(),
-                    incomingEvent.getTotalCostInCents(),
-                    transactionsToPutInEvent);
-
-            eventRepo.save(eventToAdd);
-            System.out.println(incomingEvent.getTitle() + "  " +
-                    incomingEvent.getDate() + "  " +
-                    incomingEvent.getPurpose().getTitle() + "  " +
-                    incomingEvent.getTotalCostInCents() + "  " +
-                    transactionsToPutInEvent.size());
-        }
         return (Collection<Event>) eventRepo.findAll();
 
 
