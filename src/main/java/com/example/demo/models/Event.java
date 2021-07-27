@@ -75,8 +75,6 @@ public class Event {
         this.transactions = transactions;
     }
 
-
-
 //    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Foundation> foundations) {
 //        this.title = title;
 //        this.date = date;

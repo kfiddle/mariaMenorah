@@ -70,38 +70,25 @@ public class RestEvent {
     @PostMapping("/add-event")
     public Collection<Event> addEventWithItsTransactions(@RequestBody Event incomingEvent) throws IOException {
 
-//        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
-//
-//            Collection<Transaction> transactionsToPutInEvent = new ArrayList<>(incomingEvent.getTransactions());
+        if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+            Collection<Transaction> transactionsToSave = new ArrayList<>();
 
-//            for (Transaction transaction : transactionsToPutInEvent) {
-//                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies());
-//                transaction.getFoundation().addTransaction(newTransactionToSave);
-//                transactionRepo.save(newTransactionToSave);
-//                System.out.println(newTransactionToSave.getFoundation().getName() + " will give " + newTransactionToSave.getTotalPennies());
-//                System.out.println(newTransactionToSave.getFoundation().getTransactions().size());
+            for (Transaction transaction : incomingEvent.getTransactions()) {
+                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundationId());
 
+                transactionsToSave.add(newTransactionToSave);
 
-//                if (foundationRepo.existsByName(transaction.getFoundationName())) {
-//
-//                    Foundation foundationToConnect = foundationRepo.findByName(transaction.getFoundationName());
-//                    foundationToConnect.addTransaction(transaction);
-//                    System.out.println(foundationToConnect.getName() + " has " + foundationToConnect.getTransactions().size() + " transactions");
+                transactionRepo.save(newTransactionToSave);
+            }
+            Event eventToAdd = new Event(incomingEvent.getTitle(),
+                    incomingEvent.getDate(),
+                    incomingEvent.getPurpose(),
+                    incomingEvent.getTotalCostInCents(),
+                    transactionsToSave);
 
-//                    foundationToConnect.setLeftOverPennies(transaction.getTotalPennies());
-//                    foundationRepo.save(foundationToConnect);
+            eventRepo.save(eventToAdd);
 
-//            }
-//        }
-//            Event eventToAdd = new Event(incomingEvent.getTitle(),
-//                    incomingEvent.getDate(),
-//                    incomingEvent.getPurpose(),
-//                    incomingEvent.getTotalCostInCents(),
-//                    transactionsToPutInEvent);
-//
-//            eventRepo.save(eventToAdd);
-
-
+        }
         return (Collection<Event>) eventRepo.findAll();
 
 

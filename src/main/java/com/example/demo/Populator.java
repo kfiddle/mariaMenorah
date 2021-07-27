@@ -157,12 +157,14 @@ public class Populator implements CommandLineRunner {
 
         trx.add(third);
         trx.add(fourth);
-//
-//        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
-//        Event secondEvent = new Event("Ginger's Finger", LocalDate.now(), a3, 9900, trx1);
 
-//        eventRepo.save(firstEvent);
-//        eventRepo.save(secondEvent);
+        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
+        Event secondEvent = new Event("Ginger's Finger", LocalDate.now(), a3, 9900, trx1);
+        Event thirdEvent = new Event("Ginger dance", LocalDate.now(), a6, 1200, trx1);
+
+        eventRepo.save(firstEvent);
+        eventRepo.save(secondEvent);
+        eventRepo.save(thirdEvent);
 
 
     }
