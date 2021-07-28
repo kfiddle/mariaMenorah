@@ -1,6 +1,8 @@
 package com.example.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,26 +16,24 @@ public class Transaction {
     private Long id;
 
     private int totalPennies;
-    private Long foundationId;
+
 
     @ManyToOne
     private Event event;
 
-
-//    @ManyToOne
-//    private Foundation foundation;
+    @JsonIgnore
+    @ManyToOne
+    private Foundation foundation;
 
     public Transaction() {
     }
 
-//    public Transaction(int totalPennies, Foundation foundation) {
-//        this.totalPennies = totalPennies;
-//        this.foundation = foundation;
-//    }
-
-    public Transaction(int totalPennies, Long foundationId) {
+    public Transaction(int totalPennies) {
         this.totalPennies = totalPennies;
-        this.foundationId = foundationId;
+    }
+
+    public Transaction(int totalPennies, Foundation foundation) {
+        this.totalPennies = totalPennies;
     }
 
     public Long getId() {
@@ -45,12 +45,8 @@ public class Transaction {
     }
 
 
-//    public Foundation getFoundation() {
-//        return foundation;
-//    }
-
-    public Long getFoundationId() {
-        return foundationId;
+    public Foundation getFoundation() {
+        return foundation;
     }
 
     public Event getEvent() {

@@ -137,11 +137,12 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
 
-        Transaction first = new Transaction(7500, albertBilstein.getId());
-        Transaction second = new Transaction(260, senkfor.getId());
+        Transaction first = new Transaction(7500, albertBilstein);
+        Transaction second = new Transaction(260, estelle);
 
-        Transaction third = new Transaction(7200, estelle.getId());
-        Transaction fourth = new Transaction(9300, esther.getId());
+
+        Transaction third = new Transaction(7200, esther);
+        Transaction fourth = new Transaction(9300, carol);
 
         transactionRepo.save(first);
         transactionRepo.save(second);
@@ -159,12 +160,10 @@ public class Populator implements CommandLineRunner {
         trx.add(fourth);
 
         Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
-        Event secondEvent = new Event("Ginger's Finger", LocalDate.now(), a3, 9900, trx1);
-        Event thirdEvent = new Event("Ginger dance", LocalDate.now(), a6, 1200, trx1);
+
 
         eventRepo.save(firstEvent);
-        eventRepo.save(secondEvent);
-        eventRepo.save(thirdEvent);
+
 
 
     }

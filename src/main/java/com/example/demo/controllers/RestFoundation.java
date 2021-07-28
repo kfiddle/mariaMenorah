@@ -38,19 +38,6 @@ public class RestFoundation {
         return (Collection<Foundation>) foundationRepo.findAll();
     }
 
-    @RequestMapping("/get-stringable-foundations")
-    public Collection<String> getAllStringableFoundations() {
-        Collection<String> stringsToSendBack = new ArrayList<>();
-
-        for (Foundation foundation : foundationRepo.findAll()) {
-            String stringToReturn =
-                    foundation.getName() + "," + foundation.getLeftOverPennies() + "," + foundation.getContributionInPennies() + "," + foundation.getId();
-            stringsToSendBack.add(stringToReturn);
-        }
-        return stringsToSendBack;
-    }
-
-
     @PostMapping("/add-foundation")
     public Collection<Foundation> addFoundationToDatabase(@RequestBody Foundation incomingFoundation) throws IOException {
 
@@ -68,19 +55,21 @@ public class RestFoundation {
         return foundationRepo.findByPurpose(purposeToMatch);
     }
 
-    @PostMapping("/get-matching-stringable-foundations")
-    public Collection<String> getAllStringableFoundationsOfCertainPurpose(@RequestBody Purpose purposeToMatch) throws IOException {
+    @PostMapping("/get-foundation-from-id")
+//    public String getFoundationFromId(@RequestBody Long incomingId) throws IOException {
+//        if (foundationRepo.existsById(incomingId)) {
+//            System.out.println(foundationRepo.findById(incomingId).get().getName());
+//            return foundationRepo.findById(incomingId).get().getName();
+//        } else {
+//            return "id not found";
+//        }
+//    }
 
-        Collection<Foundation> matchingFoundations = foundationRepo.findByPurpose(purposeToMatch);
-
-        Collection<String> stringsToReturn = new ArrayList<>();
-
-        for (Foundation foundation : matchingFoundations) {
-            String stringToPush = foundation.getName() + "," + foundation.getLeftOverPennies();
-            stringsToReturn.add(stringToPush);
+    public Foundation getFoundationFromId(@RequestBody Long incomingId) throws IOException {
+        if (foundationRepo.existsById(incomingId)) {
+            return foundationRepo.findById(incomingId).get();
+        } else {
+            return null;
         }
-        return stringsToReturn;
     }
-
-
 }

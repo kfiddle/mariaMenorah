@@ -23,15 +23,6 @@ import java.util.Collections;
 @RestController
 public class RestEvent {
 
-//    public static class TransactionPair {
-//        int pennies;
-//        Foundation foundation;
-//
-//        public TransactionPair(int pennies, Foundation foundation) {
-//            this.pennies = pennies;
-//            this.foundation = foundation;
-//        }
-//    }
 
     @Resource
     FoundationRepository foundationRepo;
@@ -48,22 +39,8 @@ public class RestEvent {
 
     @RequestMapping("/get-events")
     public Collection<Event> getAllEvents() {
+
         return (Collection<Event>) eventRepo.findAll();
-    }
-
-
-    @RequestMapping("/get-stringable-events")
-    public Collection<String> getStringableEvents() {
-
-        Collection<String> stringsToSendBack = new ArrayList<>();
-
-        for (Event event : eventRepo.findAll()) {
-            String stringToReturn =
-                    event.getTitle() + "," + event.getDate() + "," + event.getPurpose().getTitle() + "," + event.getTotalCostInCents() + event.getId();
-            stringsToSendBack.add(stringToReturn);
-        }
-        return stringsToSendBack;
-
     }
 
 
@@ -74,10 +51,10 @@ public class RestEvent {
             Collection<Transaction> transactionsToSave = new ArrayList<>();
 
             for (Transaction transaction : incomingEvent.getTransactions()) {
-                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundationId());
+//                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
+                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies());
 
                 transactionsToSave.add(newTransactionToSave);
-
                 transactionRepo.save(newTransactionToSave);
             }
             Event eventToAdd = new Event(incomingEvent.getTitle(),

@@ -19,8 +19,10 @@ public class Foundation {
     @OneToOne
     private Purpose purpose;
 
-//    @OneToMany(mappedBy = "foundation")
-//    private Collection<Transaction> transactions;
+
+    //    @OneToMany(mappedBy = "foundation")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "foundation")
+    private Collection<Transaction> transactions;
 
     @ManyToMany
     private Collection<Event> events;
@@ -43,8 +45,6 @@ public class Foundation {
         this.leftOverPennies = contributionInPennies;
         this.purpose = purpose;
     }
-
-
 
     public void setLeftOverPennies(int spentOnATransaction) {
         leftOverPennies -= spentOnATransaction;
@@ -70,11 +70,9 @@ public class Foundation {
         return purpose;
     }
 
-//    public Collection<Transaction> getTransactions() {
-//        return transactions;
-//    }
-
-
+    public Collection<Transaction> getTransactions() {
+        return transactions;
+    }
 
 
 }
