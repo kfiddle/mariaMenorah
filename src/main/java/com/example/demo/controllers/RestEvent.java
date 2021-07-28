@@ -51,8 +51,7 @@ public class RestEvent {
             Collection<Transaction> transactionsToSave = new ArrayList<>();
 
             for (Transaction transaction : incomingEvent.getTransactions()) {
-//                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
-                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies());
+                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
 
                 transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
@@ -62,8 +61,8 @@ public class RestEvent {
                     incomingEvent.getPurpose(),
                     incomingEvent.getTotalCostInCents(),
                     transactionsToSave);
-
             eventRepo.save(eventToAdd);
+
 
         }
         return (Collection<Event>) eventRepo.findAll();

@@ -21,7 +21,7 @@ public class Transaction {
     @ManyToOne
     private Event event;
 
-    @JsonIgnore
+
     @ManyToOne
     private Foundation foundation;
 
