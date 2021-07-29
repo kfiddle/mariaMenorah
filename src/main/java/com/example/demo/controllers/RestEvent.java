@@ -78,6 +78,13 @@ public class RestEvent {
 
         if (eventRepo.findById(eventToDelete.getId()).isPresent()) {
 
+            for (Transaction transaction : eventRepo.findById(eventToDelete.getId()).get().getTransactions()) {
+                Foundation foundationToRefund = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                foundationToRefund.returnThosePennies(transaction.getTotalPennies());
+                foundationRepo.save(foundationToRefund);
+//                transactionRepo.deleteById(transaction.getId());
+            }
+
 
             eventRepo.deleteById(eventToDelete.getId());
         }

@@ -51,6 +51,12 @@ public class Foundation {
         leftOverPennies -= spentOnATransaction;
     }
 
+    public void returnThosePennies(int totalPennies) {
+        leftOverPennies += totalPennies;
+    }
+
+
+
     public Long getId() {
         return id;
     }
@@ -74,6 +80,7 @@ public class Foundation {
     public Collection<Transaction> getTransactions() {
         return transactions;
     }
+
 
 
 }
