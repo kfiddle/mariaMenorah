@@ -53,6 +53,10 @@ public class RestEvent {
             for (Transaction transaction : incomingEvent.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
 
+                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
+                foundationRepo.save(foundationToDebit);
+
                 transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
             }
@@ -66,8 +70,6 @@ public class RestEvent {
 
         }
         return (Collection<Event>) eventRepo.findAll();
-
-
     }
 
 

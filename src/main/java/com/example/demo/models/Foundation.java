@@ -23,7 +23,6 @@ public class Foundation {
 
     @JsonIgnore
     @OneToMany(mappedBy = "foundation")
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "foundation")
     private Collection<Transaction> transactions;
 
     @ManyToMany
@@ -48,7 +47,7 @@ public class Foundation {
         this.purpose = purpose;
     }
 
-    public void setLeftOverPennies(int spentOnATransaction) {
+    public void debitLotsOfPennies(int spentOnATransaction) {
         leftOverPennies -= spentOnATransaction;
     }
 
