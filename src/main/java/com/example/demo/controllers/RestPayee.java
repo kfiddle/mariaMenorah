@@ -5,10 +5,7 @@ import com.example.demo.models.Foundation;
 import com.example.demo.models.Payee;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.PayeeRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -24,6 +21,11 @@ public class RestPayee {
     @Resource
     EventRepository eventRepo;
 
+
+    @RequestMapping("/get-payees")
+    public Collection<Payee> getAllPayees () {
+        return (Collection<Payee>) payeeRepo.findAll();
+    }
 
     @PostMapping("/add-payee")
     public Collection<Payee> addPayeeToDatabase(@RequestBody Payee incomingPayee) throws IOException {

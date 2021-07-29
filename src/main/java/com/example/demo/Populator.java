@@ -1,14 +1,8 @@
 package com.example.demo;
 
 
-import com.example.demo.models.Event;
-import com.example.demo.models.Foundation;
-import com.example.demo.models.Purpose;
-import com.example.demo.models.Transaction;
-import com.example.demo.repositories.EventRepository;
-import com.example.demo.repositories.FoundationRepository;
-import com.example.demo.repositories.PurposeRepository;
-import com.example.demo.repositories.TransactionRepository;
+import com.example.demo.models.*;
+import com.example.demo.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +25,9 @@ public class Populator implements CommandLineRunner {
 
     @Resource
     EventRepository eventRepo;
+
+    @Resource
+    PayeeRepository payeeRepo;
 
 
     @Override
@@ -136,6 +133,18 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
 
+
+        Payee estherNahm = new Payee("Esther", "Nahm");
+        Payee derekS = new Payee("Derek", "Snyder");
+        Payee derekZ = new Payee("Derek", "Zadinsky");
+        Payee mariaM = new Payee("Maria", "Monday");
+
+
+        payeeRepo.save(estherNahm);
+        payeeRepo.save(derekS);
+        payeeRepo.save(derekZ);
+        payeeRepo.save(mariaM);
+
         Transaction first = new Transaction(7500, albertBilstein);
         Transaction second = new Transaction(260, estelle);
 
@@ -161,7 +170,6 @@ public class Populator implements CommandLineRunner {
 
 
         Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
-
 
         eventRepo.save(firstEvent);
 
