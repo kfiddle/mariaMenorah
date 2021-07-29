@@ -34,6 +34,7 @@ public class Transaction {
 
     public Transaction(int totalPennies, Foundation foundation) {
         this.totalPennies = totalPennies;
+        this.foundation = foundation;
     }
 
     public Long getId() {

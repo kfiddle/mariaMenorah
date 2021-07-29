@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,9 +21,9 @@ public class Foundation {
     @OneToOne
     private Purpose purpose;
 
-
-    //    @OneToMany(mappedBy = "foundation")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "foundation")
+    @JsonIgnore
+    @OneToMany(mappedBy = "foundation")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "foundation")
     private Collection<Transaction> transactions;
 
     @ManyToMany

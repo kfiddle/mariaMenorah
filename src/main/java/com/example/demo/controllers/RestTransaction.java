@@ -38,7 +38,17 @@ public class RestTransaction {
     }
 
 
+    @PostMapping("/get-transaction-from-id")
+    public Transaction getTransactionFromId(@RequestBody Long incomingId) throws IOException {
 
+        if (transactionRepo.findById(incomingId).isPresent()) {
+            System.out.println(transactionRepo.findById(incomingId).get().getTotalPennies());
+            return transactionRepo.findById(incomingId).get();
+        } else {
+            return null;
+        }
+
+    }
 
 
 }
