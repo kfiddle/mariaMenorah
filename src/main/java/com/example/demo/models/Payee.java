@@ -1,9 +1,8 @@
 package com.example.demo.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Payee {
@@ -25,6 +24,11 @@ public class Payee {
     private String zip;
 
     private boolean w9ed;
+
+
+    @ManyToMany
+    private Collection<Event> events;
+
 
     public Payee() {
     }
@@ -52,8 +56,10 @@ public class Payee {
         this.apartmentNumber = apartmentNumber;
         this.city = city;
         this.zip = zip;
+    }
 
-
+    public void setEvent(Event eventToAdd) {
+        events.add(eventToAdd);
     }
 
     public Long getId() {
@@ -98,5 +104,9 @@ public class Payee {
 
     public boolean isW9ed() {
         return w9ed;
+    }
+
+    public Collection<Event> getEvents() {
+        return events;
     }
 }

@@ -56,15 +56,6 @@ public class RestFoundation {
     }
 
     @PostMapping("/get-foundation-from-id")
-//    public String getFoundationFromId(@RequestBody Long incomingId) throws IOException {
-//        if (foundationRepo.existsById(incomingId)) {
-//            System.out.println(foundationRepo.findById(incomingId).get().getName());
-//            return foundationRepo.findById(incomingId).get().getName();
-//        } else {
-//            return "id not found";
-//        }
-//    }
-
     public Foundation getFoundationFromId(@RequestBody Long incomingId) throws IOException {
         if (foundationRepo.existsById(incomingId)) {
             return foundationRepo.findById(incomingId).get();

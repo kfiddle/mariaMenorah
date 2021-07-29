@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PayeeRepository extends CrudRepository<Payee, Long> {
 
+    boolean existsByLastName(String lastName);
+
+    boolean existsByFirstName(String firstName);
 }

@@ -27,8 +27,9 @@ public class Event {
     @OneToMany
     private Collection<Transaction> transactions;
 
-//    @ManyToMany
-//    private Collection<Foundation> foundations;
+    @ManyToMany
+    private Collection<Payee> payees;
+
 
     public Event() {
     }
@@ -74,13 +75,14 @@ public class Event {
         this.transactions = transactions;
     }
 
-//    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Foundation> foundations) {
-//        this.title = title;
-//        this.date = date;
-//        this.purpose = purpose;
-//        this.totalCostInCents = totalCostInCents;
-//        this.foundations = foundations;
-//    }
+    public Event(String title, LocalDate date, Purpose purpose, int totalCostInCents, Collection<Transaction> transactions, Collection<Payee> payees) {
+        this.title = title;
+        this.date = date;
+        this.purpose = purpose;
+        this.totalCostInCents = totalCostInCents;
+        this.transactions = transactions;
+        this.payees = payees;
+    }
 
 
     public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute) {
@@ -92,30 +94,6 @@ public class Event {
         this.endingHour = endingHour;
         this.endingMinute = endingMinute;
     }
-
-//    public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute, Collection<Foundation> foundations) {
-//        this.title = title;
-//        this.date = date;
-//        this.totalCostInCents = totalCostInCents;
-//        this.startingHour = startingHour;
-//        this.startingMinute = startingMinute;
-//        this.endingHour = endingHour;
-//        this.endingMinute = endingMinute;
-//        this.foundations = foundations;
-//    }
-
-//    public Event(String title, LocalDate date, int totalCostInCents, int startingHour, int startingMinute, int endingHour, int endingMinute, Purpose purpose, Collection<Foundation> foundations) {
-//        this.title = title;
-//        this.date = date;
-//        this.totalCostInCents = totalCostInCents;
-//        this.startingHour = startingHour;
-//        this.startingMinute = startingMinute;
-//        this.endingHour = endingHour;
-//        this.endingMinute = endingMinute;
-//        this.purpose = purpose;
-//        this.foundations = foundations;
-//    }
-
 
     public Long getId() {
         return id;
@@ -153,11 +131,11 @@ public class Event {
         return transactions;
     }
 
-//    public Collection<Foundation> getFoundations() {
-//        return foundations;
-//    }
-
     public Purpose getPurpose() {
         return purpose;
+    }
+
+    public Collection<Payee> getPayees() {
+        return payees;
     }
 }
