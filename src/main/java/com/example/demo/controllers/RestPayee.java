@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Payee;
 import com.example.demo.repositories.EventRepository;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @CrossOrigin
@@ -23,7 +25,7 @@ public class RestPayee {
 
 
     @RequestMapping("/get-payees")
-    public Collection<Payee> getAllPayees () {
+    public Collection<Payee> getAllPayees() {
         return (Collection<Payee>) payeeRepo.findAll();
     }
 
@@ -38,5 +40,15 @@ public class RestPayee {
         return (Collection<Payee>) payeeRepo.findAll();
     }
 
+    @PostMapping("/get-events-from-payee")
+    public Collection<Event> getAllEventsOfPayee(@RequestBody Payee incomingPayee) throws IOException {
+        Collection<Event> eventsToSendBack = new ArrayList<>();
+
+        if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
+            Payee payeeToOfferEvents = payeeRepo.findById(incomingPayee.getId()).get();
+            eventsToSendBack.addAll(payeeToOfferEvents.getEvents());
+        }
+        return eventsToSendBack;
+    }
 
 }

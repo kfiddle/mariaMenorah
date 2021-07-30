@@ -29,6 +29,7 @@ public class Event {
     @OneToMany
     private Collection<Transaction> transactions;
 
+
     @ManyToMany
     private Collection<Payee> payees;
 
