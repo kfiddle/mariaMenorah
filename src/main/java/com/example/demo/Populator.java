@@ -106,8 +106,6 @@ public class Populator implements CommandLineRunner {
         Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 14200, c2);
 
 
-
-
         foundationRepo.save(mAndm);
         foundationRepo.save(rayeMorris);
         foundationRepo.save(albertBilstein);
