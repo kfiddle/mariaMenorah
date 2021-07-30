@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -27,7 +29,7 @@ public class Event {
     @OneToMany
     private Collection<Transaction> transactions;
 
-    @ManyToMany(mappedBy = "events")
+    @ManyToMany
     private Collection<Payee> payees;
 
 

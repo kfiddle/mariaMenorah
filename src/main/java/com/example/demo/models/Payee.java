@@ -1,6 +1,8 @@
 package com.example.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -25,8 +27,8 @@ public class Payee {
 
     private boolean w9ed;
 
-
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(mappedBy = "payees")
     private Collection<Event> events;
 
 
