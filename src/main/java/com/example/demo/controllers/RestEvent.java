@@ -1,14 +1,8 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.Event;
-import com.example.demo.models.Foundation;
-import com.example.demo.models.Purpose;
-import com.example.demo.models.Transaction;
-import com.example.demo.repositories.EventRepository;
-import com.example.demo.repositories.FoundationRepository;
-import com.example.demo.repositories.PurposeRepository;
-import com.example.demo.repositories.TransactionRepository;
+import com.example.demo.models.*;
+import com.example.demo.repositories.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +30,9 @@ public class RestEvent {
     @Resource
     PurposeRepository purposeRepo;
 
+    @Resource
+    PayeeRepository payeeRepo;
+
 
     @RequestMapping("/get-events")
     public Collection<Event> getAllEvents() {
@@ -49,22 +46,38 @@ public class RestEvent {
 
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
             Collection<Transaction> transactionsToSave = new ArrayList<>();
+            Collection<Payee> payeesToAdd = new ArrayList<>();
 
-            for (Transaction transaction : incomingEvent.getTransactions()) {
-                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
+            if (incomingEvent.getTransactions().size() > 0) {
+                for (Transaction transaction : incomingEvent.getTransactions()) {
+                    Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
 
-                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
-                foundationRepo.save(foundationToDebit);
+                    Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                    foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
+                    foundationRepo.save(foundationToDebit);
 
-                transactionsToSave.add(newTransactionToSave);
-                transactionRepo.save(newTransactionToSave);
+                    transactionsToSave.add(newTransactionToSave);
+                    transactionRepo.save(newTransactionToSave);
+                }
             }
+
+            if (incomingEvent.getPayees().size() > 0) {
+
+                for (Payee payee : incomingEvent.getPayees()) {
+                    if (payeeRepo.findById(payee.getId()).isPresent()) {
+                        Payee payeeToAdd = payeeRepo.findById(payee.getId()).get();
+                        payeesToAdd.add(payeeToAdd);
+                        payeeRepo.save(payeeToAdd);
+                    }
+                }
+            }
+
+
             Event eventToAdd = new Event(incomingEvent.getTitle(),
                     incomingEvent.getDate(),
                     incomingEvent.getPurpose(),
                     incomingEvent.getTotalCostInCents(),
-                    transactionsToSave);
+                    transactionsToSave, payeesToAdd);
             eventRepo.save(eventToAdd);
 
 

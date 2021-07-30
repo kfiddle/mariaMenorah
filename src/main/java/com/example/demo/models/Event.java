@@ -27,7 +27,7 @@ public class Event {
     @OneToMany
     private Collection<Transaction> transactions;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "events")
     private Collection<Payee> payees;
 
 
