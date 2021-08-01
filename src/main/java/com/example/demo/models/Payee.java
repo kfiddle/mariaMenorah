@@ -31,6 +31,9 @@ public class Payee {
     @ManyToMany(mappedBy = "payees")
     private Collection<Event> events;
 
+    @OneToOne
+    private BudgetItem budgetItem;
+
 
     public Payee() {
     }
@@ -110,5 +113,9 @@ public class Payee {
 
     public Collection<Event> getEvents() {
         return events;
+    }
+
+    public BudgetItem getBudgetItem() {
+        return budgetItem;
     }
 }

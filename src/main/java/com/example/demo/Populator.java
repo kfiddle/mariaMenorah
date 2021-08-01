@@ -29,6 +29,12 @@ public class Populator implements CommandLineRunner {
     @Resource
     PayeeRepository payeeRepo;
 
+    @Resource
+    MonthBudgetRepository monthBudgetRepo;
+
+    @Resource
+    BudgetItemRepository budgetItemRepo;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -155,24 +161,56 @@ public class Populator implements CommandLineRunner {
         transactionRepo.save(third);
         transactionRepo.save(fourth);
 
-        Collection<Transaction> trx= new ArrayList<>();
+        Collection<Transaction> trx = new ArrayList<>();
 
         trx.add(first);
         trx.add(second);
 
-        Collection<Transaction> trx1= new ArrayList<>();
+        Collection<Transaction> trx1 = new ArrayList<>();
 
         trx.add(third);
         trx.add(fourth);
-
 
 
         Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
 
         eventRepo.save(firstEvent);
 
+        MonthBudget stoneGardenJanuary = new MonthBudget("Stone Gardens", "January");
+        MonthBudget stoneGardenFebruary = new MonthBudget("Stone Gardens", "February");
+        MonthBudget stoneGardenMarch = new MonthBudget("Stone Gardens", "March");
+        MonthBudget stoneGardenApril = new MonthBudget("Stone Gardens", "April");
+        MonthBudget stoneGardenMay = new MonthBudget("Stone Gardens", "May");
+        MonthBudget stoneGardenJune = new MonthBudget("Stone Gardens", "June");
+        MonthBudget stoneGardenJuly = new MonthBudget("Stone Gardens", "July");
+        MonthBudget stoneGardenAugust = new MonthBudget("Stone Gardens", "August");
+        MonthBudget stoneGardenSeptember = new MonthBudget("Stone Gardens", "September");
+        MonthBudget stoneGardenOctober = new MonthBudget("Stone Gardens", "October");
+        MonthBudget stoneGardenNovember = new MonthBudget("Stone Gardens", "November");
+        MonthBudget stoneGardenDecember = new MonthBudget("Stone Gardens", "December");
+
+        monthBudgetRepo.save(stoneGardenJanuary);
+        monthBudgetRepo.save(stoneGardenFebruary);
+        monthBudgetRepo.save(stoneGardenMarch);
+        monthBudgetRepo.save(stoneGardenApril);
+        monthBudgetRepo.save(stoneGardenMay);
+        monthBudgetRepo.save(stoneGardenJune);
+        monthBudgetRepo.save(stoneGardenJuly);
+        monthBudgetRepo.save(stoneGardenAugust);
+        monthBudgetRepo.save(stoneGardenSeptember);
+        monthBudgetRepo.save(stoneGardenOctober);
+        monthBudgetRepo.save(stoneGardenNovember);
+        monthBudgetRepo.save(stoneGardenDecember);
+
+
+        BudgetItem testItem = new BudgetItem(stoneGardenSeptember, "Triple A Batteries", 700);
+        BudgetItem testItem2 = new BudgetItem(stoneGardenOctober, "Noah's Birthday Cake", 5000);
+        BudgetItem testItem3 = new BudgetItem(stoneGardenAugust, derekZ, 4000);
+
+        budgetItemRepo.save(testItem);
+        budgetItemRepo.save(testItem2);
+        budgetItemRepo.save(testItem3);
 
 
     }
-
 }
