@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MonthBudgetRepository extends CrudRepository<MonthBudget, Long> {
 
+    MonthBudget findByCommunityNameAndMonth(String stone_gardens, String month);
 }

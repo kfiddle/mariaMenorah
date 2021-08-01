@@ -36,6 +36,10 @@ public class MonthBudget {
         return id;
     }
 
+    public String getCommunityName() {
+        return communityName;
+    }
+
     public String getMonth() {
         return month;
     }
