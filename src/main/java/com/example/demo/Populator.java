@@ -203,16 +203,16 @@ public class Populator implements CommandLineRunner {
         monthBudgetRepo.save(stoneGardenDecember);
 
 
-        BudgetItem testItem = new BudgetItem(stoneGardenSeptember, "Triple A Batteries", 700);
-        BudgetItem testItem2 = new BudgetItem(stoneGardenOctober, "Noah's Birthday Cake", 5000);
-        BudgetItem testItem3 = new BudgetItem(stoneGardenAugust, derekZ, 4000);
+        BudgetItem testItem = new BudgetItem("Stone Gardens", "Triple A Batteries", LocalDate.now(), 700);
+        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10) ,5000);
+        BudgetItem testItem3 = new BudgetItem("Stone Gardens", derekZ, LocalDate.of(2021, 9, 17),4000);
+
+
 
         budgetItemRepo.save(testItem);
         budgetItemRepo.save(testItem2);
         budgetItemRepo.save(testItem3);
 
-        monthBudgetRepo.save(stoneGardenOctober);
-        monthBudgetRepo.save(stoneGardenSeptember);
-        monthBudgetRepo.save(stoneGardenAugust);
+
     }
 }

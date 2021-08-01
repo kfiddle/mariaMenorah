@@ -12,9 +12,12 @@ public class BudgetItem {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String item;
     private int costInPennies;
+
     private LocalDate dateOfPurchase;
+
+    private String community;
 
     @OneToOne
     private Payee payee;
@@ -25,9 +28,25 @@ public class BudgetItem {
     public BudgetItem() {
     }
 
-    public BudgetItem(MonthBudget monthBudget, String name, int costInPennies) {
+    public BudgetItem(String community, String item, LocalDate dateOfPurchase, int costInPennies) {
+        this.community = community;
+        this.item = item;
+        this.dateOfPurchase = dateOfPurchase;
+        this.costInPennies = costInPennies;
+    }
+
+    public BudgetItem(String community, Payee payee, LocalDate dateOfPurchase, int costInPennies) {
+        this.community = community;
+        this.payee = payee;
+        this.dateOfPurchase = dateOfPurchase;
+        this.costInPennies = costInPennies;
+    }
+
+
+    public BudgetItem(MonthBudget monthBudget, String item, int costInPennies) {
         this.monthBudget = monthBudget;
-        this.name = name;
+        this.item = item;
+
         this.costInPennies = costInPennies;
     }
 
@@ -37,8 +56,8 @@ public class BudgetItem {
         this.costInPennies = costInPennies;
     }
 
-    public BudgetItem(String name, int costInPennies, LocalDate dateOfPurchase){
-        this.name = name;
+    public BudgetItem(String item, int costInPennies, LocalDate dateOfPurchase) {
+        this.item = item;
         this.costInPennies = costInPennies;
         this.dateOfPurchase = dateOfPurchase;
     }
@@ -51,8 +70,12 @@ public class BudgetItem {
         return monthBudget;
     }
 
-    public String getName() {
-        return name;
+    public String getItem() {
+        return item;
+    }
+
+    public String getCommunity() {
+        return community;
     }
 
     public Payee getPayee() {

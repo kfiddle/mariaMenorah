@@ -9,6 +9,8 @@ import com.example.demo.repositories.PayeeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 @CrossOrigin
@@ -26,20 +28,22 @@ public class RestMonthBudget {
     PayeeRepository payeeRepo;
 
 
-    @RequestMapping("/stone-gardens/{month}")
-    public MonthBudget getMonthBudgetFromMonth(@PathVariable String month) {
-//        System.out.println(monthBudgetRepo.findByCommunityNameAndMonth("Stone Gardens", month).getMonth());
-//        System.out.println(monthBudgetRepo.findByCommunityNameAndMonth("Stone Gardens", month).getCommunityName());
-        return monthBudgetRepo.findByCommunityNameAndMonth("Stone Gardens", month);
-    }
+//    @RequestMapping("/stone-gardens/{month}")
+//    public MonthBudget getMonthBudgetFromMonth(@PathVariable String month) {
+//        return monthBudgetRepo.findByCommunityNameAndMonth("Stone Gardens", month);
+//    }
 
-//    MonthBudget monthBudgetToReturn = new MonthBudget();
-//
-//        for (MonthBudget monthBudget : monthBudgetRepo.findAll()) {
-//            if (monthBudget.getCommunityName().equals("Stone Gardens") && monthBudget.getMonth().equals(month)) {
-//                return monthBudget;
-//            }
-//        }
+    @RequestMapping("/{community}/{month}")
+    public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community, @PathVariable int month) {
+        Collection<BudgetItem> budgetItemsToReturn = new ArrayList<>();
+
+        for (BudgetItem budgetItem : budgetItemRepo.findByCommunity(community)) {
+            if (budgetItem.getDateOfPurchase().getMonthValue() == month) {
+                budgetItemsToReturn.add(budgetItem);
+            }
+        }
+        return budgetItemsToReturn;
+    }
 
 
 }
