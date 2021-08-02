@@ -29,8 +29,7 @@ public class Populator implements CommandLineRunner {
     @Resource
     PayeeRepository payeeRepo;
 
-    @Resource
-    MonthBudgetRepository monthBudgetRepo;
+
 
     @Resource
     BudgetItemRepository budgetItemRepo;
@@ -138,80 +137,72 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(estelle);
 
 
-        Payee estherNahm = new Payee("Esther", "Nahm");
-        Payee derekS = new Payee("Derek", "Snyder");
-        Payee derekZ = new Payee("Derek", "Zadinsky");
-        Payee mariaM = new Payee("Maria", "Monday");
+//        Payee estherNahm = new Payee("Esther", "Nahm");
+//        Payee derekS = new Payee("Derek", "Snyder");
+//        Payee derekZ = new Payee("Derek", "Zadinsky");
+//        Payee mariaM = new Payee("Maria", "Monday");
 
 
-        payeeRepo.save(estherNahm);
-        payeeRepo.save(derekS);
-        payeeRepo.save(derekZ);
-        payeeRepo.save(mariaM);
+//        payeeRepo.save(estherNahm);
+//        payeeRepo.save(derekS);
+//        payeeRepo.save(derekZ);
+//        payeeRepo.save(mariaM);
+//
+//        Transaction first = new Transaction(7500, albertBilstein);
+//        Transaction second = new Transaction(260, estelle);
+//
+//
+//        Transaction third = new Transaction(7200, esther);
+//        Transaction fourth = new Transaction(9300, carol);
 
-        Transaction first = new Transaction(7500, albertBilstein);
-        Transaction second = new Transaction(260, estelle);
-
-
-        Transaction third = new Transaction(7200, esther);
-        Transaction fourth = new Transaction(9300, carol);
-
-        transactionRepo.save(first);
-        transactionRepo.save(second);
-        transactionRepo.save(third);
-        transactionRepo.save(fourth);
-
-        Collection<Transaction> trx = new ArrayList<>();
-
-        trx.add(first);
-        trx.add(second);
-
-        Collection<Transaction> trx1 = new ArrayList<>();
-
-        trx.add(third);
-        trx.add(fourth);
-
-
-        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
-
-        eventRepo.save(firstEvent);
-
-        MonthBudget stoneGardenJanuary = new MonthBudget("Stone Gardens", "January");
-        MonthBudget stoneGardenFebruary = new MonthBudget("Stone Gardens", "February");
-        MonthBudget stoneGardenMarch = new MonthBudget("Stone Gardens", "March");
-        MonthBudget stoneGardenApril = new MonthBudget("Stone Gardens", "April");
-        MonthBudget stoneGardenMay = new MonthBudget("Stone Gardens", "May");
-        MonthBudget stoneGardenJune = new MonthBudget("Stone Gardens", "June");
-        MonthBudget stoneGardenJuly = new MonthBudget("Stone Gardens", "July");
-        MonthBudget stoneGardenAugust = new MonthBudget("Stone Gardens", "August");
-        MonthBudget stoneGardenSeptember = new MonthBudget("Stone Gardens", "September");
-        MonthBudget stoneGardenOctober = new MonthBudget("Stone Gardens", "October");
-        MonthBudget stoneGardenNovember = new MonthBudget("Stone Gardens", "November");
-        MonthBudget stoneGardenDecember = new MonthBudget("Stone Gardens", "December");
-
-        monthBudgetRepo.save(stoneGardenJanuary);
-        monthBudgetRepo.save(stoneGardenFebruary);
-        monthBudgetRepo.save(stoneGardenMarch);
-        monthBudgetRepo.save(stoneGardenApril);
-        monthBudgetRepo.save(stoneGardenMay);
-        monthBudgetRepo.save(stoneGardenJune);
-        monthBudgetRepo.save(stoneGardenJuly);
-        monthBudgetRepo.save(stoneGardenAugust);
-        monthBudgetRepo.save(stoneGardenSeptember);
-        monthBudgetRepo.save(stoneGardenOctober);
-        monthBudgetRepo.save(stoneGardenNovember);
-        monthBudgetRepo.save(stoneGardenDecember);
-
-
-        BudgetItem testItem = new BudgetItem("Stone Gardens", "Triple A Batteries", LocalDate.now(), 700);
-        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10) ,5000);
-        BudgetItem testItem3 = new BudgetItem("Stone Gardens", derekZ, LocalDate.of(2021, 9, 17),4000);
+//        transactionRepo.save(first);
+//        transactionRepo.save(second);
+//        transactionRepo.save(third);
+//        transactionRepo.save(fourth);
+//
+//        Collection<Transaction> trx = new ArrayList<>();
+//
+//        trx.add(first);
+//        trx.add(second);
+//
+//        Collection<Transaction> trx1 = new ArrayList<>();
+//
+//        trx.add(third);
+//        trx.add(fourth);
+//
+//
+//        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
+//
+//        eventRepo.save(firstEvent);
 
 
 
-        budgetItemRepo.save(testItem);
-        budgetItemRepo.save(testItem2);
-        budgetItemRepo.save(testItem3);
+
+
+
+//        BudgetItem testItem = new BudgetItem("Stone Gardens", "Triple A Batteries", LocalDate.now(), 700);
+//        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10) ,5000);
+//        BudgetItem testItem3 = new BudgetItem("Stone Gardens", derekZ, LocalDate.of(2021, 9, 17),4000);
+//        BudgetItem testItem4 = new BudgetItem("Stone Gardens", "David's movie", LocalDate.of(2021, 9, 2),4500);
+//        BudgetItem testItem5 = new BudgetItem("Stone Gardens", "Beer Pong", LocalDate.of(2021, 9, 4),80000);
+//        BudgetItem testItem6 = new BudgetItem("Stone Gardens", "Water Polo", LocalDate.of(2021, 9, 15),7356);
+//        BudgetItem testItem7 = new BudgetItem("Stone Gardens", "Badminton", LocalDate.of(2021, 9, 11),200);
+//        BudgetItem testItem8 = new BudgetItem("Stone Gardens", "Donuts", LocalDate.of(2021, 9, 20),9000);
+//        BudgetItem testItem9 = new BudgetItem("Stone Gardens", "Doritos", LocalDate.of(2021, 9, 25),400);
+//        BudgetItem testItem10 = new BudgetItem("Stone Gardens", "PaintBall", LocalDate.of(2021, 9, 7),17000);
+
+
+
+//        budgetItemRepo.save(testItem);
+//        budgetItemRepo.save(testItem2);
+//        budgetItemRepo.save(testItem3);
+//        budgetItemRepo.save(testItem4);
+//        budgetItemRepo.save(testItem5);
+//        budgetItemRepo.save(testItem6);
+//        budgetItemRepo.save(testItem7);
+//        budgetItemRepo.save(testItem8);
+//        budgetItemRepo.save(testItem9);
+//        budgetItemRepo.save(testItem10);
 
 
     }

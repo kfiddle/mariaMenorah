@@ -22,8 +22,6 @@ public class BudgetItem {
     @OneToOne
     private Payee payee;
 
-    @ManyToOne
-    private MonthBudget monthBudget;
 
     public BudgetItem() {
     }
@@ -43,19 +41,6 @@ public class BudgetItem {
     }
 
 
-    public BudgetItem(MonthBudget monthBudget, String item, int costInPennies) {
-        this.monthBudget = monthBudget;
-        this.item = item;
-
-        this.costInPennies = costInPennies;
-    }
-
-    public BudgetItem(MonthBudget monthBudget, Payee payee, int costInPennies) {
-        this.monthBudget = monthBudget;
-        this.payee = payee;
-        this.costInPennies = costInPennies;
-    }
-
     public BudgetItem(String item, int costInPennies, LocalDate dateOfPurchase) {
         this.item = item;
         this.costInPennies = costInPennies;
@@ -66,9 +51,6 @@ public class BudgetItem {
         return id;
     }
 
-    public MonthBudget getMonthBudget() {
-        return monthBudget;
-    }
 
     public String getItem() {
         return item;

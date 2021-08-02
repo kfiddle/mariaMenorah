@@ -2,9 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.models.BudgetItem;
-import com.example.demo.models.MonthBudget;
 import com.example.demo.repositories.BudgetItemRepository;
-import com.example.demo.repositories.MonthBudgetRepository;
 import com.example.demo.repositories.PayeeRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +14,9 @@ import java.util.Collection;
 @CrossOrigin
 @RestController
 
-public class RestMonthBudget {
+public class RestBudget {
 
-    @Resource
-    MonthBudgetRepository monthBudgetRepo;
+
 
     @Resource
     BudgetItemRepository budgetItemRepo;
@@ -27,11 +24,6 @@ public class RestMonthBudget {
     @Resource
     PayeeRepository payeeRepo;
 
-
-//    @RequestMapping("/stone-gardens/{month}")
-//    public MonthBudget getMonthBudgetFromMonth(@PathVariable String month) {
-//        return monthBudgetRepo.findByCommunityNameAndMonth("Stone Gardens", month);
-//    }
 
     @RequestMapping("/{community}/{month}")
     public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community, @PathVariable int month) {
