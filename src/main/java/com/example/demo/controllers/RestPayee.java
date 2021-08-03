@@ -32,9 +32,40 @@ public class RestPayee {
     @PostMapping("/add-payee")
     public Collection<Payee> addPayeeToDatabase(@RequestBody Payee incomingPayee) throws IOException {
 
-        if (!payeeRepo.existsByLastName(incomingPayee.getLastName()) && !payeeRepo.existsByFirstName(incomingPayee.getFirstName())) {
+        if (incomingPayee.getId() == null && !payeeRepo.existsByLastName(incomingPayee.getLastName()) && !payeeRepo.existsByFirstName(incomingPayee.getFirstName())) {
             Payee payeeToAdd = new Payee(incomingPayee.getFirstName(), incomingPayee.getLastName());
+
+            if (incomingPayee.getEmail() != null) {
+                payeeToAdd.setEmail(incomingPayee.getEmail());
+            }
+
+            if (incomingPayee.getPhoneNumber() != null) {
+                payeeToAdd.setPhoneNumber(incomingPayee.getPhoneNumber());
+            }
+
             payeeRepo.save(payeeToAdd);
+        } else if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
+            Payee payeeToEdit = payeeRepo.findById(incomingPayee.getId()).get();
+
+            if (incomingPayee.getFirstName() != null) {
+                payeeToEdit.setFirstName(incomingPayee.getFirstName());
+            }
+
+            if (incomingPayee.getLastName() != null) {
+                payeeToEdit.setLastName(incomingPayee.getLastName());
+            }
+
+            if (incomingPayee.getEmail() != null) {
+                payeeToEdit.setEmail(incomingPayee.getEmail());
+            }
+
+            if (incomingPayee.getPhoneNumber() != null) {
+                payeeToEdit.setPhoneNumber(incomingPayee.getPhoneNumber());
+            }
+
+            payeeRepo.save(payeeToEdit);
+
+            System.out.println(payeeToEdit.getFirstName() + "  " + payeeToEdit.getId());
         }
 
         return (Collection<Payee>) payeeRepo.findAll();
