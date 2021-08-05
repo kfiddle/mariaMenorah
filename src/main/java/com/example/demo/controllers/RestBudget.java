@@ -32,9 +32,6 @@ public class RestBudget {
         budgetItemRepo.save(budgetItemToAdd);
 
         return (Collection<BudgetItem>) budgetItemRepo.findAll();
-
-
-
     }
 
 
@@ -48,6 +45,14 @@ public class RestBudget {
             }
         }
         return budgetItemsToReturn;
+    }
+
+    @PostMapping("/delete-budget-item")
+    public Collection<BudgetItem> deleteItem(@RequestBody BudgetItem incomingItem) {
+        if (budgetItemRepo.findById(incomingItem.getId()).isPresent()) {
+            budgetItemRepo.deleteById(incomingItem.getId());
+        }
+        return (Collection<BudgetItem>) budgetItemRepo.findAll();
     }
 
 

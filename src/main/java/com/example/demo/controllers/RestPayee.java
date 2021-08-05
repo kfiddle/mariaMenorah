@@ -43,6 +43,10 @@ public class RestPayee {
                 payeeToAdd.setPhoneNumber(incomingPayee.getPhoneNumber());
             }
 
+            if (incomingPayee.getW9ed()) {
+                payeeToAdd.setW9ed(true);
+            }
+
             payeeRepo.save(payeeToAdd);
         } else if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
             Payee payeeToEdit = payeeRepo.findById(incomingPayee.getId()).get();
@@ -61,6 +65,10 @@ public class RestPayee {
 
             if (incomingPayee.getPhoneNumber() != null) {
                 payeeToEdit.setPhoneNumber(incomingPayee.getPhoneNumber());
+            }
+
+            if (incomingPayee.getW9ed()) {
+                payeeToEdit.setW9ed(true);
             }
 
             payeeRepo.save(payeeToEdit);

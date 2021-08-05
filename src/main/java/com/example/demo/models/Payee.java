@@ -50,6 +50,14 @@ public class Payee {
         this.email = email;
     }
 
+    public Payee(String firstName, String lastName, String phoneNumber, String email, boolean w9ed) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.w9ed = w9ed;
+    }
+
     public Payee(String firstName, String lastName, String phoneNumber, String email, String streetNumber,
                  String street, String apartmentNumber, String city, String zip) {
         this.firstName = firstName;
@@ -75,13 +83,19 @@ public class Payee {
         this.lastName = lastName;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setW9ed(boolean w9ed) {
+        this.w9ed = w9ed;
     }
+
+
 
     public Long getId() {
         return id;
@@ -123,7 +137,7 @@ public class Payee {
         return zip;
     }
 
-    public boolean isW9ed() {
+    public boolean getW9ed() {
         return w9ed;
     }
 
