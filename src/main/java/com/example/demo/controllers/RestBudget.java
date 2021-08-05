@@ -17,12 +17,25 @@ import java.util.Collection;
 public class RestBudget {
 
 
-
     @Resource
     BudgetItemRepository budgetItemRepo;
 
     @Resource
     PayeeRepository payeeRepo;
+
+
+    @PostMapping("/add-budget-item")
+    public Collection<BudgetItem> addItem(@RequestBody BudgetItem incomingBudgetItem) {
+        BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
+                incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
+
+        budgetItemRepo.save(budgetItemToAdd);
+
+        return (Collection<BudgetItem>) budgetItemRepo.findAll();
+
+
+
+    }
 
 
     @RequestMapping("/{community}/{month}")
