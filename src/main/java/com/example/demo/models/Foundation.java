@@ -56,6 +56,15 @@ public class Foundation {
     }
 
 
+    public void setContributionInPennies(int contributionInPennies) {
+        this.contributionInPennies = contributionInPennies;
+    }
+
+
+    public void setLeftOverPennies(int leftOverPennies) {
+        this.leftOverPennies = leftOverPennies;
+    }
+
 
     public Long getId() {
         return id;
@@ -80,7 +89,6 @@ public class Foundation {
     public Collection<Transaction> getTransactions() {
         return transactions;
     }
-
 
 
 }

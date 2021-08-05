@@ -63,4 +63,17 @@ public class RestFoundation {
             return null;
         }
     }
+
+    @PostMapping("/edit-foundation")
+    public Collection<Foundation> editFoundation(@RequestBody Foundation incomingFoundation) throws IOException {
+        if (foundationRepo.findById(incomingFoundation.getId()).isPresent()) {
+            Foundation foundationToEdit = foundationRepo.findById(incomingFoundation.getId()).get();
+            foundationToEdit.setContributionInPennies(incomingFoundation.getContributionInPennies());
+            foundationToEdit.setLeftOverPennies(incomingFoundation.getLeftOverPennies());
+
+            foundationRepo.save(foundationToEdit);
+        }
+        return (Collection<Foundation>) foundationRepo.findAll();
+
+    }
 }
