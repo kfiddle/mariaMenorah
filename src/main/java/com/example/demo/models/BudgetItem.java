@@ -28,6 +28,12 @@ public class BudgetItem {
     public BudgetItem() {
     }
 
+    public BudgetItem(String community, String item) {
+        this.community = community;
+        this.item = item;
+    }
+
+
     public BudgetItem(String community, String item, LocalDate dateOfPurchase, int costInPennies) {
         this.community = community;
         this.item = item;
@@ -69,8 +75,24 @@ public class BudgetItem {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+    public void setDateOfPurchase(LocalDate dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public void setCostInPennies (int costInPennies) {
+        this.costInPennies = costInPennies;
+    }
+
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public void setAccountNum(String accountNum) {
+        this.accountNum = accountNum;
+    }
+
+    public void setPayees(Collection<Payee> payees) {
+        this.payees = payees;
     }
 
     public Long getId() {
@@ -97,5 +119,13 @@ public class BudgetItem {
         return dateOfPurchase;
     }
 
-    public String getNotes() { return notes; }
+    public String getNotes() {
+        return notes;
+    }
+
+    public String getAccountNum() {
+        return accountNum;
+    }
+
+
 }

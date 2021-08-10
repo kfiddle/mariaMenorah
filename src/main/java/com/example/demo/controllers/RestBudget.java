@@ -28,6 +28,17 @@ public class RestBudget {
     @PostMapping("/add-budget-item")
     public Collection<BudgetItem> addItem(@RequestBody BudgetItem incomingBudgetItem) {
 
+
+        BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem());
+
+        if (incomingBudgetItem.getDateOfPurchase() != null) {
+            budgetItemToAdd.setDateOfPurchase(incomingBudgetItem.getDateOfPurchase());
+        }
+
+        if (incomingBudgetItem.getCostInPennies() > 0) {
+            budgetItemToAdd.setCostInPennies(incomingBudgetItem.getCostInPennies());
+        }
+
         if (incomingBudgetItem.getPayees().size() > 0) {
             Collection<Payee> payeesToAdd = new ArrayList<>();
 
@@ -38,30 +49,26 @@ public class RestBudget {
                     payeeRepo.save(payeeToAdd);
                 }
             }
-            BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
-                    payeesToAdd, incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
 
-            if (incomingBudgetItem.getNotes() != null) {
-                budgetItemToAdd.setNotes(incomingBudgetItem.getNotes());
-            }
-            budgetItemRepo.save(budgetItemToAdd);
-        } else {
-            BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
-                    incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
-
-            if (incomingBudgetItem.getNotes() != null) {
-                budgetItemToAdd.setNotes(incomingBudgetItem.getNotes());
-            }
-            budgetItemRepo.save(budgetItemToAdd);
+            budgetItemToAdd.setPayees(payeesToAdd);
         }
 
+        if (incomingBudgetItem.getNotes() != null) {
+            budgetItemToAdd.setNotes(incomingBudgetItem.getNotes());
+        }
 
+        if (incomingBudgetItem.getAccountNum() != null) {
+            budgetItemToAdd.setAccountNum(incomingBudgetItem.getAccountNum());
+        }
+
+        budgetItemRepo.save(budgetItemToAdd);
         return (Collection<BudgetItem>) budgetItemRepo.findAll();
     }
-
+    
 
     @RequestMapping("/{community}/{month}")
-    public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community, @PathVariable int month) {
+    public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community,
+                                                                 @PathVariable int month) {
         Collection<BudgetItem> budgetItemsToReturn = new ArrayList<>();
 
         for (BudgetItem budgetItem : budgetItemRepo.findByCommunity(community)) {
