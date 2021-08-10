@@ -192,6 +192,7 @@ public class Populator implements CommandLineRunner {
         BudgetItem testItem9 = new BudgetItem("Stone Gardens", "Doritos", LocalDate.of(2021, 9, 25), 400);
         BudgetItem testItem10 = new BudgetItem("Stone Gardens", "PaintBall", LocalDate.of(2021, 9, 7), 17000);
 
+        testItem10.setCompleted(true);
 
         budgetItemRepo.save(testItem);
         budgetItemRepo.save(testItem2);

@@ -76,9 +76,7 @@ public class RestPayee {
                 payeeToEdit.setAddress(incomingPayee.getAddress());
             }
 
-            if (incomingPayee.getW9ed()) {
-                payeeToEdit.setW9ed(true);
-            }
+            payeeToEdit.setW9ed(incomingPayee.getW9ed());
 
             payeeRepo.save(payeeToEdit);
 

@@ -28,7 +28,6 @@ public class RestBudget {
     @PostMapping("/add-budget-item")
     public Collection<BudgetItem> addItem(@RequestBody BudgetItem incomingBudgetItem) {
 
-
         BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem());
 
         if (incomingBudgetItem.getDateOfPurchase() != null) {
@@ -87,5 +86,65 @@ public class RestBudget {
         return (Collection<BudgetItem>) budgetItemRepo.findAll();
     }
 
+    @PostMapping("/edit-budget-item")
+    public Collection<BudgetItem> editItem(@RequestBody BudgetItem incoming) {
+        if (budgetItemRepo.findById(incoming.getId()).isPresent()) {
+            BudgetItem itemToEdit = budgetItemRepo.findById(incoming.getId()).get();
 
+            if (incoming.getCommunity() != null) {
+                itemToEdit.setCommunity(incoming.getCommunity());
+            }
+
+            if (incoming.getItem() != null) {
+                itemToEdit.setItem(incoming.getItem());
+            }
+
+            if (incoming.getDateOfPurchase() != null) {
+                itemToEdit.setDateOfPurchase(incoming.getDateOfPurchase());
+            }
+
+            if (incoming.getCostInPennies() > 0) {
+                itemToEdit.setCostInPennies(incoming.getCostInPennies());
+            }
+
+            if (incoming.getPayees().size() > 0) {
+                Collection<Payee> payeesToAdd = new ArrayList<>();
+
+                for (Payee payee : incoming.getPayees()) {
+                    if (payeeRepo.findById(payee.getId()).isPresent()) {
+                        Payee payeeToAdd = payeeRepo.findById(payee.getId()).get();
+                        payeesToAdd.add(payeeToAdd);
+                        payeeRepo.save(payeeToAdd);
+                    }
+                }
+
+                itemToEdit.setPayees(payeesToAdd);
+            }
+
+            if (incoming.getNotes() != null) {
+                itemToEdit.setNotes(incoming.getNotes());
+            }
+
+            if (incoming.getAccountNum() != null) {
+                itemToEdit.setAccountNum(incoming.getAccountNum());
+            }
+
+            if (incoming.isCompleted()) {
+                itemToEdit.setCompleted(true);
+            }
+
+            budgetItemRepo.save(itemToEdit);
+        }
+        return (Collection<BudgetItem>) budgetItemRepo.findAll();
+    }
+
+    @PostMapping("/edit-budget-completion")
+    public Collection<BudgetItem> editItemCompletion(@RequestBody BudgetItem incoming) {
+        if (budgetItemRepo.findById(incoming.getId()).isPresent()) {
+            BudgetItem itemToEdit = budgetItemRepo.findById(incoming.getId()).get();
+            itemToEdit.setCompleted(incoming.isCompleted());
+            budgetItemRepo.save(itemToEdit);
+        }
+        return (Collection<BudgetItem>) budgetItemRepo.findAll();
+    }
 }

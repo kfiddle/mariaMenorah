@@ -19,6 +19,7 @@ public class BudgetItem {
     private LocalDate dateOfPurchase;
     private String notes;
     private String accountNum;
+    private boolean completed;
 
 
     @ManyToMany
@@ -32,7 +33,6 @@ public class BudgetItem {
         this.community = community;
         this.item = item;
     }
-
 
     public BudgetItem(String community, String item, LocalDate dateOfPurchase, int costInPennies) {
         this.community = community;
@@ -95,6 +95,18 @@ public class BudgetItem {
         this.payees = payees;
     }
 
+    public void setCommunity(String community) {
+        this.community = community;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
     public Long getId() {
         return id;
     }
@@ -127,5 +139,7 @@ public class BudgetItem {
         return accountNum;
     }
 
-
+    public boolean isCompleted() {
+        return completed;
+    }
 }
