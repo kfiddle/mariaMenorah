@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.models.BudgetItem;
+import com.example.demo.models.Payee;
 import com.example.demo.repositories.BudgetItemRepository;
 import com.example.demo.repositories.PayeeRepository;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,26 @@ public class RestBudget {
 
     @PostMapping("/add-budget-item")
     public Collection<BudgetItem> addItem(@RequestBody BudgetItem incomingBudgetItem) {
-        BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
-                incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
 
-        budgetItemRepo.save(budgetItemToAdd);
+        if (incomingBudgetItem.getPayees().size() > 0) {
+            Collection<Payee> payeesToAdd = new ArrayList<>();
+
+            for (Payee payee : incomingBudgetItem.getPayees()) {
+                if (payeeRepo.findById(payee.getId()).isPresent()) {
+                    Payee payeeToAdd = payeeRepo.findById(payee.getId()).get();
+                    payeesToAdd.add(payeeToAdd);
+                    payeeRepo.save(payeeToAdd);
+                }
+            }
+            BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
+                    payeesToAdd, incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
+            budgetItemRepo.save(budgetItemToAdd);
+        } else {
+            BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
+                    incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
+            budgetItemRepo.save(budgetItemToAdd);
+        }
+
 
         return (Collection<BudgetItem>) budgetItemRepo.findAll();
     }

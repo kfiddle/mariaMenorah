@@ -18,18 +18,18 @@ public class Payee {
 
     private String phoneNumber;
     private String email;
-    private String streetNumber;
 
-    private String street;
-    private String apartmentNumber;
-    private String city;
-    private String zip;
+    private String address;
 
     private boolean w9ed;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "payees")
     private Collection<Event> events;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "payees")
+    private Collection<BudgetItem> budgetItems;
 
     @OneToOne
     private BudgetItem budgetItem;
@@ -58,18 +58,16 @@ public class Payee {
         this.w9ed = w9ed;
     }
 
-    public Payee(String firstName, String lastName, String phoneNumber, String email, String streetNumber,
-                 String street, String apartmentNumber, String city, String zip) {
+    public Payee(String firstName, String lastName, String phoneNumber, String email, String address, boolean w9ed) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.streetNumber = streetNumber;
-        this.street = street;
-        this.apartmentNumber = apartmentNumber;
-        this.city = city;
-        this.zip = zip;
+        this.address = address;
+        this.w9ed = w9ed;
     }
+
+
 
     public void setEvent(Event eventToAdd) {
         events.add(eventToAdd);
@@ -89,6 +87,10 @@ public class Payee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setW9ed(boolean w9ed) {
@@ -117,26 +119,6 @@ public class Payee {
         return email;
     }
 
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getApartmentNumber() {
-        return apartmentNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
     public boolean getW9ed() {
         return w9ed;
     }
@@ -145,9 +127,11 @@ public class Payee {
         return events;
     }
 
-    public BudgetItem getBudgetItem() {
-        return budgetItem;
+    public Collection<BudgetItem> getBudgetItems() {
+        return budgetItems;
     }
 
-
+    public String getAddress() {
+        return address;
+    }
 }

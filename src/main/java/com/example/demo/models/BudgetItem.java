@@ -4,6 +4,7 @@ package com.example.demo.models;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Collection;
 
 @Entity
 public class BudgetItem {
@@ -19,8 +20,8 @@ public class BudgetItem {
 
     private String community;
 
-    @OneToOne
-    private Payee payee;
+    @ManyToMany
+    private Collection<Payee> payees;
 
 
     public BudgetItem() {
@@ -33,9 +34,10 @@ public class BudgetItem {
         this.costInPennies = costInPennies;
     }
 
-    public BudgetItem(String community, Payee payee, LocalDate dateOfPurchase, int costInPennies) {
+    public BudgetItem(String community, String item, Collection<Payee> payees, LocalDate dateOfPurchase, int costInPennies) {
         this.community = community;
-        this.payee = payee;
+        this.item = item;
+        this.payees = payees;
         this.dateOfPurchase = dateOfPurchase;
         this.costInPennies = costInPennies;
     }
@@ -60,8 +62,8 @@ public class BudgetItem {
         return community;
     }
 
-    public Payee getPayee() {
-        return payee;
+    public Collection<Payee> getPayees() {
+        return payees;
     }
 
     public int getCostInPennies() {

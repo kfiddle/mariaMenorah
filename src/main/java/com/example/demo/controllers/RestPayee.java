@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.BudgetItem;
 import com.example.demo.models.Event;
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Payee;
@@ -43,6 +44,10 @@ public class RestPayee {
                 payeeToAdd.setPhoneNumber(incomingPayee.getPhoneNumber());
             }
 
+            if (incomingPayee.getAddress() != null) {
+                payeeToAdd.setAddress(incomingPayee.getAddress());
+            }
+
             if (incomingPayee.getW9ed()) {
                 payeeToAdd.setW9ed(true);
             }
@@ -67,6 +72,10 @@ public class RestPayee {
                 payeeToEdit.setPhoneNumber(incomingPayee.getPhoneNumber());
             }
 
+            if (incomingPayee.getAddress() != null) {
+                payeeToEdit.setAddress(incomingPayee.getAddress());
+            }
+
             if (incomingPayee.getW9ed()) {
                 payeeToEdit.setW9ed(true);
             }
@@ -88,6 +97,17 @@ public class RestPayee {
             eventsToSendBack.addAll(payeeToOfferEvents.getEvents());
         }
         return eventsToSendBack;
+    }
+
+    @PostMapping("/get-budget-items-from-payee")
+    public Collection<BudgetItem> getAllBudgetItemsOfPayee(@RequestBody Payee incomingPayee) throws IOException {
+        Collection<BudgetItem> budgetItemsToSendBack = new ArrayList<>();
+
+        if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
+            Payee payeeToOfferBudgetItems = payeeRepo.findById(incomingPayee.getId()).get();
+            budgetItemsToSendBack.addAll(payeeToOfferBudgetItems.getBudgetItems());
+        }
+        return budgetItemsToSendBack;
     }
 
 }

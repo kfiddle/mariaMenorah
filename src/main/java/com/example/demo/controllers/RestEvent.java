@@ -45,6 +45,7 @@ public class RestEvent {
     public Collection<Event> addEventWithItsTransactions(@RequestBody Event incomingEvent) throws IOException {
 
         if (!eventRepo.existsByTitle(incomingEvent.getTitle()) && !eventRepo.existsByDate(incomingEvent.getDate())) {
+
             Collection<Transaction> transactionsToSave = new ArrayList<>();
             Collection<Payee> payeesToAdd = new ArrayList<>();
 

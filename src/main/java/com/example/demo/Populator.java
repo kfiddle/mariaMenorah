@@ -30,7 +30,6 @@ public class Populator implements CommandLineRunner {
     PayeeRepository payeeRepo;
 
 
-
     @Resource
     BudgetItemRepository budgetItemRepo;
 
@@ -137,72 +136,73 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(estelle);
 
 
-//        Payee estherNahm = new Payee("Esther", "Nahm");
-//        Payee derekS = new Payee("Derek", "Snyder");
-//        Payee derekZ = new Payee("Derek", "Zadinsky");
-//        Payee mariaM = new Payee("Maria", "Monday");
+        Payee estherNahm = new Payee("Esther", "Nahm");
+        Payee derekS = new Payee("Derek", "Snyder");
+        Payee derekZ = new Payee("Derek", "Zadinsky");
+        Payee mariaM = new Payee("Maria", "Monday");
 
 
-//        payeeRepo.save(estherNahm);
-//        payeeRepo.save(derekS);
-//        payeeRepo.save(derekZ);
-//        payeeRepo.save(mariaM);
-//
-//        Transaction first = new Transaction(7500, albertBilstein);
-//        Transaction second = new Transaction(260, estelle);
-//
-//
-//        Transaction third = new Transaction(7200, esther);
-//        Transaction fourth = new Transaction(9300, carol);
+        payeeRepo.save(estherNahm);
+        payeeRepo.save(derekS);
+        payeeRepo.save(derekZ);
+        payeeRepo.save(mariaM);
 
-//        transactionRepo.save(first);
-//        transactionRepo.save(second);
-//        transactionRepo.save(third);
-//        transactionRepo.save(fourth);
-//
-//        Collection<Transaction> trx = new ArrayList<>();
-//
-//        trx.add(first);
-//        trx.add(second);
-//
-//        Collection<Transaction> trx1 = new ArrayList<>();
-//
-//        trx.add(third);
-//        trx.add(fourth);
-//
-//
-//        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
-//
-//        eventRepo.save(firstEvent);
+        Transaction first = new Transaction(7500, albertBilstein);
+        Transaction second = new Transaction(260, estelle);
 
 
+        Transaction third = new Transaction(7200, esther);
+        Transaction fourth = new Transaction(9300, carol);
+
+        transactionRepo.save(first);
+        transactionRepo.save(second);
+        transactionRepo.save(third);
+        transactionRepo.save(fourth);
+
+        Collection<Transaction> trx = new ArrayList<>();
+
+        trx.add(first);
+        trx.add(second);
+
+        Collection<Transaction> trx1 = new ArrayList<>();
+
+        trx.add(third);
+        trx.add(fourth);
 
 
+        Event firstEvent = new Event("Maria and Ginger", LocalDate.now(), a2, 1500, trx);
+
+        eventRepo.save(firstEvent);
 
 
-//        BudgetItem testItem = new BudgetItem("Stone Gardens", "Triple A Batteries", LocalDate.now(), 700);
-//        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10) ,5000);
-//        BudgetItem testItem3 = new BudgetItem("Stone Gardens", derekZ, LocalDate.of(2021, 9, 17),4000);
-//        BudgetItem testItem4 = new BudgetItem("Stone Gardens", "David's movie", LocalDate.of(2021, 9, 2),4500);
-//        BudgetItem testItem5 = new BudgetItem("Stone Gardens", "Beer Pong", LocalDate.of(2021, 9, 4),80000);
-//        BudgetItem testItem6 = new BudgetItem("Stone Gardens", "Water Polo", LocalDate.of(2021, 9, 15),7356);
-//        BudgetItem testItem7 = new BudgetItem("Stone Gardens", "Badminton", LocalDate.of(2021, 9, 11),200);
-//        BudgetItem testItem8 = new BudgetItem("Stone Gardens", "Donuts", LocalDate.of(2021, 9, 20),9000);
-//        BudgetItem testItem9 = new BudgetItem("Stone Gardens", "Doritos", LocalDate.of(2021, 9, 25),400);
-//        BudgetItem testItem10 = new BudgetItem("Stone Gardens", "PaintBall", LocalDate.of(2021, 9, 7),17000);
-//
-//
-//
-//        budgetItemRepo.save(testItem);
-//        budgetItemRepo.save(testItem2);
-//        budgetItemRepo.save(testItem3);
-//        budgetItemRepo.save(testItem4);
-//        budgetItemRepo.save(testItem5);
-//        budgetItemRepo.save(testItem6);
-//        budgetItemRepo.save(testItem7);
-//        budgetItemRepo.save(testItem8);
-//        budgetItemRepo.save(testItem9);
-//        budgetItemRepo.save(testItem10);
+        Collection<Payee> testPayees = new ArrayList<>();
+
+        testPayees.add(derekZ);
+        testPayees.add(mariaM);
+
+
+        BudgetItem testItem = new BudgetItem("Stone Gardens", "Triple A Batteries", LocalDate.now(), 700);
+        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10), 5000);
+        BudgetItem testItem3 = new BudgetItem("Stone Gardens", "a duo of note", testPayees, LocalDate.of(2021, 9, 17), 4000);
+        BudgetItem testItem4 = new BudgetItem("Stone Gardens", "David's movie", LocalDate.of(2021, 9, 2), 4500);
+        BudgetItem testItem5 = new BudgetItem("Stone Gardens", "Beer Pong", LocalDate.of(2021, 9, 4), 80000);
+        BudgetItem testItem6 = new BudgetItem("Stone Gardens", "Water Polo", LocalDate.of(2021, 9, 15), 7356);
+        BudgetItem testItem7 = new BudgetItem("Stone Gardens", "Badminton", LocalDate.of(2021, 9, 11), 200);
+        BudgetItem testItem8 = new BudgetItem("Stone Gardens", "Donuts", LocalDate.of(2021, 9, 20), 9000);
+        BudgetItem testItem9 = new BudgetItem("Stone Gardens", "Doritos", LocalDate.of(2021, 9, 25), 400);
+        BudgetItem testItem10 = new BudgetItem("Stone Gardens", "PaintBall", LocalDate.of(2021, 9, 7), 17000);
+
+
+        budgetItemRepo.save(testItem);
+        budgetItemRepo.save(testItem2);
+        budgetItemRepo.save(testItem3);
+        budgetItemRepo.save(testItem4);
+        budgetItemRepo.save(testItem5);
+        budgetItemRepo.save(testItem6);
+        budgetItemRepo.save(testItem7);
+        budgetItemRepo.save(testItem8);
+        budgetItemRepo.save(testItem9);
+        budgetItemRepo.save(testItem10);
 
 
     }
