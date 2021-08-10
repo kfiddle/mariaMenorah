@@ -40,10 +40,18 @@ public class RestBudget {
             }
             BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
                     payeesToAdd, incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
+
+            if (incomingBudgetItem.getNotes() != null) {
+                budgetItemToAdd.setNotes(incomingBudgetItem.getNotes());
+            }
             budgetItemRepo.save(budgetItemToAdd);
         } else {
             BudgetItem budgetItemToAdd = new BudgetItem(incomingBudgetItem.getCommunity(), incomingBudgetItem.getItem(),
                     incomingBudgetItem.getDateOfPurchase(), incomingBudgetItem.getCostInPennies());
+
+            if (incomingBudgetItem.getNotes() != null) {
+                budgetItemToAdd.setNotes(incomingBudgetItem.getNotes());
+            }
             budgetItemRepo.save(budgetItemToAdd);
         }
 

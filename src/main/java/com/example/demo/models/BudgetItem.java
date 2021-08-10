@@ -13,12 +13,12 @@ public class BudgetItem {
     @GeneratedValue
     private Long id;
 
+    private String community;
     private String item;
     private int costInPennies;
-
     private LocalDate dateOfPurchase;
+    private String notes;
 
-    private String community;
 
     @ManyToMany
     private Collection<Payee> payees;
@@ -42,6 +42,15 @@ public class BudgetItem {
         this.costInPennies = costInPennies;
     }
 
+    public BudgetItem(String community, String item, Collection<Payee> payees, LocalDate dateOfPurchase, int costInPennies, String notes) {
+        this.community = community;
+        this.item = item;
+        this.payees = payees;
+        this.dateOfPurchase = dateOfPurchase;
+        this.costInPennies = costInPennies;
+        this.notes = notes;
+    }
+
 
     public BudgetItem(String item, int costInPennies, LocalDate dateOfPurchase) {
         this.item = item;
@@ -49,10 +58,13 @@ public class BudgetItem {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public Long getId() {
         return id;
     }
-
 
     public String getItem() {
         return item;
@@ -73,4 +85,6 @@ public class BudgetItem {
     public LocalDate getDateOfPurchase() {
         return dateOfPurchase;
     }
+
+    public String getNotes() { return notes; }
 }
