@@ -18,6 +18,7 @@ public class BudgetItem {
     private int costInPennies;
     private LocalDate dateOfPurchase;
     private String notes;
+    private String accountNum;
 
 
     @ManyToMany
@@ -49,6 +50,16 @@ public class BudgetItem {
         this.dateOfPurchase = dateOfPurchase;
         this.costInPennies = costInPennies;
         this.notes = notes;
+    }
+
+    public BudgetItem(String community, String item, Collection<Payee> payees, LocalDate dateOfPurchase, int costInPennies, String notes, String accountNum) {
+        this.community = community;
+        this.item = item;
+        this.payees = payees;
+        this.dateOfPurchase = dateOfPurchase;
+        this.costInPennies = costInPennies;
+        this.notes = notes;
+        this.accountNum = accountNum;
     }
 
 
