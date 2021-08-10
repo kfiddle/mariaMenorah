@@ -64,7 +64,7 @@ public class RestBudget {
         budgetItemRepo.save(budgetItemToAdd);
         return (Collection<BudgetItem>) budgetItemRepo.findAll();
     }
-    
+
 
     @RequestMapping("/{community}/{month}")
     public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community,
