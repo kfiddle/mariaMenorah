@@ -43,7 +43,7 @@ public class FoundationItemController {
     }
 
     @PostMapping("/add-or-modify-foundation-item/{addOrModify}")
-    public Collection<FoundationItem> getAllFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
+    public Collection<FoundationItem> addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
 
         FoundationItem workingVersion = new FoundationItem();
 
