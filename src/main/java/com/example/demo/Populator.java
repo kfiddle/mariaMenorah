@@ -27,6 +27,9 @@ public class Populator implements CommandLineRunner {
     EventRepository eventRepo;
 
     @Resource
+    MasterBudgetItemRepository masterBudgetItemRepo;
+
+    @Resource
     PayeeRepository payeeRepo;
 
 
@@ -175,14 +178,19 @@ public class Populator implements CommandLineRunner {
 //        eventRepo.save(firstEvent);
 //
 //
-//        Collection<Payee> testPayees = new ArrayList<>();
-//
-//        testPayees.add(derekZ);
-//        testPayees.add(mariaM);
+        Collection<Payee> testPayees = new ArrayList<>();
+
+        testPayees.add(derekZ);
+        testPayees.add(mariaM);
+
+//    public MasterBudgetItem(String name, LocalDate date, int totalCostInCents, Collection<Payee> payees, String community, String notes, String accountNum) {
+
+        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
+
+        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
 
 
-//        BudgetItem testItem = new BudgetItem("Stone Gardens", "Triple A Batteries", LocalDate.now(), 700);
-//        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10), 5000);
+        //        BudgetItem testItem2 = new BudgetItem("Stone Gardens", "Noah's Birthday Cake", LocalDate.of(2021, 10, 10), 5000);
 //        BudgetItem testItem3 = new BudgetItem("Stone Gardens", "a duo of note", testPayees, LocalDate.of(2021, 9, 17), 4000);
 //        BudgetItem testItem4 = new BudgetItem("Stone Gardens", "David's movie", LocalDate.of(2021, 9, 2), 4500);
 //        BudgetItem testItem5 = new BudgetItem("Stone Gardens", "Beer Pong", LocalDate.of(2021, 9, 4), 80000);
@@ -194,8 +202,8 @@ public class Populator implements CommandLineRunner {
 //
 //        testItem10.setCompleted(true);
 //
-//        budgetItemRepo.save(testItem);
-//        budgetItemRepo.save(testItem2);
+        masterBudgetItemRepo.save(testItem);
+        masterBudgetItemRepo.save(testItem2);
 //        budgetItemRepo.save(testItem3);
 //        budgetItemRepo.save(testItem4);
 //        budgetItemRepo.save(testItem5);

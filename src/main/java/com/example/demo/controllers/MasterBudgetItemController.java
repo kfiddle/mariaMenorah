@@ -38,6 +38,19 @@ public class MasterBudgetItemController {
         return (Collection<MasterBudgetItem>) masterBudgetItemRepo.findAll();
     }
 
+    @RequestMapping("/{community}/{month}")
+    public Collection<MasterBudgetItem> getAllMasterBudgetItemsByCommunityAndMonth(@PathVariable String community,
+                                                                                   @PathVariable int month) {
+        Collection<MasterBudgetItem> masterBudgetItemsToReturn = new ArrayList<>();
+
+        for (MasterBudgetItem masterBudgetItem : masterBudgetItemRepo.findByCommunity(community)) {
+            if (masterBudgetItem.getDate().getMonthValue() == month) {
+                masterBudgetItemsToReturn.add(masterBudgetItem);
+            }
+        }
+        return masterBudgetItemsToReturn;
+    }
+
 
     @PostMapping("/add-or-modify-master-budget-item/{addOrModify}")
     public Collection<MasterBudgetItem> addOrModifyMasterBudgetItems(@RequestBody MasterBudgetItem incoming, @PathVariable String addOrModify) {
@@ -92,7 +105,6 @@ public class MasterBudgetItemController {
         }
 
         masterBudgetItemRepo.save(workingVersion);
-        System.out.println(workingVersion.getId() + " , " + workingVersion.getName());
         return (Collection<MasterBudgetItem>) masterBudgetItemRepo.findAll();
     }
 

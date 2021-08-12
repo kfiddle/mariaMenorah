@@ -1,10 +1,7 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.BudgetItem;
-import com.example.demo.models.Event;
-import com.example.demo.models.Foundation;
-import com.example.demo.models.Payee;
+import com.example.demo.models.*;
 import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.PayeeRepository;
 import org.springframework.web.bind.annotation.*;
@@ -80,7 +77,6 @@ public class RestPayee {
 
             payeeRepo.save(payeeToEdit);
 
-            System.out.println(payeeToEdit.getFirstName() + "  " + payeeToEdit.getId());
         }
 
         return (Collection<Payee>) payeeRepo.findAll();
@@ -96,6 +92,19 @@ public class RestPayee {
         }
         return eventsToSendBack;
     }
+
+    @PostMapping("/get-items-from-payee")
+    public Collection<Item> getAllItemsOfPayee(@RequestBody Payee incomingPayee) throws IOException {
+
+        Collection<Item> itemsToSendBack = new ArrayList<>();
+
+        if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
+            Payee payeeToOfferItems = payeeRepo.findById(incomingPayee.getId()).get();
+            itemsToSendBack = payeeToOfferItems.getItems();
+        }
+        return itemsToSendBack;
+    }
+
 
     @PostMapping("/get-budget-items-from-payee")
     public Collection<BudgetItem> getAllBudgetItemsOfPayee(@RequestBody Payee incomingPayee) throws IOException {

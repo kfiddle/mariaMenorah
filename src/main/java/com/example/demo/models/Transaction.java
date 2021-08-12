@@ -21,6 +21,8 @@ public class Transaction {
     @ManyToOne
     private Event event;
 
+    @ManyToOne
+    private FoundationItem foundationItem;
 
     @ManyToOne
     private Foundation foundation;
@@ -45,7 +47,6 @@ public class Transaction {
         return totalPennies;
     }
 
-
     public Foundation getFoundation() {
         return foundation;
     }
@@ -53,4 +54,6 @@ public class Transaction {
     public Event getEvent() {
         return event;
     }
+
+    public FoundationItem getFoundationItem() { return foundationItem; }
 }

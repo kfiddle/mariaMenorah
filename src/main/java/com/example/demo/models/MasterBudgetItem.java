@@ -21,6 +21,13 @@ public class MasterBudgetItem extends Item{
         this.accountNum = accountNum;
     }
 
+    public MasterBudgetItem(String name, LocalDate date, int totalCostInCents, String community, String notes, String accountNum) {
+        super(name, date, totalCostInCents);
+        this.community = community;
+        this.notes = notes;
+        this.accountNum = accountNum;
+    }
+
     public void setCommunity(String community) {
         this.community = community;
     }

@@ -65,18 +65,18 @@ public class RestBudget {
     }
 
 
-    @RequestMapping("/{community}/{month}")
-    public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community,
-                                                                 @PathVariable int month) {
-        Collection<BudgetItem> budgetItemsToReturn = new ArrayList<>();
-
-        for (BudgetItem budgetItem : budgetItemRepo.findByCommunity(community)) {
-            if (budgetItem.getDateOfPurchase().getMonthValue() == month) {
-                budgetItemsToReturn.add(budgetItem);
-            }
-        }
-        return budgetItemsToReturn;
-    }
+//    @RequestMapping("/{community}/{month}")
+//    public Collection<BudgetItem> getAllItemsByCommunityAndMonth(@PathVariable String community,
+//                                                                 @PathVariable int month) {
+//        Collection<BudgetItem> budgetItemsToReturn = new ArrayList<>();
+//
+//        for (BudgetItem budgetItem : budgetItemRepo.findByCommunity(community)) {
+//            if (budgetItem.getDateOfPurchase().getMonthValue() == month) {
+//                budgetItemsToReturn.add(budgetItem);
+//            }
+//        }
+//        return budgetItemsToReturn;
+//    }
 
     @PostMapping("/delete-budget-item")
     public Collection<BudgetItem> deleteItem(@RequestBody BudgetItem incomingItem) {

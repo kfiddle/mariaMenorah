@@ -31,6 +31,10 @@ public class Payee {
     @ManyToMany(mappedBy = "payees")
     private Collection<BudgetItem> budgetItems;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "payees")
+    private Collection<Item> items;
+
     @OneToOne
     private BudgetItem budgetItem;
 
@@ -97,7 +101,9 @@ public class Payee {
         this.w9ed = w9ed;
     }
 
-
+    public void setItems(Collection<Item> items) {
+        this.items = items;
+    }
 
     public Long getId() {
         return id;
@@ -123,12 +129,20 @@ public class Payee {
         return w9ed;
     }
 
+    public boolean isW9ed() { return w9ed; }
+
     public Collection<Event> getEvents() {
         return events;
     }
 
+
+
     public Collection<BudgetItem> getBudgetItems() {
         return budgetItems;
+    }
+
+    public Collection<Item> getItems() {
+        return items;
     }
 
     public String getAddress() {
