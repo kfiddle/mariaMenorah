@@ -104,4 +104,14 @@ public class FoundationItemController {
         return (Collection<FoundationItem>) foundationItemRepo.findAll();
 
     }
+
+    @PostMapping("/edit-item-completion")
+    public Collection<Item> editItemCompletion(@RequestBody Item incoming) {
+        if (itemRepo.findById(incoming.getId()).isPresent()) {
+            Item itemToEdit = itemRepo.findById(incoming.getId()).get();
+            itemToEdit.setCompleted(incoming.isCompleted());
+            itemRepo.save(itemToEdit);
+        }
+        return (Collection<Item>) itemRepo.findAll();
+    }
 }

@@ -16,6 +16,8 @@ public class Item {
     private String name;
     private LocalDate date;
     private int totalCostInCents;
+
+    private String notes;
     private boolean completed;
 
 
@@ -41,6 +43,14 @@ public class Item {
         this.payees = payees;
     }
 
+    public Item(String name, LocalDate date, int totalCostInCents, Collection<Payee> payees, String notes) {
+        this.name = name;
+        this.date = date;
+        this.totalCostInCents = totalCostInCents;
+        this.payees = payees;
+        this.notes = notes;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -55,6 +65,10 @@ public class Item {
 
     public void setPayees(Collection<Payee> payees) {
         this.payees = payees;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public void setCompleted(boolean completed) {
@@ -79,6 +93,10 @@ public class Item {
 
     public Collection<Payee> getPayees() {
         return payees;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     public boolean isCompleted() { return completed; }
