@@ -114,4 +114,12 @@ public class FoundationItemController {
         }
         return (Collection<Item>) itemRepo.findAll();
     }
+
+    @PostMapping("/delete-item")
+    public Collection<Item> deleteItem(@RequestBody Item incomingItem) {
+        if (itemRepo.findById(incomingItem.getId()).isPresent()) {
+            itemRepo.deleteById(incomingItem.getId());
+        }
+        return (Collection<Item>) itemRepo.findAll();
+    }
 }
