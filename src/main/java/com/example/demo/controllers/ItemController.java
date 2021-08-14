@@ -39,9 +39,6 @@ public class ItemController {
     @PostMapping("/delete-item")
     public Collection<Item> deleteItem(@RequestBody Item incomingItem) {
         if (itemRepo.findById(incomingItem.getId()).isPresent()) {
-            System.out.println("we might make it here");
-
-            if (incomingItem instanceof FoundationItem)
             itemRepo.deleteById(incomingItem.getId());
         }
         return (Collection<Item>) itemRepo.findAll();
