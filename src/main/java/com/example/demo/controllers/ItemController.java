@@ -1,8 +1,11 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.FoundationItem;
 import com.example.demo.models.Item;
+import com.example.demo.models.Transaction;
 import com.example.demo.repositories.ItemRepository;
+import com.example.demo.repositories.TransactionRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,6 +17,9 @@ public class ItemController {
 
     @Resource
     ItemRepository itemRepo;
+
+    @Resource
+    TransactionRepository transactionRepo;
 
     @RequestMapping("/get-items")
     public Collection<Item> getAllItems() {
@@ -33,6 +39,9 @@ public class ItemController {
     @PostMapping("/delete-item")
     public Collection<Item> deleteItem(@RequestBody Item incomingItem) {
         if (itemRepo.findById(incomingItem.getId()).isPresent()) {
+            System.out.println("we might make it here");
+
+            if (incomingItem instanceof FoundationItem)
             itemRepo.deleteById(incomingItem.getId());
         }
         return (Collection<Item>) itemRepo.findAll();

@@ -50,23 +50,7 @@ public class Foundation {
         this.purpose = purpose;
     }
 
-    public void debitLotsOfPennies(int spentOnATransaction) {
-        leftOverPennies -= spentOnATransaction;
-    }
 
-    public void returnThosePennies(int totalPennies) {
-        leftOverPennies += totalPennies;
-    }
-
-
-    public void setContributionInPennies(int contributionInPennies) {
-        this.contributionInPennies = contributionInPennies;
-    }
-
-
-    public void setLeftOverPennies(int leftOverPennies) {
-        this.leftOverPennies = leftOverPennies;
-    }
 
 
     public Long getId() {
@@ -82,6 +66,10 @@ public class Foundation {
     }
 
     public int getLeftOverPennies() {
+        leftOverPennies = contributionInPennies;
+        for (Transaction transaction : transactions) {
+            leftOverPennies -= transaction.getTotalPennies();
+        }
         return leftOverPennies;
     }
 
@@ -92,6 +80,34 @@ public class Foundation {
     public Collection<Transaction> getTransactions() {
         return transactions;
     }
-
-
 }
+
+//    public void addTransaction(Transaction transactionToAdd) {
+//        Collection<Transaction> transactionsArray = new ArrayList<>(transactions);
+//        transactionsArray.add(transactionToAdd);
+//        transactions = transactionsArray;
+//        leftOverPennies = contributionInPennies;
+//
+//        for (Transaction transaction : transactions) {
+//            leftOverPennies -= transaction.getTotalPennies();
+//        }
+//
+//    }
+
+//    public void debitLotsOfPennies(int spentOnATransaction) {
+//        leftOverPennies -= spentOnATransaction;
+//    }
+//
+//    public void returnThosePennies(int totalPennies) {
+//        leftOverPennies += totalPennies;
+//    }
+
+
+//    public void setContributionInPennies(int contributionInPennies) {
+//        this.contributionInPennies = contributionInPennies;
+//    }
+
+
+//    public void setLeftOverPennies(int leftOverPennies) {
+//        this.leftOverPennies = leftOverPennies;
+//    }

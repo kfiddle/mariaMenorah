@@ -70,13 +70,13 @@ public class FoundationItemController {
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
-
-                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
-                foundationRepo.save(foundationToDebit);
-
                 transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
+                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+
+                foundationRepo.save(foundationToDebit);
+                System.out.println(foundationToDebit.getTransactions().size());
+
             }
             workingVersion.setTransactions(transactionsToSave);
         }
@@ -101,10 +101,33 @@ public class FoundationItemController {
 
 
         foundationItemRepo.save(workingVersion);
-        System.out.println(workingVersion.getId() + " , " + workingVersion.getName() + "  , " + workingVersion.getTransactions());
         return (Collection<FoundationItem>) foundationItemRepo.findAll();
 
     }
 
+    @PostMapping("/delete-foundation-item")
+    public Collection<FoundationItem> deleteFoundationItem(@RequestBody FoundationItem foundationItemToDelete) {
+        if (foundationItemRepo.findById(foundationItemToDelete.getId()).isPresent()) {
+            foundationItemRepo.deleteById(foundationItemToDelete.getId());
 
+        }
+        return (Collection<FoundationItem>) foundationItemRepo.findAll();
+    }
 }
+
+
+//        if (incoming.getTransactions().size() > 0) {
+//            Collection<Transaction> transactionsToSave = new ArrayList<>();
+//
+//            for (Transaction transaction : incoming.getTransactions()) {
+//                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
+//
+//                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
+//                foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
+//                foundationRepo.save(foundationToDebit);
+//
+//                transactionsToSave.add(newTransactionToSave);
+//                transactionRepo.save(newTransactionToSave);
+//            }
+//            workingVersion.setTransactions(transactionsToSave);
+//        }

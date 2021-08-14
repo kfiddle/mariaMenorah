@@ -29,10 +29,10 @@ public class RestTransaction {
     }
 
     @PostMapping("delete-transaction")
-    public Collection<Transaction> deleteATransactionInDatabase(@RequestBody Long eventToDeleteID) throws IOException {
+    public Collection<Transaction> deleteATransactionInDatabase(@RequestBody Transaction eventToDeleteID) throws IOException {
 
-        if (transactionRepo.findById(eventToDeleteID).isPresent()) {
-            transactionRepo.deleteById(eventToDeleteID);
+        if (transactionRepo.findById(eventToDeleteID.getId()).isPresent()) {
+            transactionRepo.deleteById(eventToDeleteID.getId());
         }
         return (Collection<Transaction>) transactionRepo.findAll();
     }
