@@ -32,10 +32,6 @@ public class FoundationItemController {
     @Resource
     PayeeRepository payeeRepo;
 
-    @RequestMapping("/get-items")
-    public Collection<Item> getAllItems() {
-        return (Collection<Item>) itemRepo.findAll();
-    }
 
     @RequestMapping("/get-foundation-items")
     public Collection<FoundationItem> getAllFoundationItems() {
@@ -98,6 +94,11 @@ public class FoundationItemController {
             workingVersion.setPayees(payeesToAdd);
         }
 
+        if (incoming.getNotes() != null) {
+            workingVersion.setNotes(incoming.getNotes());
+
+        }
+
 
         foundationItemRepo.save(workingVersion);
         System.out.println(workingVersion.getId() + " , " + workingVersion.getName() + "  , " + workingVersion.getTransactions());
@@ -105,21 +106,5 @@ public class FoundationItemController {
 
     }
 
-    @PostMapping("/edit-item-completion")
-    public Collection<Item> editItemCompletion(@RequestBody Item incoming) {
-        if (itemRepo.findById(incoming.getId()).isPresent()) {
-            Item itemToEdit = itemRepo.findById(incoming.getId()).get();
-            itemToEdit.setCompleted(incoming.isCompleted());
-            itemRepo.save(itemToEdit);
-        }
-        return (Collection<Item>) itemRepo.findAll();
-    }
 
-    @PostMapping("/delete-item")
-    public Collection<Item> deleteItem(@RequestBody Item incomingItem) {
-        if (itemRepo.findById(incomingItem.getId()).isPresent()) {
-            itemRepo.deleteById(incomingItem.getId());
-        }
-        return (Collection<Item>) itemRepo.findAll();
-    }
 }
