@@ -72,10 +72,6 @@ public class FoundationItemController {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
                 transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
-                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-
-                foundationRepo.save(foundationToDebit);
-                System.out.println(foundationToDebit.getTransactions().size());
 
             }
             workingVersion.setTransactions(transactionsToSave);
@@ -116,18 +112,3 @@ public class FoundationItemController {
 }
 
 
-//        if (incoming.getTransactions().size() > 0) {
-//            Collection<Transaction> transactionsToSave = new ArrayList<>();
-//
-//            for (Transaction transaction : incoming.getTransactions()) {
-//                Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
-//
-//                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-//                foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
-//                foundationRepo.save(foundationToDebit);
-//
-//                transactionsToSave.add(newTransactionToSave);
-//                transactionRepo.save(newTransactionToSave);
-//            }
-//            workingVersion.setTransactions(transactionsToSave);
-//        }

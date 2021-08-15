@@ -19,6 +19,12 @@ public class FoundationItem extends Item{
         super(name, date, totalCostInCents);
     }
 
+    public FoundationItem(String name, LocalDate date, int totalCostInCents, Purpose purpose, Collection<Transaction> transactions) {
+        super(name, date, totalCostInCents);
+        this.purpose = purpose;
+        this.transactions = transactions;
+    }
+
     public FoundationItem(String name, LocalDate date, int totalCostInCents, Collection<Payee> payees, Purpose purpose, Collection<Transaction> transactions) {
         super(name, date, totalCostInCents, payees);
         this.purpose = purpose;
