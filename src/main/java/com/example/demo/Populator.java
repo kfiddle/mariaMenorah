@@ -156,14 +156,18 @@ public class Populator implements CommandLineRunner {
         Transaction first = new Transaction(7500, albertBilstein);
         Transaction second = new Transaction(260, estelle);
 
-
         Transaction third = new Transaction(7200, esther);
         Transaction fourth = new Transaction(9300, carol);
+
+        Transaction fifth = new Transaction(2783);
+        Transaction sixth = new Transaction(9244);
 
         transactionRepo.save(first);
         transactionRepo.save(second);
         transactionRepo.save(third);
         transactionRepo.save(fourth);
+        transactionRepo.save(fifth);
+        transactionRepo.save(sixth);
 
         Collection<Transaction> trx = new ArrayList<>();
 
@@ -175,11 +179,15 @@ public class Populator implements CommandLineRunner {
         trx1.add(third);
         trx1.add(fourth);
 
+        Collection<Transaction> trx2 = new ArrayList<>();
+
+        trx2.add(third);
+        trx2.add(fourth);
+
         Collection<Payee> testPayees = new ArrayList<>();
 
         testPayees.add(derekZ);
         testPayees.add(mariaM);
-
 
         FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
         foundationItemRepo.save(firstEvent);

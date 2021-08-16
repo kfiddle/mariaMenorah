@@ -22,6 +22,7 @@ public class RestTransaction {
         return (Collection<Transaction>) transactionRepo.findAll();
     }
 
+
     @PostMapping("/add-transaction")
     public Collection<Transaction> addTransaction(@RequestBody Transaction transactionToAdd) {
         transactionRepo.save(transactionToAdd);

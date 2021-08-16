@@ -51,8 +51,6 @@ public class Foundation {
     }
 
 
-
-
     public Long getId() {
         return id;
     }
@@ -65,11 +63,18 @@ public class Foundation {
         return contributionInPennies;
     }
 
-    public int getLeftOverPennies() {
+    public void setLeftOverPennies() {
         leftOverPennies = contributionInPennies;
-        for (Transaction transaction : transactions) {
-            leftOverPennies -= transaction.getTotalPennies();
+
+        if (transactions.size() > 0) {
+            for (Transaction transaction : transactions) {
+                leftOverPennies -= transaction.getTotalPennies();
+            }
         }
+    }
+
+    public int getLeftOverPennies() {
+        setLeftOverPennies();
         return leftOverPennies;
     }
 
@@ -81,33 +86,3 @@ public class Foundation {
         return transactions;
     }
 }
-
-//    public void addTransaction(Transaction transactionToAdd) {
-//        Collection<Transaction> transactionsArray = new ArrayList<>(transactions);
-//        transactionsArray.add(transactionToAdd);
-//        transactions = transactionsArray;
-//        leftOverPennies = contributionInPennies;
-//
-//        for (Transaction transaction : transactions) {
-//            leftOverPennies -= transaction.getTotalPennies();
-//        }
-//
-//    }
-
-//    public void debitLotsOfPennies(int spentOnATransaction) {
-//        leftOverPennies -= spentOnATransaction;
-//    }
-//
-//    public void returnThosePennies(int totalPennies) {
-//        leftOverPennies += totalPennies;
-//    }
-
-
-//    public void setContributionInPennies(int contributionInPennies) {
-//        this.contributionInPennies = contributionInPennies;
-//    }
-
-
-//    public void setLeftOverPennies(int leftOverPennies) {
-//        this.leftOverPennies = leftOverPennies;
-//    }

@@ -39,7 +39,7 @@ public class FoundationItemController {
     }
 
     @PostMapping("/add-or-modify-foundation-item/{addOrModify}")
-    public Collection<FoundationItem> addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
+        public void addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
 
         FoundationItem workingVersion = new FoundationItem();
 
@@ -72,7 +72,6 @@ public class FoundationItemController {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
                 transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
-
             }
             workingVersion.setTransactions(transactionsToSave);
         }
@@ -95,9 +94,7 @@ public class FoundationItemController {
 
         }
 
-
         foundationItemRepo.save(workingVersion);
-        return (Collection<FoundationItem>) foundationItemRepo.findAll();
 
     }
 
