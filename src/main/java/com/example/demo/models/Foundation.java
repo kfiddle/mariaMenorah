@@ -28,8 +28,8 @@ public class Foundation {
     @ManyToMany
     private Collection<Event> events;
 
-    @ManyToMany
-    private Collection<FoundationItem> foundationItems;
+//    @ManyToMany
+//    private Collection<FoundationItem> foundationItems;
 
     public Foundation() {
     }

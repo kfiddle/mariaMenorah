@@ -159,8 +159,8 @@ public class Populator implements CommandLineRunner {
         Transaction third = new Transaction(7200, esther);
         Transaction fourth = new Transaction(9300, carol);
 
-        Transaction fifth = new Transaction(2783);
-        Transaction sixth = new Transaction(9244);
+        Transaction fifth = new Transaction(2783, sheryl);
+        Transaction sixth = new Transaction(9244, senkfor);
 
         transactionRepo.save(first);
         transactionRepo.save(second);
@@ -168,6 +168,7 @@ public class Populator implements CommandLineRunner {
         transactionRepo.save(fourth);
         transactionRepo.save(fifth);
         transactionRepo.save(sixth);
+
 
         Collection<Transaction> trx = new ArrayList<>();
 
@@ -181,8 +182,8 @@ public class Populator implements CommandLineRunner {
 
         Collection<Transaction> trx2 = new ArrayList<>();
 
-        trx2.add(third);
-        trx2.add(fourth);
+        trx2.add(fifth);
+        trx2.add(sixth);
 
         Collection<Payee> testPayees = new ArrayList<>();
 
@@ -192,8 +193,13 @@ public class Populator implements CommandLineRunner {
         FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
         foundationItemRepo.save(firstEvent);
 
-//        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, a2, trx1);
-//        foundationItemRepo.save(secondEvent);
+        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees,a2);
+        foundationItemRepo.save(secondEvent);
+
+
+
+
+
 
         MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
         MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
