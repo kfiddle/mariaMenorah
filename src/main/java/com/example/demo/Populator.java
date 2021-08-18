@@ -193,22 +193,26 @@ public class Populator implements CommandLineRunner {
         FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
         foundationItemRepo.save(firstEvent);
 
-//        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees,a2);
-//        foundationItemRepo.save(secondEvent);
-//
-//
-//        Transaction newTrans1 = new Transaction(5000);
-//        Transaction newTrans2 = new Transaction(7500);
-//        transactionRepo.save(newTrans1);
-//        transactionRepo.save(newTrans2);
-//
-//        Collection<Transaction> transactionsForDAndGinger = new ArrayList<>();
-//        transactionsForDAndGinger.add(newTrans1);
-//        transactionsForDAndGinger.add(newTrans2);
-//
-//
-//        secondEvent.setTransactions(transactionsForDAndGinger);
-//        foundationItemRepo.save(secondEvent);
+        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees,a2);
+        foundationItemRepo.save(secondEvent);
+
+
+        Transaction newTrans1 = new Transaction(5000);
+        Transaction newTrans2 = new Transaction(7500);
+
+        newTrans1.setFoundation(peggy);
+        newTrans2.setFoundation(albertBilstein);
+
+        transactionRepo.save(newTrans1);
+        transactionRepo.save(newTrans2);
+
+        Collection<Transaction> transactionsForDAndGinger = new ArrayList<>();
+        transactionsForDAndGinger.add(newTrans1);
+        transactionsForDAndGinger.add(newTrans2);
+
+
+        secondEvent.setTransactions(transactionsForDAndGinger);
+        foundationItemRepo.save(secondEvent);
 
         MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
         MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");

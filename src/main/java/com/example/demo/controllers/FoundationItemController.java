@@ -48,11 +48,10 @@ public class FoundationItemController {
                 workingVersion = foundationItemRepo.findById(incoming.getId()).get();
 
                 for (Transaction transaction : workingVersion.getTransactions()) {
+                    System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
 
+                    transactionRepo.deleteById(transaction.getId());
 
-
-
-//                    System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
 //                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
 //                    transactionToFind.setTotalPennies(8000);
 //                    System.out.println("found again and changed at  " + transactionToFind.getId());
