@@ -28,9 +28,6 @@ public class Foundation {
     @ManyToMany
     private Collection<Event> events;
 
-//    @ManyToMany
-//    private Collection<FoundationItem> foundationItems;
-
     public Foundation() {
     }
 
@@ -49,7 +46,6 @@ public class Foundation {
         this.leftOverPennies = contributionInPennies;
         this.purpose = purpose;
     }
-
 
     public Long getId() {
         return id;

@@ -39,13 +39,24 @@ public class FoundationItemController {
     }
 
     @PostMapping("/add-or-modify-foundation-item/{addOrModify}")
-        public void addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
+    public void addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
 
         FoundationItem workingVersion = new FoundationItem();
 
         if (addOrModify.equals("modify")) {
             if (foundationItemRepo.findById(incoming.getId()).isPresent()) {
                 workingVersion = foundationItemRepo.findById(incoming.getId()).get();
+
+                for (Transaction transaction : workingVersion.getTransactions()) {
+
+
+
+
+//                    System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
+//                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
+//                    transactionToFind.setTotalPennies(8000);
+//                    System.out.println("found again and changed at  " + transactionToFind.getId());
+                }
             }
         }
 

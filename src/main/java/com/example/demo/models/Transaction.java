@@ -41,6 +41,18 @@ public class Transaction {
         this.foundationItem = foundationItem;
     }
 
+    public void setTotalPennies(int totalPennies) {
+        this.totalPennies = totalPennies;
+    }
+
+    public void setFoundation(Foundation foundation) {
+        this.foundation = foundation;
+    }
+
+    public void setFoundationItem(FoundationItem foundationItem) {
+        this.foundationItem = foundationItem;
+    }
+
 
     public Long getId() {
         return id;
