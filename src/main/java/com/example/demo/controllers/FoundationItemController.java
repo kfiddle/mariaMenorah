@@ -50,11 +50,14 @@ public class FoundationItemController {
                 for (Transaction transaction : workingVersion.getTransactions()) {
                     System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
 
-                    transactionRepo.deleteById(transaction.getId());
+                    if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
+                        Foundation foundationToAdjust = foundationRepo.findById(transaction.getFoundation().getId()).get();
+                        foundationToAdjust.removeTransaction(transaction);
+                        foundationRepo.save(foundationToAdjust);
+                    }
 
-//                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
-//                    transactionToFind.setTotalPennies(8000);
-//                    System.out.println("found again and changed at  " + transactionToFind.getId());
+                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
+                    System.out.println("found again and changed at  " + transactionToFind.getId());
                 }
             }
         }

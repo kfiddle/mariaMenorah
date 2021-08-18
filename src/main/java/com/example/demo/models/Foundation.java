@@ -47,6 +47,13 @@ public class Foundation {
         this.purpose = purpose;
     }
 
+    public void removeTransaction(Transaction transactionToRemove) {
+        Collection<Transaction> transList = new ArrayList<>(transactions);
+        transList.removeIf(transaction -> transaction.getId().equals(transactionToRemove.getId()));
+        transactions = transList;
+    }
+
+
     public Long getId() {
         return id;
     }
