@@ -32,10 +32,6 @@ public class FoundationItemController {
     @Resource
     PayeeRepository payeeRepo;
 
-    @RequestMapping("/get-items")
-    public Collection<Item> getAllItems() {
-        return (Collection<Item>) itemRepo.findAll();
-    }
 
     @RequestMapping("/get-foundation-items")
     public Collection<FoundationItem> getAllFoundationItems() {
@@ -43,17 +39,28 @@ public class FoundationItemController {
     }
 
     @PostMapping("/add-or-modify-foundation-item/{addOrModify}")
-    public Collection<FoundationItem> addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
+    public void addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
 
         FoundationItem workingVersion = new FoundationItem();
 
         if (addOrModify.equals("modify")) {
             if (foundationItemRepo.findById(incoming.getId()).isPresent()) {
                 workingVersion = foundationItemRepo.findById(incoming.getId()).get();
+
+                for (Transaction transaction : workingVersion.getTransactions()) {
+
+
+
+
+//                    System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
+//                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
+//                    transactionToFind.setTotalPennies(8000);
+//                    System.out.println("found again and changed at  " + transactionToFind.getId());
+                }
             }
         }
 
-        if (incoming.getName() != null) {
+        if (!incoming.getName().equals("")) {
             workingVersion.setName(incoming.getName());
         }
 
@@ -74,11 +81,6 @@ public class FoundationItemController {
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
-
-                Foundation foundationToDebit = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                foundationToDebit.debitLotsOfPennies(transaction.getTotalPennies());
-                foundationRepo.save(foundationToDebit);
-
                 transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
             }
@@ -98,28 +100,23 @@ public class FoundationItemController {
             workingVersion.setPayees(payeesToAdd);
         }
 
+        if (incoming.getNotes() != null) {
+            workingVersion.setNotes(incoming.getNotes());
+
+        }
 
         foundationItemRepo.save(workingVersion);
-        System.out.println(workingVersion.getId() + " , " + workingVersion.getName() + "  , " + workingVersion.getTransactions());
+
+    }
+
+    @PostMapping("/delete-foundation-item")
+    public Collection<FoundationItem> deleteFoundationItem(@RequestBody FoundationItem foundationItemToDelete) {
+        if (foundationItemRepo.findById(foundationItemToDelete.getId()).isPresent()) {
+            foundationItemRepo.deleteById(foundationItemToDelete.getId());
+
+        }
         return (Collection<FoundationItem>) foundationItemRepo.findAll();
-
-    }
-
-    @PostMapping("/edit-item-completion")
-    public Collection<Item> editItemCompletion(@RequestBody Item incoming) {
-        if (itemRepo.findById(incoming.getId()).isPresent()) {
-            Item itemToEdit = itemRepo.findById(incoming.getId()).get();
-            itemToEdit.setCompleted(incoming.isCompleted());
-            itemRepo.save(itemToEdit);
-        }
-        return (Collection<Item>) itemRepo.findAll();
-    }
-
-    @PostMapping("/delete-item")
-    public Collection<Item> deleteItem(@RequestBody Item incomingItem) {
-        if (itemRepo.findById(incomingItem.getId()).isPresent()) {
-            itemRepo.deleteById(incomingItem.getId());
-        }
-        return (Collection<Item>) itemRepo.findAll();
     }
 }
+
+

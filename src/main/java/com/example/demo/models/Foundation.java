@@ -28,9 +28,6 @@ public class Foundation {
     @ManyToMany
     private Collection<Event> events;
 
-    @ManyToMany
-    private Collection<FoundationItem> foundationItems;
-
     public Foundation() {
     }
 
@@ -50,25 +47,6 @@ public class Foundation {
         this.purpose = purpose;
     }
 
-    public void debitLotsOfPennies(int spentOnATransaction) {
-        leftOverPennies -= spentOnATransaction;
-    }
-
-    public void returnThosePennies(int totalPennies) {
-        leftOverPennies += totalPennies;
-    }
-
-
-    public void setContributionInPennies(int contributionInPennies) {
-        this.contributionInPennies = contributionInPennies;
-    }
-
-
-    public void setLeftOverPennies(int leftOverPennies) {
-        this.leftOverPennies = leftOverPennies;
-    }
-
-
     public Long getId() {
         return id;
     }
@@ -81,7 +59,18 @@ public class Foundation {
         return contributionInPennies;
     }
 
+    public void setLeftOverPennies() {
+        leftOverPennies = contributionInPennies;
+
+        if (transactions.size() > 0) {
+            for (Transaction transaction : transactions) {
+                leftOverPennies -= transaction.getTotalPennies();
+            }
+        }
+    }
+
     public int getLeftOverPennies() {
+        setLeftOverPennies();
         return leftOverPennies;
     }
 
@@ -92,6 +81,4 @@ public class Foundation {
     public Collection<Transaction> getTransactions() {
         return transactions;
     }
-
-
 }

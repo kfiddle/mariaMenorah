@@ -17,10 +17,6 @@ public class Transaction {
 
     private int totalPennies;
 
-
-    @ManyToOne
-    private Event event;
-
     @ManyToOne
     private FoundationItem foundationItem;
 
@@ -39,6 +35,25 @@ public class Transaction {
         this.foundation = foundation;
     }
 
+    public Transaction(int totalPennies, Foundation foundation, FoundationItem foundationItem) {
+        this.totalPennies = totalPennies;
+        this.foundation = foundation;
+        this.foundationItem = foundationItem;
+    }
+
+    public void setTotalPennies(int totalPennies) {
+        this.totalPennies = totalPennies;
+    }
+
+    public void setFoundation(Foundation foundation) {
+        this.foundation = foundation;
+    }
+
+    public void setFoundationItem(FoundationItem foundationItem) {
+        this.foundationItem = foundationItem;
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -49,10 +64,6 @@ public class Transaction {
 
     public Foundation getFoundation() {
         return foundation;
-    }
-
-    public Event getEvent() {
-        return event;
     }
 
     public FoundationItem getFoundationItem() { return foundationItem; }

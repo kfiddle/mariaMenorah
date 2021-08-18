@@ -63,7 +63,7 @@ public class MasterBudgetItemController {
             }
         }
 
-        if (incoming.getName() != null) {
+        if (!incoming.getName().equals("")) {
             workingVersion.setName(incoming.getName());
         }
 
