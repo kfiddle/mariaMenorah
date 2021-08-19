@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.util.Collection;
 
 @Entity
 public class Transaction {
@@ -35,11 +36,11 @@ public class Transaction {
         this.foundation = foundation;
     }
 
-    public Transaction(int totalPennies, Foundation foundation, FoundationItem foundationItem) {
-        this.totalPennies = totalPennies;
-        this.foundation = foundation;
-        this.foundationItem = foundationItem;
-    }
+//    public Transaction(int totalPennies, Foundation foundation, FoundationItem foundationItem) {
+//        this.totalPennies = totalPennies;
+//        this.foundation = foundation;
+//        this.foundationItem = foundationItem;
+//    }
 
     public void setTotalPennies(int totalPennies) {
         this.totalPennies = totalPennies;

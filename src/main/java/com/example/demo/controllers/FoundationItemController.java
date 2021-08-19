@@ -21,6 +21,9 @@ public class FoundationItemController {
     TransactionRepository transactionRepo;
 
     @Resource
+    ReceiptRepository receiptRepo;
+
+    @Resource
     ItemRepository itemRepo;
 
     @Resource
@@ -46,19 +49,6 @@ public class FoundationItemController {
         if (addOrModify.equals("modify")) {
             if (foundationItemRepo.findById(incoming.getId()).isPresent()) {
                 workingVersion = foundationItemRepo.findById(incoming.getId()).get();
-
-                for (Transaction transaction : workingVersion.getTransactions()) {
-                    System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
-
-                    if (foundationRepo.findById(transaction.getFoundation().getId()).isPresent()) {
-                        Foundation foundationToAdjust = foundationRepo.findById(transaction.getFoundation().getId()).get();
-                        foundationToAdjust.removeTransaction(transaction);
-                        foundationRepo.save(foundationToAdjust);
-                    }
-
-                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
-                    System.out.println("found again and changed at  " + transactionToFind.getId());
-                }
             }
         }
 
@@ -79,14 +69,24 @@ public class FoundationItemController {
         }
 
         if (incoming.getTransactions().size() > 0) {
-            Collection<Transaction> transactionsToSave = new ArrayList<>();
+//            Collection<Transaction> transactionsToSave = new ArrayList<>();
+
+            Collection<Receipt> receiptsToSave = new ArrayList<>();
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
-                transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
+                Receipt receiptToAdd = new Receipt(newTransactionToSave.getId());
+                receiptRepo.save(receiptToAdd);
+                receiptsToSave.add(receiptToAdd);
+//
+//                transactionsToSave.add(newTransactionToSave);
+
+
+
             }
-            workingVersion.setTransactions(transactionsToSave);
+//            workingVersion.setTransactions(transactionsToSave);
+            workingVersion.setReceipts(receiptsToSave);
         }
 
         if (incoming.getPayees().size() > 0) {

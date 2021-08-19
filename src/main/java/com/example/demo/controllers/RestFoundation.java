@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
-import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
 import com.example.demo.repositories.TransactionRepository;
@@ -22,9 +21,6 @@ public class RestFoundation {
 
     @Resource
     FoundationRepository foundationRepo;
-
-    @Resource
-    EventRepository eventRepo;
 
     @Resource
     PurposeRepository purposeRepo;

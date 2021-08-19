@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,9 +25,6 @@ public class Foundation {
     @JsonIgnore
     @OneToMany(mappedBy = "foundation")
     private Collection<Transaction> transactions;
-
-    @ManyToMany
-    private Collection<Event> events;
 
     public Foundation() {
     }

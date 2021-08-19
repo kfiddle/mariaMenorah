@@ -24,9 +24,6 @@ public class Populator implements CommandLineRunner {
     TransactionRepository transactionRepo;
 
     @Resource
-    EventRepository eventRepo;
-
-    @Resource
     FoundationItemRepository foundationItemRepo;
 
     @Resource

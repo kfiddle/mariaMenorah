@@ -15,6 +15,10 @@ public class FoundationItem extends Item{
     @OneToMany
     private Collection<Transaction> transactions;
 
+    @OneToMany(mappedBy = "foundationItem")
+    private Collection<Receipt> receipts;
+
+
     public FoundationItem() {}
 
     public FoundationItem(String name, LocalDate date, int totalCostInCents) {
@@ -52,11 +56,19 @@ public class FoundationItem extends Item{
         this.transactions = transactions;
     }
 
+    public void setReceipts(Collection<Receipt> receipts) {
+        this.receipts = receipts;
+    }
+
     public Purpose getPurpose() {
         return purpose;
     }
 
     public Collection<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public Collection<Receipt> getReceipts() {
+        return receipts;
     }
 }
