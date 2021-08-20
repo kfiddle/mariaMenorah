@@ -45,13 +45,16 @@ public class FoundationItemController {
     public void addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
 
         FoundationItem workingVersion = new FoundationItem();
-        foundationItemRepo.save(workingVersion);
 
-        if (addOrModify.equals("modify")) {
+        if (addOrModify.equals("add")) {
+            foundationItemRepo.save(workingVersion);
+
+        } else {
             if (foundationItemRepo.findById(incoming.getId()).isPresent()) {
                 workingVersion = foundationItemRepo.findById(incoming.getId()).get();
             }
         }
+
 
         if (!incoming.getName().equals("")) {
             workingVersion.setName(incoming.getName());
@@ -109,6 +112,14 @@ public class FoundationItemController {
         }
 
         foundationItemRepo.save(workingVersion);
+
+        System.out.println(workingVersion.getName() + "    " +
+                workingVersion.getPurpose().getTitle() + "    " +
+                workingVersion.getDate() + "   " +
+                workingVersion.getTotalCostInCents() + "    " +
+                workingVersion.getPayees().size()
+                );
+
 
     }
 

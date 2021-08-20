@@ -35,7 +35,6 @@ public class ReceiptRestController {
             transactionToReturn = transactionRepo.findById(receipt.getTransactionId()).get();
         }
 
-        System.out.println(transactionToReturn.getTotalPennies() + "   " + transactionToReturn.getFoundation().getName());
         return transactionToReturn;
     }
 }
