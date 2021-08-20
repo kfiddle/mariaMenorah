@@ -32,6 +32,9 @@ public class Populator implements CommandLineRunner {
     @Resource
     PayeeRepository payeeRepo;
 
+    @Resource
+    ReceiptRepository receiptRepo;
+
 
     @Resource
     BudgetItemRepository budgetItemRepo;
@@ -150,6 +153,11 @@ public class Populator implements CommandLineRunner {
         payeeRepo.save(derekZ);
         payeeRepo.save(mariaM);
 
+        Collection<Payee> testPayees = new ArrayList<>();
+
+        testPayees.add(derekZ);
+        testPayees.add(mariaM);
+
         Transaction first = new Transaction(7500, albertBilstein);
         Transaction second = new Transaction(260, estelle);
 
@@ -166,75 +174,116 @@ public class Populator implements CommandLineRunner {
         transactionRepo.save(fifth);
         transactionRepo.save(sixth);
 
-
-        Collection<Transaction> trx = new ArrayList<>();
-
-        trx.add(first);
-        trx.add(second);
-
-        Collection<Transaction> trx1 = new ArrayList<>();
-
-        trx1.add(third);
-        trx1.add(fourth);
-
-        Collection<Transaction> trx2 = new ArrayList<>();
-
-        trx2.add(fifth);
-        trx2.add(sixth);
-
-        Collection<Payee> testPayees = new ArrayList<>();
-
-        testPayees.add(derekZ);
-        testPayees.add(mariaM);
-
-        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
+        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2);
         foundationItemRepo.save(firstEvent);
 
-        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees,a2);
+        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, a2);
         foundationItemRepo.save(secondEvent);
 
-
-        Transaction newTrans1 = new Transaction(5000);
-        Transaction newTrans2 = new Transaction(7500);
-
-        newTrans1.setFoundation(peggy);
-        newTrans2.setFoundation(albertBilstein);
-
-        transactionRepo.save(newTrans1);
-        transactionRepo.save(newTrans2);
-
-        Collection<Transaction> transactionsForDAndGinger = new ArrayList<>();
-        transactionsForDAndGinger.add(newTrans1);
-        transactionsForDAndGinger.add(newTrans2);
-
-
-        secondEvent.setTransactions(transactionsForDAndGinger);
+        foundationItemRepo.save(firstEvent);
         foundationItemRepo.save(secondEvent);
 
-        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
-        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
+        Receipt receipt1 = new Receipt(first.getId(), firstEvent);
+        Receipt receipt2 = new Receipt(second.getId(), firstEvent);
+        Receipt receipt3 = new Receipt(third.getId(), firstEvent);
+        Receipt receipt4 = new Receipt(fourth.getId(), secondEvent);
+        Receipt receipt5 = new Receipt(fifth.getId(), secondEvent);
+        Receipt receipt6 = new Receipt(sixth.getId(), secondEvent);
+
+        receiptRepo.save(receipt1);
+        receiptRepo.save(receipt2);
+        receiptRepo.save(receipt3);
+        receiptRepo.save(receipt4);
+        receiptRepo.save(receipt5);
+        receiptRepo.save(receipt6);
+
+//        Collection<Receipt> receiptsForFirst = new ArrayList<>();
+//        Collection<Receipt> receiptsForSecond = new ArrayList<>();
+//
+//        receiptsForFirst.add(receipt1);
+//        receiptsForFirst.add(receipt2);
+//
+//        receiptsForSecond.add(receipt3);
+//        receiptsForSecond.add(receipt4);
 
 
-        masterBudgetItemRepo.save(testItem);
-        masterBudgetItemRepo.save(testItem2);
 
-        FoundationItem workingVersion = new FoundationItem();
 
-        workingVersion.setName("shuffle board night");
+//        firstEvent.setReceipts(receiptsForFirst);
+//        secondEvent.setReceipts(receiptsForSecond);
 
-        workingVersion.setDate(LocalDate.now());
 
-        workingVersion.setTotalCostInCents(7500);
 
-        workingVersion.setPurpose(a3);
 
-        workingVersion.setTransactions(trx1);
 
-        workingVersion.setPayees(testPayees);
-
-        workingVersion.setNotes("I take excellent notes");
-
-        foundationItemRepo.save(workingVersion);
+//        Collection<Transaction> trx = new ArrayList<>();
+//
+//        trx.add(first);
+//        trx.add(second);
+//
+//        Collection<Transaction> trx1 = new ArrayList<>();
+//
+//        trx1.add(third);
+//        trx1.add(fourth);
+//
+//        Collection<Transaction> trx2 = new ArrayList<>();
+//
+//        trx2.add(fifth);
+//        trx2.add(sixth);
+//
+//        Collection<Payee> testPayees = new ArrayList<>();
+//
+//        testPayees.add(derekZ);
+//        testPayees.add(mariaM);
+//
+//        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
+//        foundationItemRepo.save(firstEvent);
+//
+//        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees,a2);
+//        foundationItemRepo.save(secondEvent);
+//
+//
+//        Transaction newTrans1 = new Transaction(5000);
+//        Transaction newTrans2 = new Transaction(7500);
+//
+//        newTrans1.setFoundation(peggy);
+//        newTrans2.setFoundation(albertBilstein);
+//
+//        transactionRepo.save(newTrans1);
+//        transactionRepo.save(newTrans2);
+//
+//        Collection<Transaction> transactionsForDAndGinger = new ArrayList<>();
+//        transactionsForDAndGinger.add(newTrans1);
+//        transactionsForDAndGinger.add(newTrans2);
+//
+//
+//        secondEvent.setTransactions(transactionsForDAndGinger);
+//        foundationItemRepo.save(secondEvent);
+//
+//        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
+//        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
+//
+//
+//        masterBudgetItemRepo.save(testItem);
+//        masterBudgetItemRepo.save(testItem2);
+//
+//        FoundationItem workingVersion = new FoundationItem();
+//
+//        workingVersion.setName("shuffle board night");
+//
+//        workingVersion.setDate(LocalDate.now());
+//
+//        workingVersion.setTotalCostInCents(7500);
+//
+//        workingVersion.setPurpose(a3);
+//
+//        workingVersion.setTransactions(trx1);
+//
+//        workingVersion.setPayees(testPayees);
+//
+//        workingVersion.setNotes("I take excellent notes");
+//
+//        foundationItemRepo.save(workingVersion);
 
 
     }

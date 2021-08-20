@@ -76,7 +76,7 @@ public class FoundationItemController {
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
                 transactionRepo.save(newTransactionToSave);
-                Receipt receiptToAdd = new Receipt(newTransactionToSave.getId());
+                Receipt receiptToAdd = new Receipt(newTransactionToSave.getId(), workingVersion);
                 receiptRepo.save(receiptToAdd);
                 receiptsToSave.add(receiptToAdd);
 //
@@ -86,7 +86,7 @@ public class FoundationItemController {
 
             }
 //            workingVersion.setTransactions(transactionsToSave);
-            workingVersion.setReceipts(receiptsToSave);
+//            workingVersion.setReceipts(receiptsToSave);
         }
 
         if (incoming.getPayees().size() > 0) {
