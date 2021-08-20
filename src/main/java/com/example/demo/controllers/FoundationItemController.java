@@ -55,7 +55,6 @@ public class FoundationItemController {
             }
         }
 
-
         if (!incoming.getName().equals("")) {
             workingVersion.setName(incoming.getName());
         }
@@ -73,24 +72,23 @@ public class FoundationItemController {
         }
 
         if (incoming.getTransactions().size() > 0) {
-//            Collection<Transaction> transactionsToSave = new ArrayList<>();
+            if (addOrModify.equals("modify") && workingVersion.getReceipts() != null) {
+                System.out.println("current facts are...");
+                for (Receipt receipt : workingVersion.getReceipts()) {
+                    System.out.println("receiptId " + receipt.getId() + "transactionId" + receipt.getTransactionId());
 
-//            Collection<Receipt> receiptsToSave = new ArrayList<>();
+                }
+            }
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
                 transactionRepo.save(newTransactionToSave);
                 Receipt receiptToAdd = new Receipt(newTransactionToSave.getId(), workingVersion);
                 receiptRepo.save(receiptToAdd);
-//                receiptsToSave.add(receiptToAdd);
-//
-//                transactionsToSave.add(newTransactionToSave);
 
-
-
+                System.out.println(receiptToAdd.getFoundationItem().getName() + "transactionId  " + receiptToAdd.getTransactionId() + "  receiptId  " + receiptToAdd.getId());
             }
-//            workingVersion.setTransactions(transactionsToSave);
-//            workingVersion.setReceipts(receiptsToSave);
+
         }
 
         if (incoming.getPayees().size() > 0) {
@@ -113,12 +111,12 @@ public class FoundationItemController {
 
         foundationItemRepo.save(workingVersion);
 
-        System.out.println(workingVersion.getName() + "    " +
-                workingVersion.getPurpose().getTitle() + "    " +
-                workingVersion.getDate() + "   " +
-                workingVersion.getTotalCostInCents() + "    " +
-                workingVersion.getPayees().size()
-                );
+//        System.out.println(workingVersion.getName() + "    " +
+//                workingVersion.getPurpose().getTitle() + "    " +
+//                workingVersion.getDate() + "   " +
+//                workingVersion.getTotalCostInCents() + "    " +
+//                workingVersion.getPayees().size()
+//                );
 
 
     }

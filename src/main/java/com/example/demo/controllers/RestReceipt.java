@@ -1,23 +1,18 @@
 package com.example.demo.controllers;
 
-
-import com.example.demo.models.Item;
 import com.example.demo.models.Receipt;
 import com.example.demo.models.Transaction;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.ReceiptRepository;
 import com.example.demo.repositories.TransactionRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Collection;
 
 @CrossOrigin
 @RestController
-public class ReceiptRestController {
+public class RestReceipt {
 
     @Resource
     ReceiptRepository receiptRepo;
@@ -29,7 +24,7 @@ public class ReceiptRestController {
     TransactionRepository transactionRepo;
 
     @PostMapping("/get-transaction-from-receipt")
-        public Transaction retrieveATransaction(@RequestBody Receipt receipt) {
+    public Transaction retrieveATransaction(@RequestBody Receipt receipt) {
         Transaction transactionToReturn = new Transaction();
         if (receiptRepo.findById(receipt.getId()).isPresent()) {
             transactionToReturn = transactionRepo.findById(receipt.getTransactionId()).get();
@@ -37,4 +32,17 @@ public class ReceiptRestController {
 
         return transactionToReturn;
     }
+
+
+    @PostMapping("/delete-receipt")
+    public Collection<Receipt> deleteReceiptFromDatabase(@RequestBody Receipt receipt) {
+        if (receiptRepo.findById(receipt.getId()).isPresent()) {
+            receiptRepo.delete(receipt);
+        }
+        System.out.println("got it");
+        return (Collection<Receipt>) receiptRepo.findAll();
+    }
 }
+
+
+

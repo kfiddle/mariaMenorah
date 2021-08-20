@@ -15,7 +15,7 @@ public class FoundationItem extends Item{
     @OneToMany
     private Collection<Transaction> transactions;
 
-    @OneToMany(mappedBy = "foundationItem")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foundationItem")
     private Collection<Receipt> receipts;
 
 
