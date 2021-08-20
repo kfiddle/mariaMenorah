@@ -45,6 +45,7 @@ public class FoundationItemController {
     public void addOrModifyFoundationItems(@RequestBody FoundationItem incoming, @PathVariable String addOrModify) {
 
         FoundationItem workingVersion = new FoundationItem();
+        foundationItemRepo.save(workingVersion);
 
         if (addOrModify.equals("modify")) {
             if (foundationItemRepo.findById(incoming.getId()).isPresent()) {
@@ -71,14 +72,14 @@ public class FoundationItemController {
         if (incoming.getTransactions().size() > 0) {
 //            Collection<Transaction> transactionsToSave = new ArrayList<>();
 
-            Collection<Receipt> receiptsToSave = new ArrayList<>();
+//            Collection<Receipt> receiptsToSave = new ArrayList<>();
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
                 transactionRepo.save(newTransactionToSave);
                 Receipt receiptToAdd = new Receipt(newTransactionToSave.getId(), workingVersion);
                 receiptRepo.save(receiptToAdd);
-                receiptsToSave.add(receiptToAdd);
+//                receiptsToSave.add(receiptToAdd);
 //
 //                transactionsToSave.add(newTransactionToSave);
 
