@@ -72,13 +72,6 @@ public class FoundationItemController {
         }
 
         if (incoming.getTransactions().size() > 0) {
-            if (addOrModify.equals("modify") && workingVersion.getReceipts() != null) {
-                System.out.println("current facts are...");
-                for (Receipt receipt : workingVersion.getReceipts()) {
-                    System.out.println("receiptId " + receipt.getId() + "transactionId" + receipt.getTransactionId());
-
-                }
-            }
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
@@ -86,7 +79,6 @@ public class FoundationItemController {
                 Receipt receiptToAdd = new Receipt(newTransactionToSave.getId(), workingVersion);
                 receiptRepo.save(receiptToAdd);
 
-                System.out.println(receiptToAdd.getFoundationItem().getName() + "transactionId  " + receiptToAdd.getTransactionId() + "  receiptId  " + receiptToAdd.getId());
             }
 
         }

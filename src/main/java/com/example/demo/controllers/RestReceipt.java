@@ -37,6 +37,7 @@ public class RestReceipt {
     @PostMapping("/delete-receipt")
     public Collection<Receipt> deleteReceiptFromDatabase(@RequestBody Receipt receipt) {
         if (receiptRepo.findById(receipt.getId()).isPresent()) {
+            transactionRepo.deleteById(receipt.getTransactionId());
             receiptRepo.delete(receipt);
         }
         System.out.println("got it");
