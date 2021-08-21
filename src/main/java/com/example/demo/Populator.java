@@ -65,6 +65,7 @@ public class Populator implements CommandLineRunner {
         Purpose b9 = new Purpose("Educational Lectures");
         Purpose c1 = new Purpose("Mitzvah Corps");
         Purpose c2 = new Purpose("Athletic Activities");
+        Purpose c3 = new Purpose("Tai Chi/Pilates/Gigong");
 
         purposeRepo.save(a1);
         purposeRepo.save(a2);
@@ -88,6 +89,7 @@ public class Populator implements CommandLineRunner {
         purposeRepo.save(b9);
         purposeRepo.save(c1);
         purposeRepo.save(c2);
+        purposeRepo.save(c3);
 
 
         Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", 42500, a6);
@@ -114,6 +116,8 @@ public class Populator implements CommandLineRunner {
         Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 34700, a4);
         Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 29900, c1);
         Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 14200, c2);
+        Foundation peter = new Foundation("Peter Meisel", 250000, a10);
+        Foundation david = new Foundation("David and Helen Nagusky", 130000, c3);
 
 
         foundationRepo.save(mAndm);
@@ -140,62 +144,64 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(esther);
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
+        foundationRepo.save(peter);
+        foundationRepo.save(david);
 
 
         Payee estherNahm = new Payee("Esther", "Nahm");
         Payee derekS = new Payee("Derek", "Snyder");
         Payee derekZ = new Payee("Derek", "Zadinsky");
-        Payee mariaM = new Payee("Maria", "Monday");
+//        Payee mariaM = new Payee("Maria", "Monday");
 
 
         payeeRepo.save(estherNahm);
         payeeRepo.save(derekS);
         payeeRepo.save(derekZ);
-        payeeRepo.save(mariaM);
+//        payeeRepo.save(mariaM);
 
-        Collection<Payee> testPayees = new ArrayList<>();
+//        Collection<Payee> testPayees = new ArrayList<>();
+//
+//        testPayees.add(derekZ);
+//        testPayees.add(mariaM);
+//
+//        Transaction first = new Transaction(7500, albertBilstein);
+//        Transaction second = new Transaction(260, estelle);
+//
+//        Transaction third = new Transaction(7200, esther);
+//        Transaction fourth = new Transaction(9300, carol);
+//
+//        Transaction fifth = new Transaction(2783, sheryl);
+//        Transaction sixth = new Transaction(9244, senkfor);
 
-        testPayees.add(derekZ);
-        testPayees.add(mariaM);
+//        transactionRepo.save(first);
+//        transactionRepo.save(second);
+//        transactionRepo.save(third);
+//        transactionRepo.save(fourth);
+//        transactionRepo.save(fifth);
+//        transactionRepo.save(sixth);
+//
+//        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2);
+//        foundationItemRepo.save(firstEvent);
+//
+//        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, a2);
+//        foundationItemRepo.save(secondEvent);
+//
+//        foundationItemRepo.save(firstEvent);
+//        foundationItemRepo.save(secondEvent);
 
-        Transaction first = new Transaction(7500, albertBilstein);
-        Transaction second = new Transaction(260, estelle);
-
-        Transaction third = new Transaction(7200, esther);
-        Transaction fourth = new Transaction(9300, carol);
-
-        Transaction fifth = new Transaction(2783, sheryl);
-        Transaction sixth = new Transaction(9244, senkfor);
-
-        transactionRepo.save(first);
-        transactionRepo.save(second);
-        transactionRepo.save(third);
-        transactionRepo.save(fourth);
-        transactionRepo.save(fifth);
-        transactionRepo.save(sixth);
-
-        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2);
-        foundationItemRepo.save(firstEvent);
-
-        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, a2);
-        foundationItemRepo.save(secondEvent);
-
-        foundationItemRepo.save(firstEvent);
-        foundationItemRepo.save(secondEvent);
-
-        Receipt receipt1 = new Receipt(first.getId(), firstEvent);
-        Receipt receipt2 = new Receipt(second.getId(), firstEvent);
-        Receipt receipt3 = new Receipt(third.getId(), firstEvent);
-        Receipt receipt4 = new Receipt(fourth.getId(), secondEvent);
-        Receipt receipt5 = new Receipt(fifth.getId(), secondEvent);
-        Receipt receipt6 = new Receipt(sixth.getId(), secondEvent);
-
-        receiptRepo.save(receipt1);
-        receiptRepo.save(receipt2);
-        receiptRepo.save(receipt3);
-        receiptRepo.save(receipt4);
-        receiptRepo.save(receipt5);
-        receiptRepo.save(receipt6);
+//        Receipt receipt1 = new Receipt(first.getId(), firstEvent);
+//        Receipt receipt2 = new Receipt(second.getId(), firstEvent);
+//        Receipt receipt3 = new Receipt(third.getId(), firstEvent);
+//        Receipt receipt4 = new Receipt(fourth.getId(), secondEvent);
+//        Receipt receipt5 = new Receipt(fifth.getId(), secondEvent);
+//        Receipt receipt6 = new Receipt(sixth.getId(), secondEvent);
+//
+//        receiptRepo.save(receipt1);
+//        receiptRepo.save(receipt2);
+//        receiptRepo.save(receipt3);
+//        receiptRepo.save(receipt4);
+//        receiptRepo.save(receipt5);
+//        receiptRepo.save(receipt6);
 
 //        Collection<Receipt> receiptsForFirst = new ArrayList<>();
 //        Collection<Receipt> receiptsForSecond = new ArrayList<>();
