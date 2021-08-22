@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,9 +26,6 @@ public class Foundation {
     @OneToMany(mappedBy = "foundation")
     private Collection<Transaction> transactions;
 
-    @ManyToMany
-    private Collection<Event> events;
-
     public Foundation() {
     }
 
@@ -46,6 +44,12 @@ public class Foundation {
         this.leftOverPennies = contributionInPennies;
         this.purpose = purpose;
     }
+
+
+    public void setContributionInPennies(int totalPennies) {
+        contributionInPennies = totalPennies;
+    }
+
 
     public Long getId() {
         return id;

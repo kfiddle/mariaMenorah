@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Purpose;
-import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
 import com.example.demo.repositories.TransactionRepository;
@@ -22,9 +21,6 @@ public class RestFoundation {
 
     @Resource
     FoundationRepository foundationRepo;
-
-    @Resource
-    EventRepository eventRepo;
 
     @Resource
     PurposeRepository purposeRepo;
@@ -64,16 +60,16 @@ public class RestFoundation {
         }
     }
 
-//    @PostMapping("/edit-foundation")
-//    public Collection<Foundation> editFoundation(@RequestBody Foundation incomingFoundation) throws IOException {
-//        if (foundationRepo.findById(incomingFoundation.getId()).isPresent()) {
-//            Foundation foundationToEdit = foundationRepo.findById(incomingFoundation.getId()).get();
-//            foundationToEdit.setContributionInPennies(incomingFoundation.getContributionInPennies());
+    @PostMapping("/edit-foundation")
+    public Collection<Foundation> editFoundation(@RequestBody Foundation incomingFoundation) throws IOException {
+        if (foundationRepo.findById(incomingFoundation.getId()).isPresent()) {
+            Foundation foundationToEdit = foundationRepo.findById(incomingFoundation.getId()).get();
+            foundationToEdit.setContributionInPennies(incomingFoundation.getContributionInPennies());
 //            foundationToEdit.setLeftOverPennies(incomingFoundation.getLeftOverPennies());
-//
-//            foundationRepo.save(foundationToEdit);
-//        }
-//        return (Collection<Foundation>) foundationRepo.findAll();
-//
-//    }
+
+            foundationRepo.save(foundationToEdit);
+        }
+        return (Collection<Foundation>) foundationRepo.findAll();
+
+    }
 }

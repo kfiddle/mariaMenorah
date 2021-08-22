@@ -21,6 +21,9 @@ public class FoundationItemController {
     TransactionRepository transactionRepo;
 
     @Resource
+    ReceiptRepository receiptRepo;
+
+    @Resource
     ItemRepository itemRepo;
 
     @Resource
@@ -43,20 +46,12 @@ public class FoundationItemController {
 
         FoundationItem workingVersion = new FoundationItem();
 
-        if (addOrModify.equals("modify")) {
+        if (addOrModify.equals("add")) {
+            foundationItemRepo.save(workingVersion);
+
+        } else {
             if (foundationItemRepo.findById(incoming.getId()).isPresent()) {
                 workingVersion = foundationItemRepo.findById(incoming.getId()).get();
-
-                for (Transaction transaction : workingVersion.getTransactions()) {
-
-
-
-
-//                    System.out.println(transaction.getId() + "   " + transaction.getFoundation().getName());
-//                    Transaction transactionToFind = transactionRepo.findById(transaction.getId()).get();
-//                    transactionToFind.setTotalPennies(8000);
-//                    System.out.println("found again and changed at  " + transactionToFind.getId());
-                }
             }
         }
 
@@ -77,14 +72,15 @@ public class FoundationItemController {
         }
 
         if (incoming.getTransactions().size() > 0) {
-            Collection<Transaction> transactionsToSave = new ArrayList<>();
 
             for (Transaction transaction : incoming.getTransactions()) {
                 Transaction newTransactionToSave = new Transaction(transaction.getTotalPennies(), transaction.getFoundation());
-                transactionsToSave.add(newTransactionToSave);
                 transactionRepo.save(newTransactionToSave);
+                Receipt receiptToAdd = new Receipt(newTransactionToSave.getId(), workingVersion);
+                receiptRepo.save(receiptToAdd);
+
             }
-            workingVersion.setTransactions(transactionsToSave);
+
         }
 
         if (incoming.getPayees().size() > 0) {
@@ -106,6 +102,14 @@ public class FoundationItemController {
         }
 
         foundationItemRepo.save(workingVersion);
+
+//        System.out.println(workingVersion.getName() + "    " +
+//                workingVersion.getPurpose().getTitle() + "    " +
+//                workingVersion.getDate() + "   " +
+//                workingVersion.getTotalCostInCents() + "    " +
+//                workingVersion.getPayees().size()
+//                );
+
 
     }
 

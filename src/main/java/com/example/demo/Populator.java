@@ -24,9 +24,6 @@ public class Populator implements CommandLineRunner {
     TransactionRepository transactionRepo;
 
     @Resource
-    EventRepository eventRepo;
-
-    @Resource
     FoundationItemRepository foundationItemRepo;
 
     @Resource
@@ -34,6 +31,9 @@ public class Populator implements CommandLineRunner {
 
     @Resource
     PayeeRepository payeeRepo;
+
+    @Resource
+    ReceiptRepository receiptRepo;
 
 
     @Resource
@@ -65,6 +65,7 @@ public class Populator implements CommandLineRunner {
         Purpose b9 = new Purpose("Educational Lectures");
         Purpose c1 = new Purpose("Mitzvah Corps");
         Purpose c2 = new Purpose("Athletic Activities");
+        Purpose c3 = new Purpose("Tai Chi/Pilates/Gigong");
 
         purposeRepo.save(a1);
         purposeRepo.save(a2);
@@ -88,32 +89,35 @@ public class Populator implements CommandLineRunner {
         purposeRepo.save(b9);
         purposeRepo.save(c1);
         purposeRepo.save(c2);
+        purposeRepo.save(c3);
 
 
-        Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", 42500, a6);
-        Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", 29900, a7);
-        Foundation albertBilstein = new Foundation("Albert Bilstein: Garden Fund for SG", 55800, a8);
-        Foundation helenHerb = new Foundation("Helen & Herb Brown", 56900, a9);
-        Foundation mollyCharles = new Foundation("Molly & Charles Goodman", 38700, a10);
-        Foundation barbaraGross = new Foundation("Barbara Gross", 70400, a4);
-        Foundation june = new Foundation("June Isquick", 29500, b1);
-        Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", 83100, b2);
-        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 72700, b3);
-        Foundation munitz = new Foundation("A Munitz- L & L Rich Family Jewish Holiday", 55100, b4);
-        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", 64100, a4);
-        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", 48000, b5);
-        Foundation zelda = new Foundation("Morris- Zelda- Esther Rice", 31600, b6);
-        Foundation sayre = new Foundation("Sayre Family Activities Fund", 212400, a7);
-        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", 59600, b7);
-        Foundation senkfor = new Foundation("Senkfor Family", 21400, b1);
-        Foundation sheryl = new Foundation("Sheryl & Bart Simon", 47300, b8);
-        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", 214100, b9);
-        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", 39300, b9);
-        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", 74400, a10);
-        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", 30700, a5);
-        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 34700, a4);
-        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 29900, c1);
-        Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 14200, c2);
+        Foundation mAndm = new Foundation("Marilyn & Marshall Bedol youth Special Needs", 42521, a6);
+        Foundation rayeMorris = new Foundation("Raye & Morris Blane Activities Fund", 29937, a7);
+        Foundation albertBilstein = new Foundation("Albert Bilstein: Garden Fund for SG", 55778, a8);
+        Foundation helenHerb = new Foundation("Helen & Herb Brown", 56892, a9);
+        Foundation mollyCharles = new Foundation("Mollie & Charles Goodman", 38706, a10);
+        Foundation barbaraGross = new Foundation("Barbara Gross", 70350, a4);
+        Foundation june = new Foundation("June Isquick", 29484, b1);
+        Foundation barbaraStanley = new Foundation("Barbara & Stanley Meisel Art Studio Fund", 83119, b2);
+        Foundation hortense = new Foundation("Hortense Meyer Family Dreams Fund", 72699, b3);
+        Foundation munitz = new Foundation("A Munitz- L & L Rich Family Jewish Holiday", 55073, b4);
+        Foundation rena = new Foundation("Rena 'Mimmi' Reich Fund", 64133, a4);
+        Foundation larry = new Foundation("Larry Reiss Men's Club Fund", 47976, b5);
+        Foundation zelda = new Foundation("Morris- Zelda- Esther Rice", 31594, b6);
+        Foundation sayre = new Foundation("Sayre Family Activities Fund", 212448, a7);
+        Foundation schnerb = new Foundation("Schnerb & Sokel Reform / Conservative", 59591, b7);
+        Foundation senkfor = new Foundation("Senkfor Family", 21442, b1);
+        Foundation sheryl = new Foundation("Sheryl & Bart Simon", 47323, b8);
+        Foundation carol = new Foundation("Carol P. and Irwin N. Sokol Edu. Fund", 214062, b9);
+        Foundation sylvia = new Foundation("Sylvia Swerdlow Memorial Fund", 39301, b9);
+        Foundation laya = new Foundation("Laya & Leonard Tanenbaum Good Times Fund", 74422, a10);
+        Foundation peggy = new Foundation("Peggy & Philip Wasserstrom Fund", 30659, a5);
+        Foundation esther = new Foundation("Esther G. & Joseph S. Weil En. Fund", 34672, a4);
+        Foundation weisz = new Foundation("Weisz Family Mitzvah Corps Fund", 29866, c1);
+        Foundation estelle = new Foundation("Estelle & Allen Wolfe Fund", 14155, c2);
+        Foundation peter = new Foundation("Peter Meisel", 250000, a10);
+        Foundation david = new Foundation("David and Helen Nagusky", 130000, c3);
 
 
         foundationRepo.save(mAndm);
@@ -140,65 +144,117 @@ public class Populator implements CommandLineRunner {
         foundationRepo.save(esther);
         foundationRepo.save(weisz);
         foundationRepo.save(estelle);
+        foundationRepo.save(peter);
+        foundationRepo.save(david);
 
 
         Payee estherNahm = new Payee("Esther", "Nahm");
         Payee derekS = new Payee("Derek", "Snyder");
         Payee derekZ = new Payee("Derek", "Zadinsky");
-        Payee mariaM = new Payee("Maria", "Monday");
+//        Payee mariaM = new Payee("Maria", "Monday");
 
 
         payeeRepo.save(estherNahm);
         payeeRepo.save(derekS);
         payeeRepo.save(derekZ);
-        payeeRepo.save(mariaM);
+//        payeeRepo.save(mariaM);
 
-        Transaction first = new Transaction(7500, albertBilstein);
-        Transaction second = new Transaction(260, estelle);
+//        Collection<Payee> testPayees = new ArrayList<>();
+//
+//        testPayees.add(derekZ);
+//        testPayees.add(mariaM);
+//
+//        Transaction first = new Transaction(7500, albertBilstein);
+//        Transaction second = new Transaction(260, estelle);
+//
+//        Transaction third = new Transaction(7200, esther);
+//        Transaction fourth = new Transaction(9300, carol);
+//
+//        Transaction fifth = new Transaction(2783, sheryl);
+//        Transaction sixth = new Transaction(9244, senkfor);
 
-        Transaction third = new Transaction(7200, esther);
-        Transaction fourth = new Transaction(9300, carol);
+//        transactionRepo.save(first);
+//        transactionRepo.save(second);
+//        transactionRepo.save(third);
+//        transactionRepo.save(fourth);
+//        transactionRepo.save(fifth);
+//        transactionRepo.save(sixth);
+//
+//        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2);
+//        foundationItemRepo.save(firstEvent);
+//
+//        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, a2);
+//        foundationItemRepo.save(secondEvent);
+//
+//        foundationItemRepo.save(firstEvent);
+//        foundationItemRepo.save(secondEvent);
 
-        Transaction fifth = new Transaction(2783, sheryl);
-        Transaction sixth = new Transaction(9244, senkfor);
+//        Receipt receipt1 = new Receipt(first.getId(), firstEvent);
+//        Receipt receipt2 = new Receipt(second.getId(), firstEvent);
+//        Receipt receipt3 = new Receipt(third.getId(), firstEvent);
+//        Receipt receipt4 = new Receipt(fourth.getId(), secondEvent);
+//        Receipt receipt5 = new Receipt(fifth.getId(), secondEvent);
+//        Receipt receipt6 = new Receipt(sixth.getId(), secondEvent);
+//
+//        receiptRepo.save(receipt1);
+//        receiptRepo.save(receipt2);
+//        receiptRepo.save(receipt3);
+//        receiptRepo.save(receipt4);
+//        receiptRepo.save(receipt5);
+//        receiptRepo.save(receipt6);
 
-        transactionRepo.save(first);
-        transactionRepo.save(second);
-        transactionRepo.save(third);
-        transactionRepo.save(fourth);
-        transactionRepo.save(fifth);
-        transactionRepo.save(sixth);
+//        Collection<Receipt> receiptsForFirst = new ArrayList<>();
+//        Collection<Receipt> receiptsForSecond = new ArrayList<>();
+//
+//        receiptsForFirst.add(receipt1);
+//        receiptsForFirst.add(receipt2);
+//
+//        receiptsForSecond.add(receipt3);
+//        receiptsForSecond.add(receipt4);
 
 
-        Collection<Transaction> trx = new ArrayList<>();
 
-        trx.add(first);
-        trx.add(second);
 
-        Collection<Transaction> trx1 = new ArrayList<>();
+//        firstEvent.setReceipts(receiptsForFirst);
+//        secondEvent.setReceipts(receiptsForSecond);
 
-        trx1.add(third);
-        trx1.add(fourth);
 
-        Collection<Transaction> trx2 = new ArrayList<>();
 
-        trx2.add(fifth);
-        trx2.add(sixth);
 
-        Collection<Payee> testPayees = new ArrayList<>();
 
-        testPayees.add(derekZ);
-        testPayees.add(mariaM);
-
-        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
-        foundationItemRepo.save(firstEvent);
-
+//        Collection<Transaction> trx = new ArrayList<>();
+//
+//        trx.add(first);
+//        trx.add(second);
+//
+//        Collection<Transaction> trx1 = new ArrayList<>();
+//
+//        trx1.add(third);
+//        trx1.add(fourth);
+//
+//        Collection<Transaction> trx2 = new ArrayList<>();
+//
+//        trx2.add(fifth);
+//        trx2.add(sixth);
+//
+//        Collection<Payee> testPayees = new ArrayList<>();
+//
+//        testPayees.add(derekZ);
+//        testPayees.add(mariaM);
+//
+//        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, a2, trx);
+//        foundationItemRepo.save(firstEvent);
+//
 //        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees,a2);
 //        foundationItemRepo.save(secondEvent);
 //
 //
 //        Transaction newTrans1 = new Transaction(5000);
 //        Transaction newTrans2 = new Transaction(7500);
+//
+//        newTrans1.setFoundation(peggy);
+//        newTrans2.setFoundation(albertBilstein);
+//
 //        transactionRepo.save(newTrans1);
 //        transactionRepo.save(newTrans2);
 //
@@ -209,31 +265,31 @@ public class Populator implements CommandLineRunner {
 //
 //        secondEvent.setTransactions(transactionsForDAndGinger);
 //        foundationItemRepo.save(secondEvent);
-
-        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
-        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
-
-
-        masterBudgetItemRepo.save(testItem);
-        masterBudgetItemRepo.save(testItem2);
-
-        FoundationItem workingVersion = new FoundationItem();
-
-        workingVersion.setName("shuffle board night");
-
-        workingVersion.setDate(LocalDate.now());
-
-        workingVersion.setTotalCostInCents(7500);
-
-        workingVersion.setPurpose(a3);
-
-        workingVersion.setTransactions(trx1);
-
-        workingVersion.setPayees(testPayees);
-
-        workingVersion.setNotes("I take excellent notes");
-
-        foundationItemRepo.save(workingVersion);
+//
+//        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
+//        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
+//
+//
+//        masterBudgetItemRepo.save(testItem);
+//        masterBudgetItemRepo.save(testItem2);
+//
+//        FoundationItem workingVersion = new FoundationItem();
+//
+//        workingVersion.setName("shuffle board night");
+//
+//        workingVersion.setDate(LocalDate.now());
+//
+//        workingVersion.setTotalCostInCents(7500);
+//
+//        workingVersion.setPurpose(a3);
+//
+//        workingVersion.setTransactions(trx1);
+//
+//        workingVersion.setPayees(testPayees);
+//
+//        workingVersion.setNotes("I take excellent notes");
+//
+//        foundationItemRepo.save(workingVersion);
 
 
     }

@@ -23,9 +23,6 @@ public class Payee {
 
     private boolean w9ed;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "payees")
-    private Collection<Event> events;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "payees")
@@ -35,9 +32,9 @@ public class Payee {
     @ManyToMany(mappedBy = "payees")
     private Collection<Item> items;
 
-    @OneToOne
-    private BudgetItem budgetItem;
-
+//    @OneToOne
+//    private BudgetItem budgetItem;
+//
 
     public Payee() {
     }
@@ -69,12 +66,6 @@ public class Payee {
         this.email = email;
         this.address = address;
         this.w9ed = w9ed;
-    }
-
-
-
-    public void setEvent(Event eventToAdd) {
-        events.add(eventToAdd);
     }
 
     public void setFirstName(String firstName) {
@@ -130,12 +121,6 @@ public class Payee {
     }
 
     public boolean isW9ed() { return w9ed; }
-
-    public Collection<Event> getEvents() {
-        return events;
-    }
-
-
 
     public Collection<BudgetItem> getBudgetItems() {
         return budgetItems;

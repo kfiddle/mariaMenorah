@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Foundation;
 import com.example.demo.models.Transaction;
-import com.example.demo.repositories.EventRepository;
 import com.example.demo.repositories.FoundationRepository;
 import com.example.demo.repositories.PurposeRepository;
 import com.example.demo.repositories.TransactionRepository;
@@ -23,9 +22,6 @@ public class NavController {
     FoundationRepository foundationRepo;
 
     @Resource
-    EventRepository eventRepo;
-
-    @Resource
     PurposeRepository purposeRepo;
 
     @Resource
@@ -35,14 +31,6 @@ public class NavController {
     public String showPageToAddEventsAndFoundations() {
         return "entry";
     }
-
-    @RequestMapping("/all-events")
-    public String showAllEventsPage(Model model) {
-
-        model.addAttribute("allEvents", eventRepo.findAll());
-        return "allEvents";
-    }
-
 
 
     @RequestMapping("/all-foundations")

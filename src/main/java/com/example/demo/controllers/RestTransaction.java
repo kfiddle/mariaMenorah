@@ -1,7 +1,5 @@
 package com.example.demo.controllers;
 
-
-import com.example.demo.models.Event;
 import com.example.demo.models.Transaction;
 import com.example.demo.repositories.TransactionRepository;
 import org.springframework.web.bind.annotation.*;
