@@ -1,11 +1,14 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.FoundationItem;
 import com.example.demo.models.Purpose;
+import com.example.demo.repositories.FoundationItemRepository;
 import com.example.demo.repositories.PurposeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @CrossOrigin
@@ -15,6 +18,9 @@ public class RestPurpose {
 
     @Resource
     PurposeRepository purposeRepo;
+
+    @Resource
+    FoundationItemRepository foundationItemRepo;
 
     @RequestMapping("/get-purposes")
     public Collection<Purpose> getAllPurposes() {
@@ -27,6 +33,23 @@ public class RestPurpose {
             purposeRepo.save(purposeToAdd);
         }
         return (Collection<Purpose>) purposeRepo.findAll();
+    }
+
+    @PostMapping("/get-foundation-items-from-purpose")
+    public Collection<FoundationItem> getItemsFromPurpose(@RequestBody Purpose incomingPurpose) {
+        Collection<FoundationItem> itemsToReturn = new ArrayList<>();
+
+        if (purposeRepo.findById(incomingPurpose.getId()).isPresent()) {
+            Purpose purposeToExtract = purposeRepo.findById(incomingPurpose.getId()).get();
+
+            for (FoundationItem foundationItem : foundationItemRepo.findAll()) {
+                if (foundationItem.getPurpose().equals(purposeToExtract)) {
+                    itemsToReturn.add(foundationItem);
+                }
+            }
+        }
+        System.out.println(itemsToReturn.size());
+        return itemsToReturn;
     }
 
 
