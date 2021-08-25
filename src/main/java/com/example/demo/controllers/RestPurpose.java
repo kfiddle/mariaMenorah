@@ -48,7 +48,6 @@ public class RestPurpose {
                 }
             }
         }
-        System.out.println(itemsToReturn.size());
         return itemsToReturn;
     }
 
