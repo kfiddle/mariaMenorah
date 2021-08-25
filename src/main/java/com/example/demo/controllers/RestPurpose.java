@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -38,7 +40,7 @@ public class RestPurpose {
 
     @PostMapping("/get-foundation-items-from-purpose")
     public Collection<FoundationItem> getItemsFromPurpose(@RequestBody Purpose incomingPurpose) throws IOException {
-        Collection<FoundationItem> itemsToReturn = new ArrayList<>();
+        List<FoundationItem> itemsToReturn = new ArrayList<>();
 
         try {
             if (purposeRepo.findById(incomingPurpose.getId()).isPresent()) {
@@ -53,6 +55,7 @@ public class RestPurpose {
         } catch (Exception error) {
             error.printStackTrace();
         }
+        Collections.sort(itemsToReturn);
         return itemsToReturn;
     }
 
