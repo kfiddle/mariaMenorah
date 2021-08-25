@@ -318,7 +318,7 @@ public class Populator implements CommandLineRunner {
 
         workingVersion.setTransactions(trx1);
 
-        workingVersion.setPayees(testPayees);
+        workingVersion.setPayees(payees1);
 
         workingVersion.setNotes("I take excellent notes");
 

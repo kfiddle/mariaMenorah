@@ -1,14 +1,12 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.Foundation;
-import com.example.demo.models.Purpose;
-import com.example.demo.repositories.FoundationRepository;
-import com.example.demo.repositories.PurposeRepository;
-import com.example.demo.repositories.TransactionRepository;
+import com.example.demo.models.*;
+import com.example.demo.repositories.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.annotation.Resources;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,10 +21,16 @@ public class RestFoundation {
     FoundationRepository foundationRepo;
 
     @Resource
+    FoundationItemRepository foundationItemRepo;
+
+    @Resource
     PurposeRepository purposeRepo;
 
     @Resource
     TransactionRepository transactionRepo;
+
+    @Resource
+    ReceiptRepository receiptRepo;
 
     @RequestMapping("/get-foundations")
 
@@ -65,11 +69,32 @@ public class RestFoundation {
         if (foundationRepo.findById(incomingFoundation.getId()).isPresent()) {
             Foundation foundationToEdit = foundationRepo.findById(incomingFoundation.getId()).get();
             foundationToEdit.setContributionInPennies(incomingFoundation.getContributionInPennies());
-//            foundationToEdit.setLeftOverPennies(incomingFoundation.getLeftOverPennies());
 
             foundationRepo.save(foundationToEdit);
         }
         return (Collection<Foundation>) foundationRepo.findAll();
 
     }
+
+    @PostMapping("/get-foundation-items-from-foundation")
+    public Collection<FoundationItem> getItemsFromFoundation(@RequestBody Foundation incomingFoundation) {
+        Collection<FoundationItem> itemsToReturn = new ArrayList<>();
+
+        if (foundationRepo.findById(incomingFoundation.getId()).isPresent()) {
+            Foundation foundationToExtract = foundationRepo.findById(incomingFoundation.getId()).get();
+
+            if (!foundationToExtract.getTransactions().isEmpty()) {
+                for (Transaction transaction : foundationToExtract.getTransactions()) {
+                    if (receiptRepo.existsByTransactionId(transaction.getId())) {
+                        Receipt receiptToGrab = receiptRepo.findByTransactionId(transaction.getId());
+                        FoundationItem itemToReturn = receiptToGrab.getFoundationItem();
+                        itemsToReturn.add(itemToReturn);
+                    }
+                }
+            }
+
+        }
+        return itemsToReturn;
+    }
+
 }
