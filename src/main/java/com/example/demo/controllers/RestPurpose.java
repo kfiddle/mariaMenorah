@@ -8,6 +8,7 @@ import com.example.demo.repositories.PurposeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,20 +37,23 @@ public class RestPurpose {
     }
 
     @PostMapping("/get-foundation-items-from-purpose")
-    public Collection<FoundationItem> getItemsFromPurpose(@RequestBody Purpose incomingPurpose) {
+    public Collection<FoundationItem> getItemsFromPurpose(@RequestBody Purpose incomingPurpose) throws IOException {
         Collection<FoundationItem> itemsToReturn = new ArrayList<>();
 
-        if (purposeRepo.findById(incomingPurpose.getId()).isPresent()) {
-            Purpose purposeToExtract = purposeRepo.findById(incomingPurpose.getId()).get();
+        try {
+            if (purposeRepo.findById(incomingPurpose.getId()).isPresent()) {
+                Purpose purposeToExtract = purposeRepo.findById(incomingPurpose.getId()).get();
 
-            for (FoundationItem foundationItem : foundationItemRepo.findAll()) {
-                if (foundationItem.getPurpose().equals(purposeToExtract)) {
-                    itemsToReturn.add(foundationItem);
+                for (FoundationItem foundationItem : foundationItemRepo.findAll()) {
+                    if (foundationItem.getPurpose().equals(purposeToExtract)) {
+                        itemsToReturn.add(foundationItem);
+                    }
                 }
             }
+        } catch (Exception error) {
+            error.printStackTrace();
         }
         return itemsToReturn;
     }
-
 
 }
