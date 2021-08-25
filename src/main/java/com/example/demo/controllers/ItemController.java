@@ -23,7 +23,8 @@ public class ItemController {
 
     @RequestMapping("/get-items")
     public Collection<Item> getAllItems() {
-        return (Collection<Item>) itemRepo.findAll();
+//        return (Collection<Item>) itemRepo.findAll();
+        return itemRepo.findByOrderByDate();
     }
 
     @PostMapping("/edit-item-completion")

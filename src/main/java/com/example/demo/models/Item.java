@@ -6,9 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
-public class Item {
+public class Item implements Comparable<Item>{
     @Id
     @GeneratedValue
     private Long id;
@@ -100,5 +101,11 @@ public class Item {
     }
 
     public boolean isCompleted() { return completed; }
+
+
+    @Override
+    public int compareTo(Item otherItem) {
+        return date.compareTo(otherItem.getDate());
+    }
 }
 

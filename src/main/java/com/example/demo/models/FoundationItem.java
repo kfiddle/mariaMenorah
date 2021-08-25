@@ -82,4 +82,6 @@ public class FoundationItem extends Item{
     public Collection<Receipt> getReceipts() {
         return receipts;
     }
+
+
 }

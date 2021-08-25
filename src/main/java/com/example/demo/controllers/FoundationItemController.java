@@ -38,7 +38,8 @@ public class FoundationItemController {
 
     @RequestMapping("/get-foundation-items")
     public Collection<FoundationItem> getAllFoundationItems() {
-        return (Collection<FoundationItem>) foundationItemRepo.findAll();
+//        return (Collection<FoundationItem>) foundationItemRepo.findAll();
+        return foundationItemRepo.findByOrderByDate();
     }
 
     @PostMapping("/add-or-modify-foundation-item/{addOrModify}")
@@ -102,14 +103,6 @@ public class FoundationItemController {
         }
 
         foundationItemRepo.save(workingVersion);
-
-//        System.out.println(workingVersion.getName() + "    " +
-//                workingVersion.getPurpose().getTitle() + "    " +
-//                workingVersion.getDate() + "   " +
-//                workingVersion.getTotalCostInCents() + "    " +
-//                workingVersion.getPayees().size()
-//                );
-
 
     }
 
