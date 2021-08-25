@@ -10,6 +10,8 @@ import javax.annotation.Resources;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 @CrossOrigin
@@ -78,7 +80,7 @@ public class RestFoundation {
 
     @PostMapping("/get-foundation-items-from-foundation")
     public Collection<FoundationItem> getItemsFromFoundation(@RequestBody Foundation incomingFoundation) {
-        Collection<FoundationItem> itemsToReturn = new ArrayList<>();
+        List<FoundationItem> itemsToReturn = new ArrayList<>();
 
         if (foundationRepo.findById(incomingFoundation.getId()).isPresent()) {
             Foundation foundationToExtract = foundationRepo.findById(incomingFoundation.getId()).get();
@@ -94,6 +96,7 @@ public class RestFoundation {
             }
 
         }
+        Collections.sort(itemsToReturn);
         return itemsToReturn;
     }
 
