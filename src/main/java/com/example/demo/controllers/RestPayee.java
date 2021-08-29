@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -21,7 +23,12 @@ public class RestPayee {
 
     @RequestMapping("/get-payees")
     public Collection<Payee> getAllPayees() {
-        return (Collection<Payee>) payeeRepo.findAll();
+        List<Payee> payeesToSend = new ArrayList<>();
+        for (Payee payee : payeeRepo.findAll()) {
+            payeesToSend.add(payee);
+        }
+        Collections.sort(payeesToSend);
+        return payeesToSend;
     }
 
     @PostMapping("/add-payee")

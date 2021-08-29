@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class Payee {
+public class Payee implements Comparable<Payee>{
 
     @Id
     @GeneratedValue
@@ -31,10 +31,6 @@ public class Payee {
     @JsonIgnore
     @ManyToMany(mappedBy = "payees")
     private Collection<Item> items;
-
-//    @OneToOne
-//    private BudgetItem budgetItem;
-//
 
     public Payee() {
     }
@@ -132,5 +128,10 @@ public class Payee {
 
     public String getAddress() {
         return address;
+    }
+
+    @Override
+    public int compareTo(Payee otherPayee) {
+        return lastName.compareTo(otherPayee.getLastName());
     }
 }
