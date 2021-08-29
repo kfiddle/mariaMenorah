@@ -151,10 +151,10 @@ public class Populator implements CommandLineRunner {
         Payee derekS = new Payee("Derek", "Snyder");
         Payee derekZ = new Payee("Derek", "Zadinsky");
         Payee kenjo = new Payee("Ken", "Johnston");
-        Payee mariaV = new Payee("Maria", "Vinas");
+//        Payee mariaV = new Payee("Maria", "Vinas");
         Payee kentC = new Payee("Kent", "Collier");
         Payee yj = new Payee("YeeJee", "Kim");
-        Payee steve = new Payee("Steve", "Greenman");
+//        Payee steve = new Payee("Steve", "Greenman");
 
 
 
@@ -162,167 +162,167 @@ public class Populator implements CommandLineRunner {
         payeeRepo.save(derekS);
         payeeRepo.save(derekZ);
         payeeRepo.save(kenjo);
-        payeeRepo.save(mariaV);
+//        payeeRepo.save(mariaV);
         payeeRepo.save(kentC);
         payeeRepo.save(yj);
-        payeeRepo.save(steve);
+//        payeeRepo.save(steve);
 
-        Collection<Payee> testPayees = new ArrayList<>();
-
-        testPayees.add(derekZ);
-        testPayees.add(derekS);
-
-        Collection<Payee> payees1 = new ArrayList<>();
-
-        payees1.add(kenjo);
-        payees1.add(kentC);
-        payees1.add(yj);
-
-
-        Transaction first = new Transaction(7500, albertBilstein);
-        Transaction second = new Transaction(260, estelle);
-
-        Transaction third = new Transaction(7200, esther);
-        Transaction fourth = new Transaction(9300, carol);
-
-        Transaction fifth = new Transaction(2783, sheryl);
-        Transaction sixth = new Transaction(9244, senkfor);
-
-        Transaction seventh = new Transaction(20000, mollyCharles);
-
-        transactionRepo.save(first);
-        transactionRepo.save(second);
-        transactionRepo.save(third);
-        transactionRepo.save(fourth);
-        transactionRepo.save(fifth);
-        transactionRepo.save(sixth);
-        transactionRepo.save(seventh);
-
-        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, entertainment);
-        foundationItemRepo.save(firstEvent);
-
-        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, classical);
-        foundationItemRepo.save(secondEvent);
-
-        FoundationItem thirdEvent = new FoundationItem("Ginger Show", LocalDate.of(2021, 10, 21),7500, payees1 , taiChi);
-        foundationItemRepo.save(thirdEvent);
-
-        FoundationItem fourthEvent = new FoundationItem("Maria Comedy Night", LocalDate.of(2021, 9, 15), 10000, payees1, newYears);
-        foundationItemRepo.save(fourthEvent);
-
-        FoundationItem fifthEvent = new FoundationItem("Yoga Night", LocalDate.of(2021, 11, 17), 5000, payees1, taiChi);
-        foundationItemRepo.save(fifthEvent);
-
-        FoundationItem sixthEvent = new FoundationItem("Derek Z Recital", LocalDate.of(2021, 9, 9), 15000, testPayees, entertainment);
-        foundationItemRepo.save(sixthEvent);
-
-        FoundationItem seventhEvent = new FoundationItem("Jack's Lunch", LocalDate.of(2021, 8, 9), 20000, outings);
-        foundationItemRepo.save(seventhEvent);
-
-        FoundationItem eighthEvent = new FoundationItem("GoodTime Cruise", LocalDate.of(2021, 10, 19), 60000, outings);
-        foundationItemRepo.save(eighthEvent);
-
-        FoundationItem ninthEvent = new FoundationItem("GoodTime Food", LocalDate.of(2021, 10, 19), 20000, outings);
-        foundationItemRepo.save(ninthEvent);
-
-
-
-        Receipt receipt1 = new Receipt(first.getId(), firstEvent);
-        Receipt receipt2 = new Receipt(second.getId(), firstEvent);
-        Receipt receipt3 = new Receipt(third.getId(), firstEvent);
-        Receipt receipt4 = new Receipt(fourth.getId(), secondEvent);
-        Receipt receipt5 = new Receipt(fifth.getId(), secondEvent);
-        Receipt receipt6 = new Receipt(sixth.getId(), secondEvent);
-        Receipt receipt7 = new Receipt(seventh.getId(), ninthEvent);
-
-        receiptRepo.save(receipt1);
-        receiptRepo.save(receipt2);
-        receiptRepo.save(receipt3);
-        receiptRepo.save(receipt4);
-        receiptRepo.save(receipt5);
-        receiptRepo.save(receipt6);
-        receiptRepo.save(receipt7);
-
-        Collection<Receipt> receiptsForFirst = new ArrayList<>();
-        Collection<Receipt> receiptsForSecond = new ArrayList<>();
-
-        receiptsForFirst.add(receipt1);
-        receiptsForFirst.add(receipt2);
-
-        receiptsForSecond.add(receipt3);
-        receiptsForSecond.add(receipt4);
-
-
-
-        firstEvent.setReceipts(receiptsForFirst);
-        secondEvent.setReceipts(receiptsForSecond);
-
-
-
-
-
-        Collection<Transaction> trx = new ArrayList<>();
-
-        trx.add(first);
-        trx.add(second);
-
-        Collection<Transaction> trx1 = new ArrayList<>();
-
-        trx1.add(third);
-        trx1.add(fourth);
-
-        Collection<Transaction> trx2 = new ArrayList<>();
-
-        trx2.add(fifth);
-        trx2.add(sixth);
-
-
-
-        testPayees.add(derekZ);
-
-
-
-        Transaction newTrans1 = new Transaction(5000);
-        Transaction newTrans2 = new Transaction(7500);
-
-        newTrans1.setFoundation(peggy);
-        newTrans2.setFoundation(albertBilstein);
-
-        transactionRepo.save(newTrans1);
-        transactionRepo.save(newTrans2);
-
-        Collection<Transaction> transactionsForDAndGinger = new ArrayList<>();
-        transactionsForDAndGinger.add(newTrans1);
-        transactionsForDAndGinger.add(newTrans2);
-
-
-        secondEvent.setTransactions(transactionsForDAndGinger);
-        foundationItemRepo.save(secondEvent);
-
-        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
-        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
-
-
-        masterBudgetItemRepo.save(testItem);
-        masterBudgetItemRepo.save(testItem2);
-
-        FoundationItem workingVersion = new FoundationItem();
-
-        workingVersion.setName("shuffle board night");
-
-        workingVersion.setDate(LocalDate.now());
-
-        workingVersion.setTotalCostInCents(7500);
-
-        workingVersion.setPurpose(mensClub);
-
-        workingVersion.setTransactions(trx1);
-
-        workingVersion.setPayees(payees1);
-
-        workingVersion.setNotes("I take excellent notes");
-
-        foundationItemRepo.save(workingVersion);
+//        Collection<Payee> testPayees = new ArrayList<>();
+//
+//        testPayees.add(derekZ);
+//        testPayees.add(derekS);
+//
+//        Collection<Payee> payees1 = new ArrayList<>();
+//
+//        payees1.add(kenjo);
+//        payees1.add(kentC);
+//        payees1.add(yj);
+//
+//
+//        Transaction first = new Transaction(7500, albertBilstein);
+//        Transaction second = new Transaction(260, estelle);
+//
+//        Transaction third = new Transaction(7200, esther);
+//        Transaction fourth = new Transaction(9300, carol);
+//
+//        Transaction fifth = new Transaction(2783, sheryl);
+//        Transaction sixth = new Transaction(9244, senkfor);
+//
+//        Transaction seventh = new Transaction(20000, mollyCharles);
+//
+//        transactionRepo.save(first);
+//        transactionRepo.save(second);
+//        transactionRepo.save(third);
+//        transactionRepo.save(fourth);
+//        transactionRepo.save(fifth);
+//        transactionRepo.save(sixth);
+//        transactionRepo.save(seventh);
+//
+//        FoundationItem firstEvent = new FoundationItem("Maria and Ginger", LocalDate.now(), 1500, entertainment);
+//        foundationItemRepo.save(firstEvent);
+//
+//        FoundationItem secondEvent = new FoundationItem("Derek and Ginger", LocalDate.now(), 2500, testPayees, classical);
+//        foundationItemRepo.save(secondEvent);
+//
+//        FoundationItem thirdEvent = new FoundationItem("Ginger Show", LocalDate.of(2021, 10, 21),7500, payees1 , taiChi);
+//        foundationItemRepo.save(thirdEvent);
+//
+//        FoundationItem fourthEvent = new FoundationItem("Maria Comedy Night", LocalDate.of(2021, 9, 15), 10000, payees1, newYears);
+//        foundationItemRepo.save(fourthEvent);
+//
+//        FoundationItem fifthEvent = new FoundationItem("Yoga Night", LocalDate.of(2021, 11, 17), 5000, payees1, taiChi);
+//        foundationItemRepo.save(fifthEvent);
+//
+//        FoundationItem sixthEvent = new FoundationItem("Derek Z Recital", LocalDate.of(2021, 9, 9), 15000, testPayees, entertainment);
+//        foundationItemRepo.save(sixthEvent);
+//
+//        FoundationItem seventhEvent = new FoundationItem("Jack's Lunch", LocalDate.of(2021, 8, 9), 20000, outings);
+//        foundationItemRepo.save(seventhEvent);
+//
+//        FoundationItem eighthEvent = new FoundationItem("GoodTime Cruise", LocalDate.of(2021, 10, 19), 60000, outings);
+//        foundationItemRepo.save(eighthEvent);
+//
+//        FoundationItem ninthEvent = new FoundationItem("GoodTime Food", LocalDate.of(2021, 10, 19), 20000, outings);
+//        foundationItemRepo.save(ninthEvent);
+//
+//
+//
+//        Receipt receipt1 = new Receipt(first.getId(), firstEvent);
+//        Receipt receipt2 = new Receipt(second.getId(), firstEvent);
+//        Receipt receipt3 = new Receipt(third.getId(), firstEvent);
+//        Receipt receipt4 = new Receipt(fourth.getId(), secondEvent);
+//        Receipt receipt5 = new Receipt(fifth.getId(), secondEvent);
+//        Receipt receipt6 = new Receipt(sixth.getId(), secondEvent);
+//        Receipt receipt7 = new Receipt(seventh.getId(), ninthEvent);
+//
+//        receiptRepo.save(receipt1);
+//        receiptRepo.save(receipt2);
+//        receiptRepo.save(receipt3);
+//        receiptRepo.save(receipt4);
+//        receiptRepo.save(receipt5);
+//        receiptRepo.save(receipt6);
+//        receiptRepo.save(receipt7);
+//
+//        Collection<Receipt> receiptsForFirst = new ArrayList<>();
+//        Collection<Receipt> receiptsForSecond = new ArrayList<>();
+//
+//        receiptsForFirst.add(receipt1);
+//        receiptsForFirst.add(receipt2);
+//
+//        receiptsForSecond.add(receipt3);
+//        receiptsForSecond.add(receipt4);
+//
+//
+//
+//        firstEvent.setReceipts(receiptsForFirst);
+//        secondEvent.setReceipts(receiptsForSecond);
+//
+//
+//
+//
+//
+//        Collection<Transaction> trx = new ArrayList<>();
+//
+//        trx.add(first);
+//        trx.add(second);
+//
+//        Collection<Transaction> trx1 = new ArrayList<>();
+//
+//        trx1.add(third);
+//        trx1.add(fourth);
+//
+//        Collection<Transaction> trx2 = new ArrayList<>();
+//
+//        trx2.add(fifth);
+//        trx2.add(sixth);
+//
+//
+//
+//        testPayees.add(derekZ);
+//
+//
+//
+//        Transaction newTrans1 = new Transaction(5000);
+//        Transaction newTrans2 = new Transaction(7500);
+//
+//        newTrans1.setFoundation(peggy);
+//        newTrans2.setFoundation(albertBilstein);
+//
+//        transactionRepo.save(newTrans1);
+//        transactionRepo.save(newTrans2);
+//
+//        Collection<Transaction> transactionsForDAndGinger = new ArrayList<>();
+//        transactionsForDAndGinger.add(newTrans1);
+//        transactionsForDAndGinger.add(newTrans2);
+//
+//
+//        secondEvent.setTransactions(transactionsForDAndGinger);
+//        foundationItemRepo.save(secondEvent);
+//
+//        MasterBudgetItem testItem = new MasterBudgetItem("Triple A Batteries", LocalDate.of(2021, 10, 10), 5000, "Stone Gardens", "some notes", "3728");
+//        MasterBudgetItem testItem2 = new MasterBudgetItem("Zadinsky Method", LocalDate.of(2021, 10, 10), 5000, testPayees, "Stone Gardens", "some notes", "3728");
+//
+//
+//        masterBudgetItemRepo.save(testItem);
+//        masterBudgetItemRepo.save(testItem2);
+//
+//        FoundationItem workingVersion = new FoundationItem();
+//
+//        workingVersion.setName("shuffle board night");
+//
+//        workingVersion.setDate(LocalDate.now());
+//
+//        workingVersion.setTotalCostInCents(7500);
+//
+//        workingVersion.setPurpose(mensClub);
+//
+//        workingVersion.setTransactions(trx1);
+//
+//        workingVersion.setPayees(payees1);
+//
+//        workingVersion.setNotes("I take excellent notes");
+//
+//        foundationItemRepo.save(workingVersion);
 
 
     }
