@@ -34,55 +34,61 @@ public class RestPayee {
     @PostMapping("/add-payee")
     public Collection<Payee> addPayeeToDatabase(@RequestBody Payee incomingPayee) throws IOException {
 
-        if (incomingPayee.getId() == null && !payeeRepo.existsByLastName(incomingPayee.getLastName()) && !payeeRepo.existsByFirstName(incomingPayee.getFirstName())) {
-            Payee payeeToAdd = new Payee(incomingPayee.getFirstName(), incomingPayee.getLastName());
+        try {
 
-            if (incomingPayee.getEmail() != null) {
-                payeeToAdd.setEmail(incomingPayee.getEmail());
+            if (payeeRepo.existsByFirstName(incomingPayee.getFirstName()) && payeeRepo.existsByLastName(incomingPayee.getLastName())) {
+                return (Collection<Payee>) payeeRepo.findAll();
+            } else if (incomingPayee.getId() == null) {
+                Payee payeeToAdd = new Payee(incomingPayee.getFirstName(), incomingPayee.getLastName());
+
+                if (incomingPayee.getEmail() != null) {
+                    payeeToAdd.setEmail(incomingPayee.getEmail());
+                }
+
+                if (incomingPayee.getPhoneNumber() != null) {
+                    payeeToAdd.setPhoneNumber(incomingPayee.getPhoneNumber());
+                }
+
+                if (incomingPayee.getAddress() != null) {
+                    payeeToAdd.setAddress(incomingPayee.getAddress());
+                }
+
+                if (incomingPayee.getW9ed()) {
+                    payeeToAdd.setW9ed(true);
+                }
+
+                payeeRepo.save(payeeToAdd);
+            } else if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
+                Payee payeeToEdit = payeeRepo.findById(incomingPayee.getId()).get();
+
+                if (incomingPayee.getFirstName() != null) {
+                    payeeToEdit.setFirstName(incomingPayee.getFirstName());
+                }
+
+                if (incomingPayee.getLastName() != null) {
+                    payeeToEdit.setLastName(incomingPayee.getLastName());
+                }
+
+                if (incomingPayee.getEmail() != null) {
+                    payeeToEdit.setEmail(incomingPayee.getEmail());
+                }
+
+                if (incomingPayee.getPhoneNumber() != null) {
+                    payeeToEdit.setPhoneNumber(incomingPayee.getPhoneNumber());
+                }
+
+                if (incomingPayee.getAddress() != null) {
+                    payeeToEdit.setAddress(incomingPayee.getAddress());
+                }
+
+                payeeToEdit.setW9ed(incomingPayee.getW9ed());
+
+                payeeRepo.save(payeeToEdit);
+
             }
-
-            if (incomingPayee.getPhoneNumber() != null) {
-                payeeToAdd.setPhoneNumber(incomingPayee.getPhoneNumber());
-            }
-
-            if (incomingPayee.getAddress() != null) {
-                payeeToAdd.setAddress(incomingPayee.getAddress());
-            }
-
-            if (incomingPayee.getW9ed()) {
-                payeeToAdd.setW9ed(true);
-            }
-
-            payeeRepo.save(payeeToAdd);
-        } else if (payeeRepo.findById(incomingPayee.getId()).isPresent()) {
-            Payee payeeToEdit = payeeRepo.findById(incomingPayee.getId()).get();
-
-            if (incomingPayee.getFirstName() != null) {
-                payeeToEdit.setFirstName(incomingPayee.getFirstName());
-            }
-
-            if (incomingPayee.getLastName() != null) {
-                payeeToEdit.setLastName(incomingPayee.getLastName());
-            }
-
-            if (incomingPayee.getEmail() != null) {
-                payeeToEdit.setEmail(incomingPayee.getEmail());
-            }
-
-            if (incomingPayee.getPhoneNumber() != null) {
-                payeeToEdit.setPhoneNumber(incomingPayee.getPhoneNumber());
-            }
-
-            if (incomingPayee.getAddress() != null) {
-                payeeToEdit.setAddress(incomingPayee.getAddress());
-            }
-
-            payeeToEdit.setW9ed(incomingPayee.getW9ed());
-
-            payeeRepo.save(payeeToEdit);
-
+        } catch (Exception error) {
+            error.printStackTrace();
         }
-
         return (Collection<Payee>) payeeRepo.findAll();
     }
 
